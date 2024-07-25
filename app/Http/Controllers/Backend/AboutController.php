@@ -173,80 +173,80 @@ class AboutController extends Controller
                 return redirect()->back()->with('status','About-us information added successfully.');
             }
         
-            // function removeAbout($slug){
-            //     $about = Homeabout::where('slug',$slug)->first();
+            function removeAbout($slug){
+                $about = About::where('slug',$slug)->first();
                 
-            //     //remove from public folder
-            //     $imgName = $about->image_url;
-            //     $delete = public_path('about-us/'.$imgName);
-            //     if(file_exists($delete)){
-            //         unlink($delete);
-            //     }
+                //remove from public folder
+                $imgName = $about->image_url;
+                $delete = public_path('about-us/'.$imgName);
+                if(file_exists($delete)){
+                    unlink($delete);
+                }
         
-            //     $about->delete();
-            //     return redirect()->back()->with('status',"Selected about info. deleted successfully.");
-            // }
+                $about->delete();
+                return redirect()->back()->with('status',"Selected about info. deleted successfully.");
+            }
         
-            // function editAbout($slug){
-            //     $homeAboutEdit = Homeabout::where('slug',$slug)->first();
-            //     return view('backend.about.editHomeAbout',compact('homeAboutEdit'));
-            // }
+            function editAbout($slug){
+                $aboutEdit = About::where('slug',$slug)->first();
+                return view('backend.about.editMainAbout',compact('aboutEdit'));
+            }
         
-            // function updateAbout(Request $request, $slug){
-            //     // dd($request->all());
+            function updateAbout(Request $request, $slug){
+                // dd($request->all());
         
-            //         $request->validate([
-            //             "home_about_title" => "required",
-            //             "home_about_description" => "required",
-            //             "home_about_image" => "required|mimes:png,jpg,jpeg,svg"
-            //         ]);
+                    $request->validate([
+                        "about_title" => "required",
+                        "about_description" => "required",
+                        "about_image" => "required|mimes:png,jpg,jpeg,svg"
+                    ]);
             
-            //         $homeAboutUpdate = Homeabout::where('slug',$slug)->first();
-            //         $homeAboutUpdate->title = $request->home_about_title;
-            //         $homeAboutUpdate->description = $request->home_about_description;
+                    $aboutUpdate = About::where('slug',$slug)->first();
+                    $aboutUpdate->title = $request->about_title;
+                    $aboutUpdate->description = $request->about_description;
                     
-            //         //home about slug updated
-            //         //Checking old slug exists or not
-            //          $oldSlug = Homeabout::where('slug','LIKE','%'.str($request->home_about_title)->slug().'%')->count();
-            //          if($oldSlug > 0){
-            //              $oldSlug +=1;
-            //              $slug = str($request->home_about_title)->slug().'-'.$oldSlug;
-            //              $homeAboutUpdate->slug = $slug;
-            //          }else{
-            //              $slug = str($request->home_about_title)->slug();
-            //              $homeAboutUpdate->slug = $slug;
-            //          }
+                    //home about slug updated
+                    //Checking old slug exists or not
+                     $oldSlug = About::where('slug','LIKE','%'.str($request->about_title)->slug().'%')->count();
+                     if($oldSlug > 0){
+                         $oldSlug +=1;
+                         $slug = str($request->about_title)->slug().'-'.$oldSlug;
+                         $aboutUpdate->slug = $slug;
+                     }else{
+                         $slug = str($request->about_title)->slug();
+                         $aboutUpdate->slug = $slug;
+                     }
             
             
-            //         //this part is for delete file from public folder while delete from database
-            //         $delete = public_path('about-us/'.$homeAboutUpdate->image_url);
-            //         if(file_exists($delete)){
-            //             unlink($delete);
-            //         }
+                    //this part is for delete file from public folder while delete from database
+                    $delete = public_path('about-us/'.$aboutUpdate->image_url);
+                    if(file_exists($delete)){
+                        unlink($delete);
+                    }
                     
-            //         $imageName = time().'.'.$request->home_about_image->extension();
-            //         $request->home_about_image->move(public_path('about-us'), $imageName);
-            //         $homeAboutUpdate->image_url = $imageName;
-            //         $homeAboutUpdate->save();
+                    $imageName = time().'.'.$request->about_image->extension();
+                    $request->about_image->move(public_path('about-us'), $imageName);
+                    $aboutUpdate->image_url = $imageName;
+                    $aboutUpdate->save();
                     
-            //         return redirect()->route('dashboard.homeAbout')
-            //         ->with('status',"About-us home page information updated successfully.");
-            // }
+                    return redirect()->route('dashboard.actualAbout')
+                    ->with('status',"About-us information updated successfully.");
+            }
         
-            // function activeAbout($slug){
-            //     $singleAboutHome = Homeabout::where('slug',$slug)->first();
+            function activeAbout($slug){
+                $singleAbout = About::where('slug',$slug)->first();
                 
                 
-            //     if($singleAboutHome){
-            //         //this logic build for another items deactive 
-            //         $singleAboutHome->update(['status' => 1]);
-            //         Homeabout::where('slug', '!=', $slug)->update(['status' => 0]);
+                if($singleAbout){
+                    //this logic build for another items deactive 
+                    $singleAbout->update(['status' => 1]);
+                    About::where('slug', '!=', $slug)->update(['status' => 0]);
         
-            //     }else{
-            //         $singleAboutHome->update(['status' => 0]);
-            //     }
+                }else{
+                    $singleAbout->update(['status' => 0]);
+                }
                
-            //     $singleAboutHome->save();
-            //     return redirect()->back()->with('status',"Status updated successfully.");
-            // }
+                $singleAbout->save();
+                return redirect()->back()->with('status',"Status updated successfully.");
+            }
 }

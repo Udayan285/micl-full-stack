@@ -80,18 +80,18 @@
                                 </td>
                                 <td>
                                    
-                                    <form action="" method="POST">
+                                    <form action="{{ route('dashboard.aboutActive',$about->slug) }}" method="POST">
                                         @csrf
                                         @method("PUT")
-                                        <button type="submit" class="btn btn-warning btn-sm mt-2">Active</button>
+                                        <button type="submit" class="btn btn-{{ $about->status ==0 ? 'warning' : 'success' }} btn-sm mt-2">{{ $about->status ==0 ? 'Active' : 'Deactive' }}</button>
                                     </form>
                                     
-                                    <form action="" method="GET">
+                                    <form action="{{ route('dashboard.aboutEdit',$about->slug) }}" method="GET">
                                         @csrf
                                         <button type="submit" class="btn btn-primary btn-sm mt-2">Edit</button>
                                     </form>
                                    
-                                    <form action="" method="POST">
+                                    <form action="{{ route('dashboard.aboutRemove',$about->slug) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm mt-2">Delete</button>
