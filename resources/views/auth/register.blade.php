@@ -16,6 +16,8 @@
     <!-- END: Head -->
     <body class="login">
         <div class="container px-sm-10">
+            
+
             <div class="grid columns-2 gap-4">
                 <!-- BEGIN: Register Info -->
                 <div class="g-col-2 g-col-xl-1 d-none d-xl-flex flex-column min-vh-screen">
@@ -34,6 +36,7 @@
                     </div>
                 </div>
                 <!-- END: Register Info -->
+
                 <!-- BEGIN: Register Form -->
                 <div class="g-col-2 g-col-xl-1 h-screen h-xl-auto d-flex py-5 py-xl-0 my-10 my-xl-0">
                     <div class="my-auto mx-auto ms-xl-20 bg-white dark-bg-dark-1 bg-xl-transparent px-5 px-sm-8 py-8 p-xl-0 rounded-2 shadow-md shadow-xl-none w-full w-sm-3/4 w-lg-2/4 w-xl-auto">
@@ -41,19 +44,54 @@
                             Sign Up
                         </h2>
                         <div class="intro-x mt-2 text-gray-500 dark-text-gray-500 d-xl-none text-center">A few more clicks to sign in to your account. Manage all your e-commerce accounts in one place</div>
-                        <div class="intro-x mt-8">
-                            <input type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block" placeholder="First Name">
-                            <input type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block mt-4" placeholder="Last Name">
-                            <input type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block mt-4" placeholder="Email">
-                            <input type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block mt-4" placeholder="Password">
+                        
+                        {{-- form submition here --}}
+                        <form action="{{ route('auth.create') }}" method="POST">
+                            @csrf
+                        
+                            <div class="intro-x mt-8">
+                                {{-- Success message show here via alert --}}
+                                {{-- @if (session('status'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="fa fa-exclamation-circle me-2"></i>{{ session('status') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                 </div>
+                                @endif --}}
 
-                            <input type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block mt-4" placeholder="Password Confirmation">
-                        </div>
-                      
-                        <div class="intro-x mt-5 mt-xl-8 text-center text-xl-start">
-                            <button class="btn btn-primary py-3 px-4 w-full w-xl-32 me-xl-3 align-top">Register</button>
-                            <a href="{{ route('auth.loginForm') }}" class="btn btn-outline-secondary py-3 px-4 w-full w-xl-32 mt-3 mt-xl-0 align-top">Sign in</a>
-                        </div>
+                                <input type="text" name="first_name" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block" placeholder="First Name">
+                                @error('first_name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                               
+                                <input type="text" name="last_name" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block mt-4" placeholder="Last Name">
+                                @error('last_name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                                <input type="email" name="email" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block mt-4" placeholder="Email">
+                                @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                
+                                <input type="password" name="password" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block mt-4" placeholder="Password">
+                                @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
+                                <input type="password" name="password_confirmation" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block mt-4" placeholder="Password Confirmation">
+                                @error('password_confirmation')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            
+                            </div>
+                        
+                            <div class="intro-x mt-5 mt-xl-8 text-center text-xl-start">
+                                <button type="submit" class="btn btn-primary py-3 px-4 w-full w-xl-32 me-xl-3 align-top">Register</button>
+                                <a href="{{ route('auth.loginForm') }}" class="btn btn-outline-secondary py-3 px-4 w-full w-xl-32 mt-3 mt-xl-0 align-top">Sign in</a>
+                            </div>
+
+                        </form>
+
                     </div>
                 </div>
                 <!-- END: Register Form -->

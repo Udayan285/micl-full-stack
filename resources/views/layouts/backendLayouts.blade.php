@@ -54,7 +54,7 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Udayan Singh</h6>
+                        <h6 class="mb-0">{{ auth()->user() ? auth()->user()->first_name : "Udayan Singh" }}</h6>
                         <span>Admin</span>
                     </div>
                 </div>
@@ -81,6 +81,8 @@
                             
                         </div>
                     </div>
+
+                    <a href="{{ route("auth.logout") }}" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Logout</a>
 
                     
                    

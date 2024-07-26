@@ -11,8 +11,8 @@
             <div class="container">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <h1 class="mb-4">{{ $homeCorporate->title }}</h1>
-                        <p>{{ $homeCorporate->description }}</p>
+                        <h1 class="mb-4">{{ $homeCorporate ? $homeCorporate->title : "Example Title" }}</h1>
+                        <p>{{ $homeCorporate ? $homeCorporate->description : "Example description" }}</p>
                         <div class="row g-4 align-items-center">
                             <div class="col-sm-6">
                                 <a class="btn btn-primary rounded-pill py-3 px-5" href="corporate.html">Read More</a>

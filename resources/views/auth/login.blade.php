@@ -43,15 +43,43 @@
                             Sign In
                         </h2>
                         <div class="intro-x mt-2 text-gray-500 d-xl-none text-center">A few more clicks to sign in to your account. Manage all your e-commerce accounts in one place</div>
+
+                        <form action="{{ route('auth.login') }}" method="POST">
+                        @csrf
                         <div class="intro-x mt-8">
-                            <input type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block" placeholder="Email">
-                            <input type="password" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block mt-4" placeholder="Password">
+
+                             {{-- Success message show here via alert --}}
+                             @if (session('status'))
+                             <div class="alert alert-success alert-dismissible fade show" role="alert">
+                             <i class="fa fa-exclamation-circle me-2"></i>{{ session('status') }}
+                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>
+                             @endif
+                             @if (session('status2'))
+                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                             <i class="fa fa-exclamation-circle me-2"></i>{{ session('status2') }}
+                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                              </div>
+                             @endif
+
+                            <input type="email" name="email" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block" placeholder="Email">
+                            @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+
+                            <input type="password" name="password" class="intro-x login__input form-control py-3 px-4 border-gray-300 d-block mt-4" placeholder="Password">
+                            @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+
                         </div>
                        
                         <div class="intro-x mt-5 mt-xl-8 text-center text-xl-start">
-                            <button class="btn btn-primary py-3 px-4 w-full w-xl-32 me-xl-3 align-top">Login</button>
+                            <button type="submit" class="btn btn-primary py-3 px-4 w-full w-xl-32 me-xl-3 align-top">Login</button>
                             <a href="{{ route('auth.registerForm') }}" class="btn btn-outline-secondary py-3 px-4 w-full w-xl-32 mt-3 mt-xl-0 align-top">Sign up</a>
                         </div>
+
+                        </form>
                       
                     </div>
                 </div>

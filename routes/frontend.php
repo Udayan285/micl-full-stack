@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\CorporateVisionController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Middleware\ValidUser;
 
 //Frontend view page show related all routes written Start here...
 route::prefix("/")->name("micl.")->controller(FrontendController::class)->group(function(){
@@ -29,11 +30,16 @@ route::prefix("/")->name("micl.")->controller(FrontendController::class)->group(
 route::prefix("/")->name('auth.')->controller(UserController::class)->group(function(){
     route::get('register','showRegForm')->name('registerForm');
     route::get('login','showLogForm')->name('loginForm');
+
+    route::post('create','create')->name('create');
+    route::post('login','login')->name('login');
+    route::get('logout','logout')->name('logout');
+
 });
 
 
 //temporary sidebar->blade show and dashboard route written here..
-route::prefix("/dashboard")->name('dashboard.')->controller(BackendController::class)->group(function(){
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(BackendController::class)->group(function(){
     
     //sidebar menu route
     route::get('','dashboard')->name('all');
