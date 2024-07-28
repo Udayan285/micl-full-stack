@@ -36,6 +36,15 @@
                         
                         </ul>
                        
+                       {{-- =========summernote test======== --}}
+                        {{-- <ul>
+                        @foreach ($summer as $sum)
+                            
+                       <p>{!! $sum->summernote !!}</p> 
+                        @endforeach
+                       </ul> --}}
+                       {{-- =========summernote test======== --}}
+
                     </div>
                     <div class="col-lg-6 about-img wow fadeInUp" data-wow-delay="0.5s">
                         <div class="row">

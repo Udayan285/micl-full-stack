@@ -43,6 +43,11 @@ route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->c
     
     //sidebar menu route
     route::get('','dashboard')->name('all');
+    // {{-- =========summernote test======== --}}
+    route::get('/ckeditor','dashboardCke')->name('cke');
+    route::post('/ckeditor/post','dashboardCkepost')->name('ckepost');
+    // {{-- =========summernote test======== --}}
+
     route::get('/hero-banner','showHero')->name('heroBanner');
     route::get('/corporate-vision','showCorporate')->name('corporate');
     route::get('/main-corporate-vision','showMainCorporate')->name('mainCorporate');

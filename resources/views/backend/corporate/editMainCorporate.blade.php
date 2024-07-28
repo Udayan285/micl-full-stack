@@ -30,8 +30,8 @@
                         <label for="exampleInputDescription" class="form-label">Corporate Description</label>
                         <div class="form-floating">
                             <textarea class="form-control" name="corporate_description" placeholder="Leave a description here"
-                                id="floatingTextarea" style="height: 150px;" >{{ $CorpoEdit ? $CorpoEdit->description : '' }}</textarea>
-                            <label for="floatingTextarea">Type your corporate description...</label>
+                                id="summernote" style="height: 150px;" >{{ $CorpoEdit ? $CorpoEdit->description : '' }}</textarea>
+                           
                         </div>
                         @error('corporate_description')
                              <div class="alert alert-danger">{{ $message }}</div>

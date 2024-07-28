@@ -29,8 +29,8 @@
                         <label for="exampleInputDescription" class="form-label">Banner Description</label>
                         <div class="form-floating">
                             <textarea class="form-control" name="banner_description" placeholder="Leave a description here"
-                                id="floatingTextarea" style="height: 150px;" ></textarea>
-                            <label for="floatingTextarea">Type your description...</label>
+                                id="summernote" style="height: 150px;" ></textarea>
+                            
                         </div>
                         @error('banner_description')
                              <div class="alert alert-danger">{{ $message }}</div>
@@ -68,7 +68,7 @@
                             <tr>
                                 <th scope="row">{{ ++$key }}</th>
                                 <td>{{ $banner->title }}</td>
-                                <td>{{ $banner->description }}</td>
+                                <td>{!! $banner->description !!}</td>
                                 <td>
                                     <img src="{{ asset('images/'.$banner->image_url) }}" alt="Banner Image" style="height: 80px;width:90px;">
                                 </td>

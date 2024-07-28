@@ -28,8 +28,8 @@
                        
                         <label for="exampleInputDescription" class="form-label">About Description</label>
                         <div class="form-floating">
-                            <textarea class="form-control" name="about_description" placeholder="Leave a description here"
-                                id="floatingTextarea" style="height: 150px;" ></textarea>
+                            <textarea class="form-control" name="about_description" 
+                                id="summernote" style="height: 150px;" ></textarea>
                             
                         </div>
                         @error('about_description')
@@ -74,7 +74,7 @@
                             <tr>
                                 <th scope="row">{{ ++$key }}</th>
                                 <td>{{ $about->title }}</td>
-                                <td>{{ $about->description }}</td>
+                                <td>{!! $about->description !!}</td>
                                 <td>
                                     <img src="{{ asset('about-us/'.$about->image_url) }}" alt="About Image" style="height: 80px;width:90px;">
                                 </td>

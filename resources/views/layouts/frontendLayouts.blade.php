@@ -17,6 +17,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@600&family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
     
+
+   
+
+
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -134,19 +138,7 @@
             </div>
         
 
-            {{-- custom js for active menu --}}
-            {{-- <script>
-                let navItem = document.querySelector('.nav-link')
-                //let display = document.querySelector('#homeAboutImage')
-                
-                function activeClass(event){
-                    let className = 'active';
-                    navItem.class = className;
-                    //let url = URL.createObjectURL(event.target.files[0])
-                    //display.src = url
-                }
-                navItem.addEventListener('click',activeClass);
-            </script> --}}
+   
 
             
 
@@ -158,6 +150,8 @@
             <script src="frontend/lib/waypoints/waypoints.min.js"></script>
             <script src="frontend/lib/owlcarousel/owl.carousel.min.js"></script>
         
+            
+           
             <!-- Template Javascript -->
             <script src="frontend/js/main.js"></script>
 

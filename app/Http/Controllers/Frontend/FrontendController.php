@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Banner;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Models\Ckeditor;
 use App\Models\Homeabout;
+use Illuminate\Http\Request;
 use App\Models\Homecorporate;
+use App\Http\Controllers\Controller;
 
 class FrontendController extends Controller
 {
@@ -23,6 +24,7 @@ class FrontendController extends Controller
     }
 
     function aboutUs(){
+        // $summer = Ckeditor::all();
         $bannersData = Banner::where('status',1)->get();
         return view('MICL-clone.about',compact('bannersData'));
     }

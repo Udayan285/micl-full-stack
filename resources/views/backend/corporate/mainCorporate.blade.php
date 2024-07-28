@@ -31,7 +31,7 @@
                         <label for="exampleInputDescription" class="form-label">Corporate Page Corporate Description</label>
                         <div class="form-floating">
                             <textarea class="form-control" name="corporate_description" placeholder="Leave a description here"
-                                id="floatingTextarea" style="height: 150px;" ></textarea>
+                                id="summernote" style="height: 150px;" ></textarea>
                             
                         </div>
 
@@ -85,7 +85,7 @@
                             <tr>
                                 <th scope="row">{{ ++$key }}</th>
                                 <td>{{ $data->title }}</td>
-                                <td>{{ $data->description }}</td>
+                                <td>{!! $data->description !!}</td>
                                 <td>
                                     <img src="{{ asset('corporates/'.$data->image_url) }}" alt="Corporate Image" style="height: 80px;width:90px;">
                                 </td>

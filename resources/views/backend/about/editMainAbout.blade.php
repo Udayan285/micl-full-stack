@@ -30,7 +30,7 @@
                         <label for="exampleInputDescription" class="form-label">Update About Description</label>
                         <div class="form-floating">
                             <textarea class="form-control" name="about_description" placeholder="Leave a description here"
-                                id="floatingTextarea" style="height: 150px;" >{{ $aboutEdit ? $aboutEdit->description : '' }}
+                                id="summernote" style="height: 150px;" >{{ $aboutEdit ? $aboutEdit->description : '' }}
                             </textarea>
                             
                         </div>

@@ -29,8 +29,8 @@
                         <label for="exampleInputDescription" class="form-label">Banner Description</label>
                         <div class="form-floating">
                             <textarea class="form-control" name="banner_description" placeholder="Leave a description here"
-                                id="floatingTextarea" style="height: 150px;" >{{ $bannerEdit->description }}</textarea>
-                            <label for="floatingTextarea">Type your description...</label>
+                                id="summernote" style="height: 150px;" >{{ $bannerEdit->description }}</textarea>
+                            
                         </div>
                         @error('banner_description')
                              <div class="alert alert-danger">{{ $message }}</div>
