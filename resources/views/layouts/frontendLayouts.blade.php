@@ -58,25 +58,26 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
-                    <a href="{{ route('micl.home') }}" class="nav-item nav-link active">Home</a>
-                    <a href="{{ route('micl.md') }}" class="nav-item nav-link">MD Profile</a>
-                    <a href="{{ route('micl.aboutUs') }}" class="nav-item nav-link">About Us</a>
-                    <a href="{{ route('micl.corporate') }}" class="nav-item nav-link">Corporate Vision</a>
+                    <a href="{{ route('micl.home') }}" class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a>
+                    <a href="{{ route('micl.md') }}" class="nav-item nav-link {{ request()->is('md-profile') ? 'active' : '' }}">MD Profile</a>
+                    <a href="{{ route('micl.aboutUs') }}" class="nav-item nav-link {{ request()->is('about-us-front') ? 'active' : '' }}">About Us</a>
+                    <a href="{{ route('micl.corporate') }}" class="nav-item nav-link {{ request()->is('corporate-vision') ? 'active' : '' }}">Corporate Vision</a>
                     
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Business activities</a>
+                        <a href="#" class="nav-link dropdown-toggle {{ request()->is('storage-tank-terminal','bitumen-plant','physical-refinery','super-oil-dry-fractionation','edible-oil','bottle-making') ? 'active' : '' }}" data-bs-toggle="dropdown">Business activities</a>
                         <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
-                            <a href="{{ route('micl.storageTank') }}" class="dropdown-item">Storage Tank Terminal & Delivery Support Services </a>
-                            <a href="{{ route('micl.vitumenPlant') }}" class=" dropdown-item" >Bitumen Plant & Storage Tank </a>
+                            <a href="{{ route('micl.storageTank') }}" class="dropdown-item {{ request()->is('storage-tank-terminal') ? 'active' : '' }}">Storage Tank Terminal & Delivery Support Services </a>
+                            <a href="{{ route('micl.vitumenPlant') }}" class=" dropdown-item {{ request()->is('bitumen-plant') ? 'active' : '' }}" >Bitumen Plant & Storage Tank </a>
                            
-                            <a href="{{ route('micl.physical') }}" class="dropdown-item">Physical Refinery Unit</a>
-                            <a href="{{ route('micl.dryFractionation') }}" class="dropdown-item">Super Oil Refinery & Dry fractionation Unit </a>
-                            <a href="{{ route('micl.edibleOil') }}" class="dropdown-item">Edible Oil Filling Plant </a>
-                            <a href="{{ route('micl.bottle') }}" class="dropdown-item">Bottle Making Plant </a>
+                            <a href="{{ route('micl.physical') }}" class="dropdown-item {{ request()->is('physical-refinery') ? 'active' : '' }}">Physical Refinery Unit</a>
+                            <a href="{{ route('micl.dryFractionation') }}" class="dropdown-item {{ request()->is('super-oil-dry-fractionation') ? 'active' : '' }}">Super Oil Refinery & Dry fractionation Unit </a>
+                            <a href="{{ route('micl.edibleOil') }}" class="dropdown-item {{ request()->is('edible-oil') ? 'active' : '' }}">Edible Oil Filling Plant </a>
+                            <a href="{{ route('micl.bottle') }}" class="dropdown-item {{ request()->is('bottle-making') ? 'active' : '' }}">Bottle Making Plant </a>
                         </div>
                     </div>
-                    <a href="{{ route('micl.area') }}" class="nav-item nav-link">Area</a>
-                    <a href="{{ route('micl.contact') }}" class="nav-item nav-link">Contact Us</a>
+
+                    <a href="{{ route('micl.area') }}" class="nav-item nav-link {{ request()->is('area-front') ? 'active' : '' }} ">Area</a>
+                    <a href="{{ route('micl.contact') }}" class="nav-item nav-link {{ request()->is('contact-us') ? 'active' : '' }}">Contact Us</a>
                 </div>
                 
             </div>

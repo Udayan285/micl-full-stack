@@ -61,31 +61,31 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="{{ route('dashboard.all') }}" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="{{ route('dashboard.heroBanner') }}" class="nav-item nav-link active"><i class="fa fa-keyboard me-2"></i>Hero Banner</a>
+                    <a href="{{ route('dashboard.all') }}" class="nav-item nav-link {{ request()->is('dashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="{{ route('dashboard.heroBanner') }}" class="nav-item nav-link {{ request()->is('dashboard/hero-banner') ? 'active' : '' }}"><i class="fas fa-home"></i>Hero Banner</a>
                    
                     {{-- corporate-menu --}}
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Corporate Vision</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ route('dashboard.corporate') }}" class="dropdown-item">Home Corporate</a>
-                            <a href="{{ route('dashboard.mainCorporate') }}" class="dropdown-item">Main Corporate</a>
+                        <a href="#" class="nav-link dropdown-toggle {{ request()->is('dashboard/corporate-vision','dashboard/main-corporate-vision') ? 'active' : '' }}" data-bs-toggle="dropdown"><i class="fas fa-business-time"></i>Corporate Vision</a>
+                        <div class="dropdown-menu bg-transparent border-0 ">
+                            <a href="{{ route('dashboard.corporate') }}" class="dropdown-item {{ request()->is('dashboard/corporate-vision') ? 'active' : '' }}">Home Corporate</a>
+                            <a href="{{ route('dashboard.mainCorporate') }}" class="dropdown-item {{ request()->is('dashboard/main-corporate-vision') ? 'active' : '' }}">Main Corporate</a>
                             
                         </div>
                     </div>
 
                     {{-- about-us-menu --}}
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>About Us</a>
+                        <a href="#" class="nav-link dropdown-toggle {{ request()->is('dashboard/home-about','dashboard/actual-about-us') ? 'active' : '' }}" data-bs-toggle="dropdown"><i class="far fa-address-card"></i>About Us</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ route('dashboard.homeAbout') }}" class="dropdown-item">Home About</a>
-                            <a href="{{ route('dashboard.actualAbout') }}" class="dropdown-item">Main About</a>
+                            <a href="{{ route('dashboard.homeAbout') }}" class="dropdown-item {{ request()->is('dashboard/home-about') ? 'active' : '' }}">Home About</a>
+                            <a href="{{ route('dashboard.actualAbout') }}" class="dropdown-item {{ request()->is('dashboard/actual-about-us') ? 'active' : '' }}">Main About</a>
                             
                         </div>
                     </div>
 
-                    <a href="{{ route('dashboard.area') }}" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Area</a>
-                    <a href="{{ route("auth.logout") }}" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Logout</a>
+                    <a href="{{ route('dashboard.area') }}" class="nav-item nav-link {{ request()->is('dashboard/area') ? 'active' : '' }}"><i class="fas fa-street-view"></i>Area</a>
+                    <a href="{{ route("auth.logout") }}" class="nav-item nav-link "><i class="fas fa-sign-out-alt"></i>Logout</a>
 
                     
                    

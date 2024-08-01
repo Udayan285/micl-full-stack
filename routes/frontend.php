@@ -16,12 +16,12 @@ route::prefix("/")->name("micl.")->controller(FrontendController::class)->group(
     Route::get('about-us-front','aboutUs')->name('aboutUs');
     Route::get('corporate-vision','corporateVision')->name('corporate');
     Route::get('storage-tank-terminal','storageTank')->name('storageTank');
-    Route::get('vitumen-plant','vitumenPlant')->name('vitumenPlant');
+    Route::get('bitumen-plant','vitumenPlant')->name('vitumenPlant');
     Route::get('physical-refinery','physicalRefinery')->name('physical');
     Route::get('super-oil-dry-fractionation','dryFractionation')->name('dryFractionation');
     Route::get('edible-oil','edibleOil')->name('edibleOil');
     Route::get('bottle-making','bottleMaking')->name('bottle');
-    Route::get('area','area')->name('area');
+    Route::get('area-front','area')->name('area');
     Route::get('contact-us','contactUs')->name('contact');
 });
 //Frontend view page show related all routes written End here...
