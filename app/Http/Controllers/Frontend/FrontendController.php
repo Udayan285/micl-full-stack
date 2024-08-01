@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\Area;
 use App\Models\Banner;
-use App\Models\Ckeditor;
 use App\Models\Homeabout;
 use Illuminate\Http\Request;
 use App\Models\Homecorporate;
@@ -60,7 +60,10 @@ class FrontendController extends Controller
 
     function area(){
         $bannersData = Banner::where('status',1)->get();
-        return view('MICL-clone.area',compact('bannersData'));
+        $areaData = Area::where('status',1)->get();
+        // dd($areaData);
+
+        return view('MICL-clone.area',compact('bannersData','areaData'));
     }
 
     function contactUs(){
