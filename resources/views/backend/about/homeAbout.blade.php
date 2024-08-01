@@ -77,7 +77,7 @@
                             <tr>
                                 <th scope="row">{{ ++$key }}</th>
                                 <td>{{ $about->title }}</td>
-                                <td>{{ $about->description }}</td>
+                                <td>{!! $about->description !!}</td>
                                 <td>
                                     <img src="{{ asset('about-us/'.$about->image_url) }}" alt="Home About Image" style="height: 80px;width:90px;">
                                 </td>
