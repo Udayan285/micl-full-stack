@@ -84,6 +84,7 @@
                         </div>
                     </div>
 
+                    <a href="{{ route('dashboard.area') }}" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Area</a>
                     <a href="{{ route("auth.logout") }}" class="nav-item nav-link "><i class="fa fa-tachometer-alt me-2"></i>Logout</a>
 
                     

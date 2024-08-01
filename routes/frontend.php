@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Backend\AboutController;
+use App\Http\Controllers\Backend\AreaController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\CorporateVisionController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -53,6 +54,7 @@ route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->c
     route::get('/main-corporate-vision','showMainCorporate')->name('mainCorporate');
     route::get('/home-about','showHomeAbout')->name('homeAbout');
     route::get('/actual-about-us','showAbout')->name('actualAbout');
+    route::get('/area','showArea')->name('area');
 
 
     //banner info store/update/delete
@@ -99,5 +101,17 @@ route::prefix("/dashboard")->name('dashboard.')->controller(AboutController::cla
     route::put('/actual-about-us/active/{slug}','activeAbout')->name('aboutActive');
     route::delete('/actual-about-us/remove/{slug}','removeAbout')->name('aboutRemove');
 
+
+});
+
+//Area Page related all route here..
+route::prefix("/dashboard")->name('dashboard.')->controller(AreaController::class)->group(function(){
+   
+    //Area page all routes here..(#udayan285#)
+    route::post('/area-page/store','storeArea')->name('areaStore');
+    route::get('/area-page/edit/{slug}','editArea')->name('areaEdit');
+    route::put('/area-page/update/{slug}','updateArea')->name('areaUpdate');
+    route::put('/area-page/active/{slug}','activeArea')->name('areaActive');
+    route::delete('/area-page/remove/{slug}','removeArea')->name('areaRemove');
 
 });

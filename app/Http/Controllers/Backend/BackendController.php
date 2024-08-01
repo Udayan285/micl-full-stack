@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Area;
 use App\Models\About;
 use App\Models\Banner;
+use App\Models\Ckeditor;
 use App\Models\Homeabout;
 use Illuminate\Http\Request;
 use App\Models\Homecorporate;
 use App\Models\CorporateVision;
 use App\Http\Helpers\SlugBuilder;
 use App\Http\Controllers\Controller;
-use App\Models\Ckeditor;
 
 class BackendController extends Controller
 {
@@ -46,25 +47,14 @@ class BackendController extends Controller
         $abouts = About::all();
         return view('backend.about.mainAbout',compact('abouts'));
     }
+
+    function showArea(){
+        $areas = Area::all();
+        return view('backend.area.area',compact('areas'));
+        
+    }
     //ends here all menu items page show..
 
-    // ===============summernote test=================
-    function dashboardCke() {
-
-        $summer = Ckeditor::all();
-        return view('testcke',compact('summer'));
-
-    }
-    function dashboardCkepost(Request $req) {
-
-        $summer = new Ckeditor();
-        
-        $summer->summernote = $req->editordata;
-        $summer->save();
-
-        return redirect()->back();
-    }
-    // ===============summernote test=================
 
 
     
