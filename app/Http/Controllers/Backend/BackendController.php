@@ -53,6 +53,11 @@ class BackendController extends Controller
         return view('backend.area.area',compact('areas'));
         
     }
+
+    function showContact(){
+        return view('backend.contact.contact');
+        
+    }
     //ends here all menu items page show..
 
 

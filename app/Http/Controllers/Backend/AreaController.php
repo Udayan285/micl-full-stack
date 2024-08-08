@@ -118,8 +118,22 @@ class AreaController extends Controller
             }else{
                 $singleArea->update(['status' => 0]);
             }
+
+            $singleArea = Area::where('slug', $slug)->first();
+
+            // if ($singleArea) {
+            //     // Update the current area to active
+            //     $singleArea->update(['status' => 1]);
+        
+            //     // Update other areas to inactive using a transaction for efficiency
+            //     DB::transaction(function () use ($slug) {
+            //         Area::where('slug', '!=', $slug)->update(['status' => 0]);
+            //     });
+            // }
            
             $singleArea->save();
             return redirect()->back()->with('status',"Status updated successfully.");
         }
+
+
 }

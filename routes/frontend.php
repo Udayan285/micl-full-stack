@@ -55,6 +55,7 @@ route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->c
     route::get('/home-about','showHomeAbout')->name('homeAbout');
     route::get('/actual-about-us','showAbout')->name('actualAbout');
     route::get('/area','showArea')->name('area');
+    route::get('/contact-page','showContact')->name('contactPage');
 
 
     //banner info store/update/delete

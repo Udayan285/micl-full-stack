@@ -61,8 +61,6 @@ class FrontendController extends Controller
     function area(){
         $bannersData = Banner::where('status',1)->get();
         $areaData = Area::where('status',1)->get();
-        // dd($areaData);
-
         return view('MICL-clone.area',compact('bannersData','areaData'));
     }
 
