@@ -12,14 +12,12 @@
               </div>
               @endif
 
-            {{-- area section starts --}}
+            {{-- contact section starts --}}
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Contact - Location,Email,Phone</h6>
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('dashboard.contactStore') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                       
-                       
                         <label for="exampleInputDescription" class="form-label">Contact Location</label>
                         <div class="form-floating mb-3">
                             <textarea class="form-control" name="contact_location" placeholder="Leave a description here"
@@ -50,10 +48,10 @@
                     </form>
                 </div>
             </div>
-            {{-- area section endss --}}
+            {{-- contact section endss --}}
 
 
-            {{-- area section show table starts --}}
+            {{--  contact section show table starts --}}
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Area Page Information...</h6>
@@ -61,39 +59,37 @@
                         <thead>
                             <tr>
                                 <th scope="col">S.No</th>
-                                <th scope="col">Area Headline</th>
-                                <th scope="col">Area Description</th>
-                                <th scope="col">Images</th>
+                                <th scope="col">Contact Location</th>
+                                <th scope="col">Contact Email</th>
+                                <th scope="col">Contact Phone</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            {{-- @foreach ($areas as $key=>$area) --}}
+                            @foreach ($contacts as $key=>$contact)
                                 
                                            
                             <tr>
-                                <th scope="row"></th>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <img src="" alt="Area Image" style="height: 80px;width:90px;">
-                                </td>
+                                <th scope="row">{{ ++$key }}</th>
+                                <td>{!! $contact->contact_location !!}</td>
+                                <td>{{ $contact->contact_email }}</td>
+                                <td>{{ $contact->contact_phone }}</td>
+                              
                                 <td>
                                    
-                                    <form action="" method="POST">
+                                    <form action="{{ route('dashboard.contactActive',$contact->id) }}" method="POST">
                                         @csrf
                                         @method("PUT")
-                                        <button type="submit" class="btn btn-warning btn-sm mt-2">Active</button>
-                                       
+                                        <button type="submit" class="btn btn-{{ $contact->status == 0 ? 'warning' : 'success' }} btn-sm mt-2">{{ $contact->status == 0 ? 'Active' : 'Deactive' }}</button> 
                                     </form>
                                     
-                                    <form action="" method="GET">
+                                    <form action="{{ route('dashboard.contactEdit',$contact->id) }}" method="GET">
                                         @csrf
                                         <button type="submit" class="btn btn-primary btn-sm mt-2">Edit</button>
                                     </form>
                                    
-                                    <form action="" method="POST">
+                                    <form action="{{ route('dashboard.contactRemove',$contact->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm mt-2">Delete</button>
@@ -102,34 +98,19 @@
                                 </td>
                                
                             </tr>  
-                            {{-- @endforeach  --}}
+                            @endforeach 
 
                                                                          
                         </tbody>
                     </table>
                 </div>
             </div>
-            {{--area section show table ends--}}
+            {{--contact section show table ends--}}
 
         
         </div>
     </div>       
 </div>
-
-
-{{-- Custom javascript here for media upload --}}
-@push('homeAboutImage')
-<script>
-    let uploadImg = document.querySelector('#area_image')
-    let display = document.querySelector('#area_image_main')
-    
-    function imgPreviewer(event){
-        let url = URL.createObjectURL(event.target.files[0])
-        display.src = url
-    }
-    uploadImg.addEventListener('change',imgPreviewer);
-</script>
-@endpush
 
 
 @endsection

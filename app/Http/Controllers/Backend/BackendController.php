@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Area;
 use App\Models\About;
 use App\Models\Banner;
+use App\Models\Contact;
 use App\Models\Ckeditor;
 use App\Models\Homeabout;
 use Illuminate\Http\Request;
@@ -55,9 +56,12 @@ class BackendController extends Controller
     }
 
     function showContact(){
-        return view('backend.contact.contact');
+        $contacts = Contact::all();
+        return view('backend.contact.contact',compact('contacts'));
         
     }
+
+
     //ends here all menu items page show..
 
 

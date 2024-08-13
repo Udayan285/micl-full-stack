@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\AreaController;
 use App\Http\Controllers\Backend\BackendController;
+use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\CorporateVisionController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Middleware\ValidUser;
@@ -114,5 +115,17 @@ route::prefix("/dashboard")->name('dashboard.')->controller(AreaController::clas
     route::put('/area-page/update/{slug}','updateArea')->name('areaUpdate');
     route::put('/area-page/active/{slug}','activeArea')->name('areaActive');
     route::delete('/area-page/remove/{slug}','removeArea')->name('areaRemove');
+
+});
+
+//Contact Page related all route here..
+route::prefix("/dashboard")->name('dashboard.')->controller(ContactController::class)->group(function(){
+   
+    //Contact page all routes here..(#udayan285#)
+    route::post('/contact/store','storeContact')->name('contactStore');
+    route::get('/contact/edit/{id}','editContact')->name('contactEdit');
+    route::put('/contact/update/{id}','updateContact')->name('contactUpdate');
+    route::put('/contact/active/{id}','activeContact')->name('contactActive');
+    route::delete('/contact/remove/{id}','removeContact')->name('contactRemove');
 
 });
