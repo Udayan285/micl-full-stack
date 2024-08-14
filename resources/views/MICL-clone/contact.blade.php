@@ -11,10 +11,9 @@
             style="max-width: 600px"
           >
             <h1 class="mb-3">Get In Touch</h1>
-          <!-- <p>
-            hello
-          </p> -->
           </div>
+          
+          @foreach ($contact as $data)
           <div class="row g-4 mb-5">
             <div
               class="col-md-6 col-lg-4 text-center wow fadeInUp"
@@ -26,9 +25,9 @@
               >
                 <i class="fa fa-map-marker-alt fa-2x text-primary"></i>
               </div>
-              <h6 class="locat-content">Habib’s, (Level-4), 1574/A, East Nasirabad, Bayezid Bostami Road, Opposite side of Nasirabad Housing Society (Road No-03), Panchlaish, Chattogram - 4000, Bangladesh.</h6>
+              <h6 class="locat-content">{!! $data->contact_location !!}</h6>
             </div>
-            <div
+            <divs
               class="col-md-6 col-lg-4 text-center wow fadeInUp"
               data-wow-delay="0.3s"
             >
@@ -38,8 +37,8 @@
               >
                 <i class="fa fa-envelope-open fa-2x text-primary"></i>
               </div>
-              <h6>info@miclbd.com</h6>
-            </div>
+              <h6>{!! $data->contact_email !!}</h6>
+            </divs>
             <div
               class="col-md-6 col-lg-4 text-center wow fadeInUp"
               data-wow-delay="0.5s"
@@ -50,10 +49,13 @@
               >
                 <i class="fa fa-phone-alt fa-2x text-primary"></i>
               </div>
-              <h6>Phone : 02-41356228</h6>
-              <h6>Phone : 02-41356229</h6>
+              <h6>{!! $data->contact_phone !!}</h6>
             </div>
           </div>
+          @endforeach
+        
+
+
           <div class="primaryBg rounded">
             <div class="row g-0">
               <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">

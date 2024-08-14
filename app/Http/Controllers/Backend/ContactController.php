@@ -14,8 +14,8 @@ class ContactController extends Controller
 
         $request->validate([
             'contact_location' => 'required',
-            'contact_email' => 'required|email', // Added email validation
-            'contact_phone' => 'required|numeric',
+            'contact_email' => 'required', 
+            'contact_phone' => 'required',
         ]);
 
         Contact::create($request->all());
@@ -37,8 +37,8 @@ class ContactController extends Controller
     function updateContact(Request $request, $id) {
         $request->validate([
             'contact_location' => 'required',
-            'contact_email' => 'required|email',
-            'contact_phone' => 'required|numeric',
+            'contact_email' => 'required',
+            'contact_phone' => 'required',
         ]);
     
         $contact = Contact::findOrFail($id);

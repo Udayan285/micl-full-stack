@@ -28,8 +28,10 @@
                         @enderror
 
                         <label for="exampleInputTitle" class="form-label">Contact - Email</label>
-                        <div class="mb-3 ">     
-                            <input type="text" name="contact_email"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">  
+                        <div class="mb-3 "> 
+                            <textarea class="form-control summernote" name="contact_email" placeholder="Leave a description here"
+                                id="" style="height: 150px;" ></textarea>      
+                            
                         </div>
                         @error('contact_email')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -37,7 +39,9 @@
 
                         <label for="exampleInputTitle" class="form-label">Contact - Phone</label>
                         <div class="mb-3">     
-                            <input type="text" name="contact_phone"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">  
+                            <textarea class="form-control summernote" name="contact_phone" placeholder="Leave a description here"
+                                id="" style="height: 150px;" ></textarea>
+                            
                         </div>
                         @error('contact_phone')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -73,8 +77,8 @@
                             <tr>
                                 <th scope="row">{{ ++$key }}</th>
                                 <td>{!! $contact->contact_location !!}</td>
-                                <td>{{ $contact->contact_email }}</td>
-                                <td>{{ $contact->contact_phone }}</td>
+                                <td>{!! $contact->contact_email !!}</td>
+                                <td>{!! $contact->contact_phone !!}</td>
                               
                                 <td>
                                    

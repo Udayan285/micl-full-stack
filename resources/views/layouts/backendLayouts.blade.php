@@ -132,6 +132,14 @@
                 );
                 });
             </script>
+
+            <script>
+                $(document).ready(function() {
+                $('.summernote').summernote(
+                    {height:200,}
+                );
+                });
+            </script>
     <!-- Template Javascript -->
     <script src="{{ asset('backend/js/main.js') }}"></script>
 </body>

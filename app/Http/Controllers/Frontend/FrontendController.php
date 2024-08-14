@@ -8,6 +8,7 @@ use App\Models\Homeabout;
 use Illuminate\Http\Request;
 use App\Models\Homecorporate;
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
 
 class FrontendController extends Controller
 {
@@ -65,7 +66,8 @@ class FrontendController extends Controller
     }
 
     function contactUs(){
-        return view('MICL-clone.contact');
+        $contact = Contact::where('status',1)->get();
+        return view('MICL-clone.contact',compact('contact'));
     }
 
    

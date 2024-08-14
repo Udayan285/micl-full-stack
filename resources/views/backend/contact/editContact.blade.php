@@ -29,16 +29,18 @@
                         @enderror
 
                         <label for="exampleInputTitle" class="form-label">Edit Contact - Email</label>
-                        <div class="mb-3 ">     
-                            <input type="text" name="contact_email" value="{{ $contactEdit ? $contactEdit->contact_email : '' }}"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">  
+                        <div class="mb-3 "> 
+                            <textarea class="form-control summernote" name="contact_email" placeholder="Leave a description here"
+                                id="" style="height: 150px;" >{{ $contactEdit ? $contactEdit->contact_email : '' }}</textarea>    
                         </div>
                         @error('contact_email')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
 
                         <label for="exampleInputTitle" class="form-label">Edit Contact - Phone</label>
-                        <div class="mb-3">     
-                            <input type="text" name="contact_phone" value="{{ $contactEdit ? $contactEdit->contact_phone : '' }}"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">  
+                        <div class="mb-3">  
+                            <textarea class="form-control summernote" name="contact_phone" placeholder="Leave a description here"
+                                id="" style="height: 150px;" >{{ $contactEdit ? $contactEdit->contact_phone : '' }}</textarea>   
                         </div>
                         @error('contact_phone')
                             <div class="alert alert-danger">{{ $message }}</div>
