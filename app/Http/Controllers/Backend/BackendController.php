@@ -13,6 +13,7 @@ use App\Models\Homecorporate;
 use App\Models\CorporateVision;
 use App\Http\Helpers\SlugBuilder;
 use App\Http\Controllers\Controller;
+use App\Models\Manager;
 
 class BackendController extends Controller
 {
@@ -59,6 +60,11 @@ class BackendController extends Controller
         $contacts = Contact::all();
         return view('backend.contact.contact',compact('contacts'));
         
+    }
+
+    function showMD(){
+        $mds = Manager::all();
+        return view('backend.md.md',compact('mds')); 
     }
 
 

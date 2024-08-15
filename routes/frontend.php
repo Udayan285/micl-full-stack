@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\AreaController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\CorporateVisionController;
+use App\Http\Controllers\Backend\ManagerController;
 use App\Http\Controllers\Email\EmailController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Middleware\ValidUser;
@@ -46,6 +47,7 @@ route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->c
     
     //sidebar menu route
     route::get('','dashboard')->name('all');
+    
     // {{-- =========summernote test======== --}}
     route::get('/ckeditor','dashboardCke')->name('cke');
     route::post('/ckeditor/post','dashboardCkepost')->name('ckepost');
@@ -58,6 +60,7 @@ route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->c
     route::get('/actual-about-us','showAbout')->name('actualAbout');
     route::get('/area','showArea')->name('area');
     route::get('/contact-page','showContact')->name('contactPage');
+    route::get('/md-profile','showMD')->name('mdPage');
 
 
     //banner info store/update/delete
@@ -134,3 +137,17 @@ route::prefix("/dashboard")->name('dashboard.')->controller(ContactController::c
 
 //Email sending route here....(#udayan285#)
 route::post('/send-email',[EmailController::class,'sendEmail'])->name('sendEmail');
+
+
+
+//Managing Director page related all route here..
+route::prefix("/dashboard")->name('dashboard.')->controller(ManagerController::class)->group(function(){
+   
+    //MD page all routes here..(#udayan285#)
+    route::post('/md-profile/store','storeMD')->name('mdStore');
+    route::get('/md-profile/edit/{id}','editMD')->name('mdEdit');
+    route::put('/md-profile/update/{id}','updateMD')->name('mdUpdate');
+    route::put('/md-profile/active/{id}','activeMD')->name('mdActive');
+    route::delete('/md-profile/remove/{id}','removeMD')->name('mdRemove');
+
+});
