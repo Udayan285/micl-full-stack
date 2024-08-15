@@ -13,11 +13,13 @@ use App\Models\Homecorporate;
 use App\Models\CorporateVision;
 use App\Http\Helpers\SlugBuilder;
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\MediaDeleteTrait;
 use App\Models\Manager;
 
 class BackendController extends Controller
 {
    // use SlugBuilder;
+   use MediaDeleteTrait;
 
    //show all menu time page here starts
     function dashboard(){
@@ -115,14 +117,8 @@ class BackendController extends Controller
     //Remove Banner
     function removeHero(string $slug){
         $banner = Banner::where('slug',$slug)->first();
-        
         //remove from public folder
-        $imgName = $banner->image_url;
-        $delete = public_path('images/'.$imgName);
-        if(file_exists($delete)){
-            unlink($delete);
-        }
-
+        $this->deleteMedia($banner,'images/');
         $banner->delete();
         return redirect()->back()->with('status',"Selected banner deleted successfully.");
     }
@@ -157,11 +153,8 @@ class BackendController extends Controller
          }
 
 
-        //this part is for delete file from public folder while delete from database
-        $delete = public_path('images/'.$bannerUpdate->image_url);
-        if(file_exists($delete)){
-            unlink($delete);
-        }
+       //remove from public folder
+       $this->deleteMedia($bannerUpdate,'images/');
         
         $imageName = time().'.'.$request->banner_image->extension();
         $request->banner_image->move(public_path('images'), $imageName);
@@ -233,11 +226,7 @@ class BackendController extends Controller
         $homecorpo = Homecorporate::where('slug',$slug)->first();
         
         //remove from public folder
-        $imgName = $homecorpo->image_url;
-        $delete = public_path('homecorporate/'.$imgName);
-        if(file_exists($delete)){
-            unlink($delete);
-        }
+        $this->deleteMedia($homecorpo,'homecorporate/');
 
         $homecorpo->delete();
         return redirect()->back()->with('status',"Selected homepage corporate info. deleted successfully.");
@@ -272,12 +261,8 @@ class BackendController extends Controller
                  $homeCorpoUpdate->slug = $slug;
              }
     
-    
-            //this part is for delete file from public folder while delete from database
-            $delete = public_path('homecorporate/'.$homeCorpoUpdate->image_url);
-            if(file_exists($delete)){
-                unlink($delete);
-            }
+            //remove from public folder
+            $this->deleteMedia($homeCorpoUpdate,'homecorporate/');
             
             $imageName = time().'.'.$request->home_corporate_image->extension();
             $request->home_corporate_image->move(public_path('homecorporate'), $imageName);

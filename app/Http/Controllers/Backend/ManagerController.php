@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Helpers\MediaDeleteTrait;
 use App\Http\Controllers\Controller;
 use App\Models\Manager;
 use Illuminate\Http\Request;
 
 class ManagerController extends Controller
 {
+    use MediaDeleteTrait;
     //Managing Director page all function here..(#udayan285#)
                 
     function storeMD(Request $request){
@@ -35,6 +37,9 @@ class ManagerController extends Controller
 
     function removeMD($id){
         $contact = Manager::where('id',$id)->first();
+        
+        $this->deleteMedia($contact,'md/');
+        
         $contact->delete();
         return redirect()->back()->with('status',"Selected MD info. deleted successfully.");
     }
@@ -57,10 +62,7 @@ class ManagerController extends Controller
         $mdUpdate->description = $request->description;
 
         //this part is for delete file from public folder while delete from database
-        $delete = public_path('md/'.$mdUpdate->image_url);
-        if(file_exists($delete)){
-            unlink($delete);
-        }
+        $this->deleteMedia($mdUpdate,'md/');
         
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('md'), $imageName);

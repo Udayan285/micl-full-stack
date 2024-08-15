@@ -8,10 +8,11 @@ use App\Models\Homeabout;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helpers\SlugBuilder;
+use App\Http\Helpers\MediaDeleteTrait;
 
 class AboutController extends Controller
 {
-       //use SlugBuilder;    
+       use MediaDeleteTrait;   
     
             //Home Page About detail store/update/delete here..(#udayan285#)
             function storeHomeAbout(Request $request){
@@ -59,12 +60,8 @@ class AboutController extends Controller
                 $about = Homeabout::where('slug',$slug)->first();
                 
                 //remove from public folder
-                $imgName = $about->image_url;
-                $delete = public_path('about-us/'.$imgName);
-                if(file_exists($delete)){
-                    unlink($delete);
-                }
-        
+                $this->deleteMedia($about,'about-us/');
+                
                 $about->delete();
                 return redirect()->back()->with('status',"Selected about info. deleted successfully.");
             }
@@ -100,11 +97,9 @@ class AboutController extends Controller
                      }
             
             
-                    //this part is for delete file from public folder while delete from database
-                    $delete = public_path('about-us/'.$homeAboutUpdate->image_url);
-                    if(file_exists($delete)){
-                        unlink($delete);
-                    }
+                    //remove from public folder
+                    $this->deleteMedia($homeAboutUpdate,'about-us/');
+                    
                     
                     $imageName = time().'.'.$request->home_about_image->extension();
                     $request->home_about_image->move(public_path('about-us'), $imageName);
@@ -177,11 +172,7 @@ class AboutController extends Controller
                 $about = About::where('slug',$slug)->first();
                 
                 //remove from public folder
-                $imgName = $about->image_url;
-                $delete = public_path('about-us/'.$imgName);
-                if(file_exists($delete)){
-                    unlink($delete);
-                }
+                $this->deleteMedia($about,'about-us/');
         
                 $about->delete();
                 return redirect()->back()->with('status',"Selected about info. deleted successfully.");
@@ -218,11 +209,9 @@ class AboutController extends Controller
                      }
             
             
-                    //this part is for delete file from public folder while delete from database
-                    $delete = public_path('about-us/'.$aboutUpdate->image_url);
-                    if(file_exists($delete)){
-                        unlink($delete);
-                    }
+                    
+                    //remove from public folder
+                    $this->deleteMedia($aboutUpdate,'about-us/');
                     
                     $imageName = time().'.'.$request->about_image->extension();
                     $request->about_image->move(public_path('about-us'), $imageName);
