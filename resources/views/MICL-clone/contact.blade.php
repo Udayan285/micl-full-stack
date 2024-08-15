@@ -65,50 +65,85 @@
                   <p class="mb-4">
                     Make appointment and connect.
                   </p>
-                  <form>
+
+                   {{-- Success message show here via alert --}}
+                  @if (session('success'))
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fa fa-exclamation-circle me-2"></i>{{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  @endif
+                  {{-- failed message show here via alert --}}
+                  @if (session('fail'))
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fa fa-exclamation-circle me-2"></i>{{ session('fail') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                  @endif
+                 
+                 
+                 {{-- email part start here --}}
+                  <form action="{{ route('sendEmail') }}" method="POST">
+                    @csrf
                     <div class="row g-3">
                       <div class="col-sm-6">
+                        @error('name')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-floating">
                           <input
+                            name="name"
                             type="text"
                             class="form-control border-0"
                             id="name"
                             placeholder="Your Name"
                           />
-                          <label for="name">Your Name</label>
+                          {{-- <label for="name">Your Name</label> --}}
                         </div>
                       </div>
                       <div class="col-sm-6">
+                        @error('email')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-floating">
-                          <input
+                          <input                          
+                            name="email"
                             type="email"
                             class="form-control border-0"
                             id="email"
                             placeholder="Your Email"
                           />
-                          <label for="email">Your Email</label>
+                          {{-- <label for="email">Your Email</label> --}}
                         </div>
                       </div>
                       <div class="col-12">
+                        @error('subject')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-floating">
                           <input
+                            name="subject"
                             type="text"
                             class="form-control border-0"
                             id="subject"
                             placeholder="Subject"
                           />
-                          <label for="subject">Subject</label>
+                          {{-- <label for="subject">Subject</label> --}}
                         </div>
                       </div>
                       <div class="col-12">
+                        @error('message')
+                          <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <div class="form-floating">
                           <textarea
+                            name="message"
                             class="form-control border-0"
                             placeholder="Leave a message here"
                             id="message"
                             style="height: 100px"
                           ></textarea>
-                          <label for="message">Message</label>
+                          {{-- <label for="message">Message</label> --}}
                         </div>
                       </div>
                       <div class="col-12">
@@ -121,6 +156,9 @@
                       </div>
                     </div>
                   </form>
+                  {{-- email part end here --}}
+
+
                 </div>
               </div>
               <div

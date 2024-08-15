@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\AreaController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\CorporateVisionController;
+use App\Http\Controllers\Email\EmailController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Middleware\ValidUser;
 
@@ -129,3 +130,7 @@ route::prefix("/dashboard")->name('dashboard.')->controller(ContactController::c
     route::delete('/contact/remove/{id}','removeContact')->name('contactRemove');
 
 });
+
+
+//Email sending route here....(#udayan285#)
+route::post('/send-email',[EmailController::class,'sendEmail'])->name('sendEmail');
