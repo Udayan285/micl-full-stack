@@ -12,6 +12,7 @@ class Footer extends Model
     protected $fillable = [
         'corporate_office',
         'sales_office',
-        'factory'
+        'factory',
+        'status'
     ];
 }
