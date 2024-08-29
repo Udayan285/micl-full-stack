@@ -109,22 +109,20 @@
                                 
                               
                             </div>
+
+                            {{-- footer quick links here --}}
                             <div class="col-lg-4 col-md-6">
                                 <h3 class="text-white mb-4">Quick Links</h3>
                                 <ul type="square">
-                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="about.html">About Us</a></li>
-                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="tank-terminal.html">Storage Tank Terminal & Delivery Support Services</a></li>
-                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="bitumin-plant.html">Bitumen Plant & Storage Tank</a></li>
-                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="#">Physical Refinery Unit</a></li>
-                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="dry-friction.html">Super Oil Refinery & Dry fractionation Unit</a></li>
-                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="oil-filling.html">Edible Oil Filling Plant </a></li>
-                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="bottle-making.html">Bottle Making Plant  </a></li>
-                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="contact.html">Contact Us</a></li>  
+                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="{{ route('micl.aboutUs') }}">About Us</a></li>
+                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="{{ route('micl.storageTank') }}">Storage Tank Terminal & Delivery Support Services</a></li>
+                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="{{ route('micl.vitumenPlant') }}">Bitumen Plant & Storage Tank</a></li>
+                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="{{ route('micl.physical') }}">Physical Refinery Unit</a></li>
+                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="{{ route('micl.dryFractionation') }}">Super Oil Refinery & Dry fractionation Unit</a></li>
+                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="{{ route('micl.edibleOil') }}">Edible Oil Filling Plant </a></li>
+                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="{{ route('micl.bottle') }}">Bottle Making Plant  </a></li>
+                                    <li><a style="color: #ffc706 !important;" class="text-white-50" href="{{ route('micl.contact') }}">Contact Us</a></li>  
                                 </ul>
-                                
-                                
-                                
-                                
                             </div>
                          
                         </div>

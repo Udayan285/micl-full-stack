@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\AreaController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\CorporateVisionController;
+use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\ManagerController;
 use App\Http\Controllers\Email\EmailController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -61,6 +62,7 @@ route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->c
     route::get('/area','showArea')->name('area');
     route::get('/contact-page','showContact')->name('contactPage');
     route::get('/md-profile','showMD')->name('mdPage');
+    route::get('/footer','showFooter')->name('footer');
 
 
     //banner info store/update/delete
@@ -149,5 +151,17 @@ route::prefix("/dashboard")->name('dashboard.')->controller(ManagerController::c
     route::put('/md-profile/update/{id}','updateMD')->name('mdUpdate');
     route::put('/md-profile/active/{id}','activeMD')->name('mdActive');
     route::delete('/md-profile/remove/{id}','removeMD')->name('mdRemove');
+
+});
+
+//Footer page related all route here..
+route::prefix("/dashboard")->name('dashboard.')->controller(FooterController::class)->group(function(){
+   
+    //Footer page all routes here..(#udayan285#)
+    route::post('/footer/store','storeFooter')->name('footerStore');
+    route::get('/footer/edit/{id}','editFooter')->name('footerEdit');
+    route::put('/footer/update/{id}','updateFooter')->name('footerUpdate');
+    route::put('/footer/active/{id}','activeFooter')->name('footerActive');
+    route::delete('/footer/remove/{id}','removeFooter')->name('footerRemove');
 
 });

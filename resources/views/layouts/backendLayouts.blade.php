@@ -87,6 +87,7 @@
                     <a href="{{ route('dashboard.area') }}" class="nav-item nav-link {{ request()->is('dashboard/area') ? 'active' : '' }}"><i class="fas fa-street-view"></i>Area</a>
                     <a href="{{ route('dashboard.contactPage') }}" class="nav-item nav-link {{ request()->is('dashboard/contact-page') ? 'active' : '' }}"><i class="fas fa-address-book"></i>Contact Us</a>
                     <a href="{{ route('dashboard.mdPage') }}" class="nav-item nav-link {{ request()->is('dashboard/md-profile') ? 'active' : '' }}"><i class="fas fa-user"></i>Manager</a>
+                    <a href="{{ route('dashboard.footer') }}" class="nav-item nav-link {{ request()->is('dashboard/footer') ? 'active' : '' }}"><i class="fas fa-hourglass-end"></i>Footer</a>
                     <a href="{{ route("auth.logout") }}" class="nav-item nav-link "><i class="fas fa-sign-out-alt"></i>Logout</a>
 
                     

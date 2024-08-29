@@ -74,13 +74,13 @@ class ManagerController extends Controller
     }
 
     function activeMD($id) {
-        $contact = Manager::findOrFail($id);
+        $manager = Manager::findOrFail($id);
     
-        // Deactivate other contacts
+        // Deactivate other manager
         Manager::where('id', '!=', $id)->update(['status' => 0]);
     
-        // Activate the current contact
-        $contact->update(['status' => 1]);
+        // Activate the current manager
+        $manager->update(['status' => 1]);
     
         return redirect()->back()->with('status', 'Status updated successfully.');
     }

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Area;
 use App\Models\About;
 use App\Models\Banner;
+use App\Models\Footer;
 use App\Models\Contact;
+use App\Models\Manager;
 use App\Models\Ckeditor;
 use App\Models\Homeabout;
 use Illuminate\Http\Request;
@@ -14,7 +16,6 @@ use App\Models\CorporateVision;
 use App\Http\Helpers\SlugBuilder;
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\MediaDeleteTrait;
-use App\Models\Manager;
 
 class BackendController extends Controller
 {
@@ -67,6 +68,11 @@ class BackendController extends Controller
     function showMD(){
         $mds = Manager::all();
         return view('backend.md.md',compact('mds')); 
+    }
+
+    function showFooter(){
+        $footers = Footer::all();
+        return view('backend.footer.footer',compact('footers'));
     }
 
 

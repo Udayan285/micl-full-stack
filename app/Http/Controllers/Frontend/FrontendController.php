@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Homecorporate;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\Manager;
 
 class FrontendController extends Controller
 {
@@ -21,7 +22,8 @@ class FrontendController extends Controller
     }
 
     function mdProfile(){
-        return view('MICL-clone.md');
+        $mdData = Manager::where('status',1)->get();
+        return view('MICL-clone.md',compact('mdData'));
     }
 
     function aboutUs(){

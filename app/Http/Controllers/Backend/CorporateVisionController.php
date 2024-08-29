@@ -36,8 +36,7 @@ class CorporateVisionController extends Controller
                 $slug = str($request->corporate_title)->slug();
                 $corporate->slug = $slug;
             }
-            //$slug = $this->slugGenerator($request,Banner::class);
-            //$banner->slug = $slug;
+
     
             //image upload related task written here...
             $imgName = time().'.'.$request->corporate_image->extension();
