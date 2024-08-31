@@ -63,6 +63,14 @@ route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->c
     route::get('/contact-page','showContact')->name('contactPage');
     route::get('/md-profile','showMD')->name('mdPage');
     route::get('/footer','showFooter')->name('footer');
+    
+    // business activities related blade route
+    route::get('/storage-tank-terminal-and-delivery-support-services','showStorageTank')->name('storageTank');
+    route::get('/bitumen-plant-and-storage-tank','showBitumen')->name('bitumen');
+    route::get('/physical-refinery','showPhysical')->name('physical');
+    route::get('/super-oil-dry-fractionation','showSuperOil')->name('superOil');
+    route::get('/edible-oil','showEdibleOil')->name('edibleOil');
+    route::get('/bottle-making','showBottleMaking')->name('bottleMaking');
 
 
     //banner info store/update/delete

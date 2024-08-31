@@ -75,6 +75,31 @@ class BackendController extends Controller
         return view('backend.footer.footer',compact('footers'));
     }
 
+    // Business Activities
+    function showStorageTank(){
+        return view('backend.business.storageTank');
+    }
+
+    function showBitumen(){
+        return view('backend.business.bitumenPlant');
+    }
+
+    function showPhysical(){
+       return view('backend.business.physical'); 
+    }
+
+    function showSuperOil(){
+        return view('backend.business.superOil');
+    }
+
+    function showEdibleOil(){
+        return view('backend.business.edibleOil');
+    }
+
+    function showBottleMaking(){
+        return view('backend.business.bottleMaking');
+    }
+
 
     //ends here all menu items page show..
 

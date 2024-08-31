@@ -4,72 +4,84 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\Area;
 use App\Models\Banner;
+use App\Models\Footer;
+use App\Models\Contact;
+use App\Models\Manager;
 use App\Models\Homeabout;
 use Illuminate\Http\Request;
 use App\Models\Homecorporate;
 use App\Http\Controllers\Controller;
-use App\Models\Contact;
-use App\Models\Manager;
 
 class FrontendController extends Controller
 {
     //Show Blade file method written here..
     function homePage(){
+        $footer = Footer::where('status',1)->get();
         $bannersData = Banner::where('status',1)->get();
         $homeCorporate = Homecorporate::where('status',1)->first();
         $homeAbout = Homeabout::where('status',1)->first();
-        return view('MICL-clone.welcome',compact('bannersData','homeCorporate','homeAbout'));
+        return view('MICL-clone.welcome',compact('bannersData','homeCorporate','homeAbout','footer'));
     }
 
     function mdProfile(){
+        $footer = Footer::where('status',1)->get();
         $mdData = Manager::where('status',1)->get();
-        return view('MICL-clone.md',compact('mdData'));
+        return view('MICL-clone.md',compact('mdData','footer'));
     }
 
     function aboutUs(){
-        // $summer = Ckeditor::all();
+        $footer = Footer::where('status',1)->get();
         $bannersData = Banner::where('status',1)->get();
-        return view('MICL-clone.about',compact('bannersData'));
+        return view('MICL-clone.about',compact('bannersData','footer'));
     }
 
     function corporateVision(){
+        $footer = Footer::where('status',1)->get();
         $bannersData = Banner::where('status',1)->get();
-        return view('MICL-clone.corporate',compact('bannersData'));
+        return view('MICL-clone.corporate',compact('bannersData','footer'));
     }
 
     function storageTank(){
-        return view('MICL-clone.tank-terminal');
+        $footer = Footer::where('status',1)->get();
+        return view('MICL-clone.tank-terminal',compact('footer'));
     }
 
     function vitumenPlant(){
-        return view('MICL-clone.bitumin-plant');
+        $footer = Footer::where('status',1)->get();
+        return view('MICL-clone.bitumin-plant',compact('footer'));
     }
 
     function physicalRefinery(){
-        return view('MICL-clone.physical-unit');
+        $footer = Footer::where('status',1)->get();
+        return view('MICL-clone.physical-unit',compact('footer'));
     }
 
     function dryFractionation(){
-        return view('MICL-clone.dry-friction');
+        $footer = Footer::where('status',1)->get();
+        return view('MICL-clone.dry-friction',compact('footer'));
     }
 
     function edibleOil(){
-        return view('MICL-clone.oil-filling');
+        $footer = Footer::where('status',1)->get();
+        return view('MICL-clone.oil-filling',compact('footer'));
     }
 
     function bottleMaking(){
-        return view('MICL-clone.bottle-making');
+        $footer = Footer::where('status',1)->get();
+        return view('MICL-clone.bottle-making',compact('footer'));
     }
 
     function area(){
+        $footer = Footer::where('status',1)->get();
         $bannersData = Banner::where('status',1)->get();
         $areaData = Area::where('status',1)->get();
-        return view('MICL-clone.area',compact('bannersData','areaData'));
+        return view('MICL-clone.area',compact('bannersData','areaData','footer'));
     }
 
     function contactUs(){
+        $footer = Footer::where('status',1)->get();
         $contact = Contact::where('status',1)->get();
-        return view('MICL-clone.contact',compact('contact'));
+        return view('MICL-clone.contact',compact('contact','footer'));
     }
 
    

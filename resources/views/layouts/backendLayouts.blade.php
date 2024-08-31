@@ -84,6 +84,19 @@
                         </div>
                     </div>
 
+                    {{-- Business-Activities-menu --}}
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle {{ request()->is('dashboard/storage-tank-terminal-and-delivery-support-services','dashboard/bitumen-plant-and-storage-tank','dashboard/physical-refinery','dashboard/super-oil-dry-fractionation','dashboard/edible-oil','dashboard/bottle-making') ? 'active' : '' }}" data-bs-toggle="dropdown"><i class="fas fa-chart-line"></i>Business Act.</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('dashboard.storageTank') }}" class="dropdown-item {{ request()->is('dashboard/storage-tank-terminal-and-delivery-support-services') ? 'active' : '' }}">Storage tank terminal</a>
+                            <a href="{{ route('dashboard.bitumen') }}" class="dropdown-item {{ request()->is('dashboard/bitumen-plant-and-storage-tank') ? 'active' : '' }}">Bitumen plant</a>
+                            <a href="{{ route('dashboard.physical') }}" class="dropdown-item {{ request()->is('dashboard/physical-refinery') ? 'active' : '' }}">Physical refienery</a>
+                            <a href="{{ route('dashboard.superOil') }}" class="dropdown-item {{ request()->is('dashboard/super-oil-dry-fractionation') ? 'active' : '' }}">Super oil and dry fractionation</a>
+                            <a href="{{ route('dashboard.edibleOil') }}" class="dropdown-item {{ request()->is('dashboard/edible-oil') ? 'active' : '' }}">Edible oil</a>
+                            <a href="{{ route('dashboard.bottleMaking') }}" class="dropdown-item {{ request()->is('dashboard/bottle-making') ? 'active' : '' }}">Bottle making</a>                           
+                        </div>
+                    </div>
+
                     <a href="{{ route('dashboard.area') }}" class="nav-item nav-link {{ request()->is('dashboard/area') ? 'active' : '' }}"><i class="fas fa-street-view"></i>Area</a>
                     <a href="{{ route('dashboard.contactPage') }}" class="nav-item nav-link {{ request()->is('dashboard/contact-page') ? 'active' : '' }}"><i class="fas fa-address-book"></i>Contact Us</a>
                     <a href="{{ route('dashboard.mdPage') }}" class="nav-item nav-link {{ request()->is('dashboard/md-profile') ? 'active' : '' }}"><i class="fas fa-user"></i>Manager</a>

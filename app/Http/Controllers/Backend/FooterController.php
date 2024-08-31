@@ -28,8 +28,9 @@ class FooterController extends Controller
         return redirect()->back()->with('status', 'Get in touch information removed successfully.');
     }
 
-    // problem occure here
+    
     function activeFooter($id){ 
+        //Udayan285
        
         $footer = Footer::findOrFail($id);
     

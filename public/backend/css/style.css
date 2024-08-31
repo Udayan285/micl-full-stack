@@ -1,3 +1,127 @@
+/* extra css */
+/* @import url("https://fonts.googleapis.com/css?family=Cairo|Manjari&display=swap"); */
+/* @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap") */
+  
+/* body {
+  font: 'Cairo', sans-serif;
+  background: #ECF1F6;
+  color: #17202A;
+} */
+
+#title{
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 2.3em;
+}
+#description {
+  text-align: center;
+  padding-top: 25px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.1em;
+}
+#radiobutton {
+  font-size: 15px;
+}
+#checkbox label {
+  font-size: 15px;
+}
+.container {
+ align-items: center;
+  width: 100%;
+  max-width: 900px;
+  background: #c4ccd2;
+  color: #009CFF;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-left: 300px;
+}
+
+.container * {
+  box-sizing: border-box;
+}
+
+.flex-outer,
+.flex-inner {
+  list-style-type: none;
+  padding: 20px;
+}
+
+.flex-outer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.flex-outer li,
+select{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.flex-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.flex-inner {
+  padding: 0 8px;
+  justify-content: space-between;
+}
+
+.flex-outer > li:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.flex-outer li label,
+.flex-outer li p {
+  padding: 8px;
+  font-weight: 300;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.flex-outer > li > label,
+.flex-outer li p {
+  flex: 1 0 120px;
+  max-width: 220px;
+}
+
+.flex-outer > li > label + *,
+.flex-inner {
+  flex: 1 0 220px;
+}
+
+.flex-outer li p {
+  margin: 0;
+}
+
+.flex-outer li input:not([type='checkbox']),
+.flex-outer li textarea {
+  padding: 15px;
+  border: none;
+}
+
+.flex-outer li button {
+  margin-left: auto;
+  padding: 8px 16px;
+  border: none;
+  background-color: white;
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  border-radius: 2px;
+}
+
+.flex-inner li {
+  width: 200px;
+}
+
+.flex-outer li button:hover {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
 /********** Template CSS **********/
 :root {
     --primary: #009CFF;

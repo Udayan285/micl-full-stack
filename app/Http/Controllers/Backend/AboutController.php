@@ -111,11 +111,10 @@ class AboutController extends Controller
             }
         
             function activeHomeAbout($slug){
+                //udayan285
                 $singleAboutHome = Homeabout::where('slug',$slug)->first();
-                
-                
                 if($singleAboutHome){
-                    //this logic build for another items deactive 
+                    //others item deactive 
                     $singleAboutHome->update(['status' => 1]);
                     Homeabout::where('slug', '!=', $slug)->update(['status' => 0]);
         

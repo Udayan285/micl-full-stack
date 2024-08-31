@@ -99,16 +99,19 @@
                                 <p class="mb-2"><i style="color: #ffc706;" class="fa fa-phone-alt me-3"></i>02-41356229</p>
                                 <p class="mb-2"><i style="color: #ffc706;" class="fa fa-envelope me-3"></i>info@miclbd.com</p>
                             </div>
+
+                            @foreach ($footer as $foot)                               
                             <div class="col-lg-4 col-md-6">
                                 <h3 class="text-white mb-4">Get In Touch</h3>
                                 <p class="mb-2"><b style="color: #ffc706;">Corporate Office :</b> 
-                                    Habib’s, (Level-4), 1574/A, East Nasirabad, Bayezid Bostami Road, Opposite side of Nasirabad Housing Society (Road No-03), Panchlaish, Chattogram - 4000, Bangladesh.
+                                    {!! $foot->corporate_office !!}
                                 </p>
-                                <p class="mb-2"><b style="color: #ffc706;">MICL Sales Office :</b> 269,Khatungonj,Chattogram.</p>
-                                <p class="mb-2"><b style="color: #ffc706;">Factory :</b> North Patenga,CEPZ,CHattogram.</p>
+                                <p class="mb-2"><b style="color: #ffc706;">MICL Sales Office :</b> {!! $foot->sales_office !!}</p>
+                                <p class="mb-2"><b style="color: #ffc706;">Factory :</b> {!! $foot->factory !!}</p>
                                 
-                              
+                                
                             </div>
+                            @endforeach
 
                             {{-- footer quick links here --}}
                             <div class="col-lg-4 col-md-6">
