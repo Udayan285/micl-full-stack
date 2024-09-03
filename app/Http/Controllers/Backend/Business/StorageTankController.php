@@ -68,62 +68,8 @@ class StorageTankController extends Controller
     function previewAll()
     {
         $storagetanks = Storagetank::all();
-        return view('backend.business.previewAll',compact('storagetanks'));
+        return view('backend.business.storage-tank.previewAll',compact('storagetanks'));
     }
-
-    // function storeStorageTank(Request $request)
-    // {
-    //     $request->validate([
-    //         "year_establishment" => 'required',
-    //         "storage_capacity" => 'required',
-    //         "product_turnover" => 'required',
-    //         "inward_facility" => 'required',
-    //         "jetty_facility" => 'required',
-    //         "pipeline_facility" => 'required',
-    //         "delivery_facility" => 'required',
-    //         "outward_delivey" => 'required',
-    //         "weight_scale" => 'required',
-    //         "utility_requirement" => 'required',
-    //         "manpower_requirement" => 'required',
-    //         "opportunity" => 'required',
-    //         "bonded_facility" => 'required',
-    //         "images.*" => 'required|mimes:jpg,jpeg,png,webp'
-    //     ]);
-
-    //     // Create the StorageTank entry
-    //     $storage = StorageTank::create($request->only([
-    //         'year_establishment',
-    //         'storage_capacity',
-    //         'product_turnover',
-    //         'inward_facility',
-    //         'jetty_facility',
-    //         'pipeline_facility',
-    //         'delivery_facility',
-    //         'outward_delivey',
-    //         'weight_scale',
-    //         'utility_requirement',
-    //         'manpower_requirement',
-    //         'opportunity',
-    //         'bonded_facility',
-    //     ]));
-
-    //     // Images management
-    //     if ($request->hasFile('images')) {
-    //         foreach($request->file('images') as $image) {
-    //             $imageName = uniqid().'.'.$image->getClientOriginalExtension();
-    //             $uploadPath = 'business-activities/';
-    //             $imagePath = $uploadPath.$imageName;
-    //             $image->move(public_path($uploadPath), $imageName);
-
-    //             // Store each image in the storage_tank_images table
-    //             $storage->images()->create([
-    //                 'image_path' => $imagePath
-    //             ]);
-    //         }
-    //     }
-
-    //     return redirect()->back()->with('status', "Storage Tank Submitted Successfully.");
-    // }
 
     function removeStorage($id)
     {
@@ -147,7 +93,7 @@ class StorageTankController extends Controller
 
     function editStorage($id){
         $storageEdit = StorageTank::where('id',$id)->first();
-        return view('backend.business.editBusinessActivities',compact('storageEdit'));
+        return view('backend.business.storage-tank.editBusinessActivities',compact('storageEdit'));
     }
 
     function updateStorage(Request $request,$id){

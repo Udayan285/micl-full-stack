@@ -77,7 +77,7 @@ class BackendController extends Controller
 
     // Business Activities
     function showStorageTank(){
-        return view('backend.business.storageTank');
+        return view('backend.business.storage-tank.storageTank');
     }
 
     function showBitumen(){

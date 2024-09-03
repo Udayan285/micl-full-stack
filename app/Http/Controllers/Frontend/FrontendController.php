@@ -11,6 +11,7 @@ use App\Models\Homeabout;
 use Illuminate\Http\Request;
 use App\Models\Homecorporate;
 use App\Http\Controllers\Controller;
+use App\Models\Storagetank;
 
 class FrontendController extends Controller
 {
@@ -42,8 +43,9 @@ class FrontendController extends Controller
     }
 
     function storageTank(){
+        $storages = Storagetank::where('status',1)->get();
         $footer = Footer::where('status',1)->get();
-        return view('MICL-clone.tank-terminal',compact('footer'));
+        return view('MICL-clone.tank-terminal',compact('footer','storages'));
     }
 
     function vitumenPlant(){

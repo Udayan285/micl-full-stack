@@ -11,6 +11,7 @@
 
       <!-- innovation_gallery -->
       <div class="innovation_gallery d-flex gap-4 container col-lg-12">
+        @foreach ($storages as $key=>$data)
         <!-- Innovation start -->
         <div class="py-5 col-lg-4 innovation">
           <div class="row">
@@ -18,50 +19,46 @@
               <div class="row">
                 <ul class="list-group">
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Year of Establishment :</span>2019
+                    <span>Year of Establishment :</span>{{ $data->year_establishment }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Storage Capacity (Existing) :</span>30,200 M.Ton
+                    <span>Storage Capacity (Existing) :</span>{{ $data->storage_capacity }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Product Turnover :</span>18 Times/Year
+                    <span>Product Turnover :</span>{{ $data->product_turnover }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Inward Facility :</span>Direct from Mother Vessel.
+                    <span>Inward Facility :</span>{{ $data->inward_facility  }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Jetty Facility for discharge :</span>TSP Jetty, RM-3, RM-4 TSP=800 Rft(Deep 7.9 Miter & Length
-                    175.25 Miter), RM3=800Rft (Deep 7.6 Miter & Length 182.9
-                    Miter), RM4=2350Rft (Deep 9.14 Miter & Length 160 Miter).
+                    <span>Jetty Facility for discharge :</span>{{ $data->jetty_facility }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Pipeline Facility :</span>Established & Company own.
+                    <span>Pipeline Facility :</span>{{ $data->pipeline_facility }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Delivery Facility :</span>Through Jetty , Lighter Vessel & Through Lorry.
+                    <span>Delivery Facility :</span>{{ $data->delivery_facility }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Outward Delivery (Lorry) :</span>Overhead Bulk Delivery point & Drum Delivery.
+                    <span>Outward Delivery (Lorry) :</span>{{ $data->outward_delivey }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Outward Delivery (Lorry) :</span>2 Nos.
+                    <span>Weight Scale :</span>{{ $data->weight_scale }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Weight Scale :</span>Electricity
+                    <span>Utility Requirement :</span>{{ $data->utility_requirement }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Utility Requirement :</span>20 Person
+                    <span>Manpower Requirement :</span>{{ $data->manpower_requirement }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Manpower Requirement :</span>Bonded Facility
+                    <span>Opportunity :</span>{{ $data->opportunity }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Opportunity :</span>
-                  </li>
-                  <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Bonded Facility Approved for Items :</span>HFO/Edible Oil/Bitumen/Lubricant.
+                    <span>Bonded Facility Approved for Items :</span>{{ $data->bonded_facility }}
                   </li>
                 </ul>
+                
               </div>
             </div>
           </div>
@@ -72,35 +69,22 @@
         <div class="py-2 col-lg-7">
           <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
             <div class="row g-5 align-items-center image_gallery">
+              @php
+                $images = explode('|',$data->images);
+              @endphp
+              @foreach($images as $image)
               <div class="image col-lg-6">
                 <img
-                  src="{{ asset('frontend//img/MEB/Tank Terminal & Bitumen Plant/Tank.jpg') }}"
-                  alt=""
+                  src="{{ asset($image) }}"
+                  alt="storage-tank-image"
                 />
-              </div>
-              <div class="image col-lg-6">
-                <img
-                  src="{{ asset('frontend//img/MEB/Tank Terminal & Bitumen Plant/Terminal-Image-3.jpg') }}"
-                  alt=""
-                />
-              </div>
-              <div class="image col-lg-6">
-                <img
-                  src="{{ asset('frontend//img/MEB/Tank Terminal & Bitumen Plant/Terminal.jpg') }}"
-                  alt=""
-                />
-              </div>
-              <div class="image col-lg-6">
-                <img
-                  src="{{ asset('frontend//img/MEB/Tank Terminal & Bitumen Plant/Terminal1.jpg') }}"
-                  alt=""
-                />
-              </div>
-        
+              </div> 
+              @endforeach
             </div>
           </div>
         </div>
         <!-- Gallery End -->
+        @endforeach
       </div>
 @endsection
 

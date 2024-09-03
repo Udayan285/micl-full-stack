@@ -93,82 +93,79 @@
       <textarea name="weight_scale" id="textArea" rows="4" cols="50">{{ $storageEdit ? $storageEdit->weight_scale : '' }}</textarea>
     </li>
 
-    @error('utility_requirement')
-      <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <li>
-      <label for="textArea">Utility Requirement</label>
-      <textarea name="utility_requirement" id="textArea" rows="4" cols="50">{{ $storageEdit ? $storageEdit->utility_requirement : '' }}</textarea>
-    </li>
+      @error('utility_requirement')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+      <li>
+        <label for="textArea">Utility Requirement</label>
+        <textarea name="utility_requirement" id="textArea" rows="4" cols="50">{{ $storageEdit ? $storageEdit->utility_requirement : '' }}</textarea>
+      </li>
 
-    @error('manpower_requirement')
-      <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <li>
-      <label for="textArea">Manpower Requirement</label>
-      <textarea name="manpower_requirement" id="textArea" rows="4" cols="50">{{ $storageEdit ? $storageEdit->manpower_requirement : '' }}</textarea>
-    </li>
+      @error('manpower_requirement')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+      <li>
+        <label for="textArea">Manpower Requirement</label>
+        <textarea name="manpower_requirement" id="textArea" rows="4" cols="50">{{ $storageEdit ? $storageEdit->manpower_requirement : '' }}</textarea>
+      </li>
 
-    @error('opportunity')
-      <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <li>
-      <label for="textArea">Opportunity</label>
-      <textarea name="opportunity" id="textArea" rows="4" cols="50">{{ $storageEdit ? $storageEdit->opportunity : '' }}</textarea>
-    </li>
+      @error('opportunity')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+      <li>
+        <label for="textArea">Opportunity</label>
+        <textarea name="opportunity" id="textArea" rows="4" cols="50">{{ $storageEdit ? $storageEdit->opportunity : '' }}</textarea>
+      </li>
 
-    @error('bonded_facility')
-      <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <li>
-      <label for="textArea">Bonded Facility Approved for Items</label>
-      <textarea name="bonded_facility" id="textArea" rows="4" cols="50">{{ $storageEdit ? $storageEdit->bonded_facility : '' }}</textarea>
-    </li>
+      @error('bonded_facility')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+      <li>
+        <label for="textArea">Bonded Facility Approved for Items</label>
+        <textarea name="bonded_facility" id="textArea" rows="4" cols="50">{{ $storageEdit ? $storageEdit->bonded_facility : '' }}</textarea>
+      </li>
 
-    {{-- images attchment --}}
-    @error('images.*')
-      <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <li>
-      <label for="images">Select Multiple Images</label>
-      <input name="images[]" multiple id="ImageFile" type="file"></input>
-    </li>
+      {{-- images attchment --}}
+      @error('images.*')
+        <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+      <li>
+        <label for="images">Select Multiple Images</label>
+        <input name="images[]" multiple id="ImageFile" type="file"></input>
+      </li>
 
-    {{-- images show here via ajax --}}
-    <li>
-      <label for="">All Images</label>
-      <div>
-       
-        <div class="row">
-            @if($storageEdit && $storageEdit->images)
-                @php
-                    $images = explode('|', $storageEdit->images); // Split string into an array using the pipe as a delimiter
-                @endphp
-                @foreach($images as $image)
-                    <div class="col-md-4 Imageview" style="margin-bottom: 10px;">
-                        <img src="{{ asset($image) }}" style="height:100px;width:100px;" alt="Image" class="img-fluid">
-                    </div>
-                @endforeach
-            @endif
-        </div>
+      {{-- images show here via ajax --}}
+      <li>
+        <label for="">All Images</label>
+        <div>
         
-        
-
-        <div class="row">
-          <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-          <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-          <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-          <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-          <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-          <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-          <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-          <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-          <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+          <div class="row">
+              @if($storageEdit && $storageEdit->images)
+                  @php
+                      $images = explode('|', $storageEdit->images); // Split string into an array using the pipe as a delimiter
+                  @endphp
+                  @foreach($images as $image)
+                      <div class="col-md-4 Imageview" style="margin-bottom: 10px;">
+                          <img src="{{ asset($image) }}" style="height:100px;width:100px;" alt="Image" class="img-fluid">
+                      </div>
+                  @endforeach
+              @endif
+          </div>
+          
+          <div class="row">
+            <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+            <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+            <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+            <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+            <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+            <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+            <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+            <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+            <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+          </div>
+          
         </div>
-      </div>
-    </li>
-
-
+      </li>
       
       <li>
         <button id="submit" type="submit">Update Now</button>
