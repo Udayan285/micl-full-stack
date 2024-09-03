@@ -1,17 +1,18 @@
 <?php
 
+use App\Http\Middleware\ValidUser;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\UserController;
-use App\Http\Controllers\Backend\AboutController;
+use App\Http\Controllers\Email\EmailController;
 use App\Http\Controllers\Backend\AreaController;
+use App\Http\Controllers\Backend\AboutController;
+use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\ContactController;
-use App\Http\Controllers\Backend\CorporateVisionController;
-use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\ManagerController;
-use App\Http\Controllers\Email\EmailController;
 use App\Http\Controllers\Frontend\FrontendController;
-use App\Http\Middleware\ValidUser;
+use App\Http\Controllers\Backend\CorporateVisionController;
+use App\Http\Controllers\Backend\Business\StorageTankController;
 
 //Frontend view page show related all routes written Start here...
 route::prefix("/")->name("micl.")->controller(FrontendController::class)->group(function(){
@@ -171,5 +172,21 @@ route::prefix("/dashboard")->name('dashboard.')->controller(FooterController::cl
     route::put('/footer/update/{id}','updateFooter')->name('footerUpdate');
     route::put('/footer/active/{id}','activeFooter')->name('footerActive');
     route::delete('/footer/remove/{id}','removeFooter')->name('footerRemove');
+
+});
+
+//storage tank related all route here..
+route::prefix("/dashboard")->name('dashboard.')->controller(StorageTankController::class)->group(function(){
+   
+    //Footer page all routes here..(#udayan285#)
+    route::post('/storage-tank/store','storeStorageTank')->name('storageTankStore');
+    // Preview all business activities 
+    route::get('/business-activities/preview','previewAll')->name('preview');
+    // Preview all business activities 
+    
+    // route::get('/storage-tank/edit/{id}','editFooter')->name('footerEdit');
+    // route::put('/storage-tank/update/{id}','updateFooter')->name('footerUpdate');
+    // route::put('/storage-tank/active/{id}','activeFooter')->name('footerActive');
+    route::delete('/storage-tank/remove/{id}','removeStorage')->name('storageRemove');
 
 });

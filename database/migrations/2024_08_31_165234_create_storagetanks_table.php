@@ -13,6 +13,21 @@ return new class extends Migration
     {
         Schema::create('storagetanks', function (Blueprint $table) {
             $table->id();
+            $table->longText('year_establishment');
+            $table->longText('storage_capacity');
+            $table->longText('product_turnover');
+            $table->longText('inward_facility');
+            $table->longText('jetty_facility');
+            $table->longText('pipeline_facility');
+            $table->longText('delivery_facility');
+            $table->longText('outward_delivey');
+            $table->longText('weight_scale');
+            $table->longText('utility_requirement');
+            $table->longText('manpower_requirement');
+            $table->longText('opportunity');
+            $table->longText('bonded_facility');
+            $table->string('images')->nullable();
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

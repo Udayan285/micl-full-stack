@@ -27,7 +27,6 @@ class FooterController extends Controller
         $footer->delete();
         return redirect()->back()->with('status', 'Get in touch information removed successfully.');
     }
-
     
     function activeFooter($id){ 
         //Udayan285
