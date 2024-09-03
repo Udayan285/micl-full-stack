@@ -75,7 +75,7 @@
 
               <td>
                 
-                <form action="" method="">
+                <form action="{{ route('dashboard.storageEdit',$data->id) }}" method="GET">
                   @csrf
                   <button type="submit" class="btn btn-sm mb-1 btn-primary">Edit</button>
                 </form>
@@ -86,9 +86,10 @@
                   <button type="submit" class="btn btn-sm mb-1 btn-danger">Delete</button>
                 </form>
                
-                <form action="" method="">
+                <form action="{{ route('dashboard.storageActive',$data->id) }}" method="POST">
                   @csrf
-                  <button type="submit" class="btn btn-sm mb-1 btn-success">Active</button>
+                  @method("PUT")
+                  <button type="submit" class="btn btn-sm mb-1 btn-{{ $data->status == 0 ? 'warning' : 'success' }}">{{ $data->status == 0 ? 'Active' : 'Deactive' }}</button>
                 </form>
 
               </td>

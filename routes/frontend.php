@@ -184,9 +184,9 @@ route::prefix("/dashboard")->name('dashboard.')->controller(StorageTankControlle
     route::get('/business-activities/preview','previewAll')->name('preview');
     // Preview all business activities 
     
-    // route::get('/storage-tank/edit/{id}','editFooter')->name('footerEdit');
-    // route::put('/storage-tank/update/{id}','updateFooter')->name('footerUpdate');
-    // route::put('/storage-tank/active/{id}','activeFooter')->name('footerActive');
+    route::get('/storage-tank/edit/{id}','editStorage')->name('storageEdit');
+    route::put('/storage-tank/update/{id}','updateStorage')->name('storageUpdate');
+    route::put('/storage-tank/active/{id}','activeStorage')->name('storageActive');
     route::delete('/storage-tank/remove/{id}','removeStorage')->name('storageRemove');
 
 });
