@@ -6,7 +6,7 @@
  
   
   <div style="display: flex; justify-content: flex-end;">
-    <a href="{{ route('dashboard.storageTank') }}"><button class="btn btn-sm btn-primary mt-3">Back</button></a>
+    <a href="{{ route('dashboard.bitumen') }}"><button class="btn btn-sm btn-primary mt-3">Back</button></a>
   </div>
    {{-- Success message show here via alert --}}
    @if (session('status'))
@@ -16,7 +16,7 @@
    </div>
    @endif
 
-  <h3 id="description">All Storage Tank Terminal & Delivery Support Services </h3>
+  <h3 id="description">All Bitumen Plant & Storage Tank</h3>
 
   <div class="table-responsive">
     <table class="table table-bordered border-primary">
@@ -24,19 +24,12 @@
         <thead>
             <tr>
             <th scope="col">#</th>
-            <th scope="col">Year of Establishment</th>
-            <th scope="col">Storage Capacity (Existing)</th>
-            <th scope="col">Product Turnover</th>
-            <th scope="col">Inward Facility</th>
-            <th scope="col">Jetty Facility for discharge</th>
-            <th scope="col">Pipeline Facility</th>
-            <th scope="col">Delivery Facility</th>
-            <th scope="col">Outward Delivery (Lorry) </th>
-            <th scope="col">Weight Scale</th>
-            <th scope="col">Utility Requirement</th>
-            <th scope="col">Manpower Requirement</th>
-            <th scope="col">Opportunity </th>
-            <th scope="col">Bonded Facility Approved for Items</th>
+            <th scope="col">Storage Tank Capacity (Heated)</th>
+            <th scope="col">Service (Delivery) Tank capacity</th>
+            <th scope="col">Product Turnover (Yearly)</th>
+            <th scope="col">Prime Raw Material</th>
+            <th scope="col">Product</th>
+            <th scope="col">Present Status</th>
             <th scope="col">Images</th>
             <th scope="col">Actions</th>
             
@@ -44,22 +37,15 @@
         </thead>
 
         <tbody>
-            @foreach($storagetanks as $key=> $data)
+            @foreach($bitumenAll as $key=> $data)
             <tr>
               <th scope="row">{{ ++$key }}</th>
-              <td>{{ $data->year_establishment }}</td>
-              <td>{{ $data->storage_capacity }}</td>
+              <td>{{ $data->storage_tank }}</td>
+              <td>{{ $data->service_tank }}</td>
               <td>{{ $data->product_turnover }}</td>
-              <td>{{ $data->inward_facility }}</td>
-              <td>{{ $data->jetty_facility }}</td>
-              <td>{{ $data->pipeline_facility }}</td>
-              <td>{{ $data->delivery_facility }}</td>
-              <td>{{ $data->outward_delivey }}</td>
-              <td>{{ $data->weight_scale }}</td>
-              <td>{{ $data->utility_requirement }}</td>
-              <td>{{ $data->manpower_requirement }}</td>
-              <td>{{ $data->opportunity }}</td>
-              <td>{{ $data->bonded_facility }}</td>
+              <td>{{ $data->prime_raw_material }}</td>
+              <td>{{ $data->product }}</td>
+              <td>{{ $data->present_status }}</td>
               
               {{-- images --}}
               <td>

@@ -86,10 +86,10 @@
 
                     {{-- Business-Activities-menu --}}
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle {{ request()->is('dashboard/storage-tank-terminal-and-delivery-support-services','dashboard/bitumen-plant-and-storage-tank','dashboard/physical-refinery','dashboard/super-oil-dry-fractionation','dashboard/edible-oil','dashboard/bottle-making') ? 'active' : '' }}" data-bs-toggle="dropdown"><i class="fas fa-chart-line"></i>Business Act.</a>
+                        <a href="#" class="nav-link dropdown-toggle {{ request()->is('dashboard/storage-tank-terminal-and-delivery-support-services','dashboard/bitumen-plant-and-storage-tank','dashboard/physical-refinery','dashboard/super-oil-dry-fractionation','dashboard/edible-oil','dashboard/bottle-making','dashboard/business-activities/preview','dashboard/bitumen-plant/preview') ? 'active' : '' }}" data-bs-toggle="dropdown"><i class="fas fa-chart-line"></i>Business Act.</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="{{ route('dashboard.storageTank') }}" class="dropdown-item {{ request()->is('dashboard/storage-tank-terminal-and-delivery-support-services') ? 'active' : '' }}">Storage tank terminal</a>
-                            <a href="{{ route('dashboard.bitumen') }}" class="dropdown-item {{ request()->is('dashboard/bitumen-plant-and-storage-tank') ? 'active' : '' }}">Bitumen plant</a>
+                            <a href="{{ route('dashboard.storageTank') }}" class="dropdown-item {{ request()->is('dashboard/storage-tank-terminal-and-delivery-support-services','dashboard/business-activities/preview') ? 'active' : '' }}">Storage tank terminal</a>
+                            <a href="{{ route('dashboard.bitumen') }}" class="dropdown-item {{ request()->is('dashboard/bitumen-plant-and-storage-tank','dashboard/bitumen-plant/preview') ? 'active' : '' }}">Bitumen plant</a>
                             <a href="{{ route('dashboard.physical') }}" class="dropdown-item {{ request()->is('dashboard/physical-refinery') ? 'active' : '' }}">Physical refienery</a>
                             <a href="{{ route('dashboard.superOil') }}" class="dropdown-item {{ request()->is('dashboard/super-oil-dry-fractionation') ? 'active' : '' }}">Super oil and dry fractionation</a>
                             <a href="{{ route('dashboard.edibleOil') }}" class="dropdown-item {{ request()->is('dashboard/edible-oil') ? 'active' : '' }}">Edible oil</a>

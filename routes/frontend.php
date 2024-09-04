@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\AreaController;
 use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\BackendController;
+use App\Http\Controllers\Backend\Business\BitumenPlantController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\ManagerController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -180,13 +181,22 @@ route::prefix("/dashboard")->name('dashboard.')->controller(StorageTankControlle
    
     //Footer page all routes here..(#udayan285#)
     route::post('/storage-tank/store','storeStorageTank')->name('storageTankStore');
-    // Preview all business activities 
     route::get('/business-activities/preview','previewAll')->name('preview');
-    // Preview all business activities 
-    
     route::get('/storage-tank/edit/{id}','editStorage')->name('storageEdit');
     route::put('/storage-tank/update/{id}','updateStorage')->name('storageUpdate');
     route::put('/storage-tank/active/{id}','activeStorage')->name('storageActive');
     route::delete('/storage-tank/remove/{id}','removeStorage')->name('storageRemove');
+
+});
+
+//bitumen plant related all route here..
+route::prefix("/dashboard")->name('dashboard.')->controller(BitumenPlantController::class)->group(function(){
+    //Bitumen page all routes here..(#udayan285#)
+    route::post('/bitumen-plant/store','storeBitumen')->name('storageBitumen');
+    route::get('/bitumen-plant/preview','previewBitumen')->name('previewBitumen');
+    // route::get('/bitumen-plant/edit/{id}','editBitumen')->name('storageEdit');
+    // route::put('/bitumen-plant/update/{id}','updateBitumen')->name('storageUpdate');
+    // route::put('/bitumen-plant/active/{id}','activeBitumen')->name('storageActive');
+    // route::delete('/bitumen-plant/remove/{id}','removeBitumen')->name('storageRemove');
 
 });

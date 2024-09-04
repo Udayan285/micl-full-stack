@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('bitumenplants', function (Blueprint $table) {
             $table->id();
+            $table->longText('storage_tank');
+            $table->longText('service_tank');
+            $table->longText('product_turnover');
+            $table->longText('prime_raw_material');
+            $table->longText('product');
+            $table->longText('present_status');
+            $table->string('images')->nullable();
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Backend\Business;
 
-use App\Http\Controllers\Controller;
 use App\Models\Storagetank;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Helpers\BusinessMediaUploadTrait;
 
 class StorageTankController extends Controller
 {
+    use BusinessMediaUploadTrait;
     
     function storeStorageTank(Request $request)
     {
@@ -46,20 +48,8 @@ class StorageTankController extends Controller
         $storage->bonded_facility = $request->bonded_facility;
     
         // Images management
-        $imageUrls = [];
-        if ($request->hasFile('images')) {
-            foreach($request->file('images') as $key => $image) {
-                $imageName = $key.'-'.time().'.'.$image->getClientOriginalExtension();
-                $upload_path = 'business-activities/';
-                $image_url = $upload_path.$imageName;
-                $image->move(public_path($upload_path), $imageName);
-    
-                $imageUrls[] = $image_url;
-            }
-        }
-    
-        $storage->images = implode('|', $imageUrls);
-    
+        $imagesAll=$this->uploadImages($request,'business-activities/');
+        $storage->images = $imagesAll;
         $storage->save();
     
         return redirect()->back()->with('status', "Storage Tank Submitted Successfully.");

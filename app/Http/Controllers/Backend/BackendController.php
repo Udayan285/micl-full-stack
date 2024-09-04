@@ -81,7 +81,7 @@ class BackendController extends Controller
     }
 
     function showBitumen(){
-        return view('backend.business.bitumenPlant');
+        return view('backend.business.bitumen.bitumenPlant');
     }
 
     function showPhysical(){

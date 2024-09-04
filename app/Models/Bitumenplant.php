@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Bitumenplant extends Model
 {
     use HasFactory;
+
+    protected $fillable = [ 'images'];
+    protected $guarded = [];
 }
