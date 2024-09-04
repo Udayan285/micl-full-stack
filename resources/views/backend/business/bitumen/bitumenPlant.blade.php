@@ -7,7 +7,7 @@
     <a href="{{ route('dashboard.previewBitumen') }}"><button class="btn btn-sm btn-primary mt-3">Preview All</button></a>
   </div>
   <h3 id="description">Bitumen Plant & Storage Tank</h3>
-  <form action="{{ route('dashboard.storageBitumen') }}" method="POST" id="survey-form" enctype="multipart/form-data">
+  <form action="{{ route('dashboard.storeBitumen') }}" method="POST" id="survey-form" enctype="multipart/form-data">
     @csrf
     <ul class="flex-outer">
     {{-- Success message show here via alert --}}

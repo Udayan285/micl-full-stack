@@ -143,9 +143,6 @@ class AboutController extends Controller
                 $about->description = $request->about_description;
         
 
-                //$slug = $this->slugGenerator($request,About::class);
-                //$about->slug = $slug;
-
                 $oldSlug = About::where('slug','LIKE','%'.str($request->about_title)->slug().'%')->count();
                 if($oldSlug > 0){
                     $oldSlug +=1;

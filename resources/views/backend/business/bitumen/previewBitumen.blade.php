@@ -66,13 +66,13 @@
                   <button type="submit" class="btn btn-sm mb-1 btn-primary">Edit</button>
                 </form>
 
-                <form action="{{ route('dashboard.storageRemove',$data->id) }}" method="POST">
+                <form action="{{ route('dashboard.bitumenRemove',$data->id) }}" method="POST">
                   @csrf
                   @method('DELETE')
                   <button type="submit" class="btn btn-sm mb-1 btn-danger">Delete</button>
                 </form>
                
-                <form action="{{ route('dashboard.storageActive',$data->id) }}" method="POST">
+                <form action="{{ route('dashboard.bitumenActive',$data->id) }}" method="POST">
                   @csrf
                   @method("PUT")
                   <button type="submit" class="btn btn-sm mb-1 btn-{{ $data->status == 0 ? 'warning' : 'success' }}">{{ $data->status == 0 ? 'Active' : 'Deactive' }}</button>

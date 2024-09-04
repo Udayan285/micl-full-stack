@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Backend\Business;
 use App\Models\Storagetank;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Helpers\MediaDeleteTrait;
 use App\Http\Helpers\BusinessMediaUploadTrait;
 
 class StorageTankController extends Controller
 {
-    use BusinessMediaUploadTrait;
+    use BusinessMediaUploadTrait,MediaDeleteTrait;
     
     function storeStorageTank(Request $request)
     {
@@ -64,6 +65,7 @@ class StorageTankController extends Controller
     function removeStorage($id)
     {
         $storage = StorageTank::find($id);
+        $this->businessMediaDelete($storage);
         $storage->delete();
         return redirect()->back()->with('status',"Selected Storage info. deleted successfully.");
     }

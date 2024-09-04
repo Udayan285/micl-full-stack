@@ -11,4 +11,17 @@ trait MediaDeleteTrait
             unlink($delete);
         }
     }
+
+    function businessMediaDelete($model)
+    {
+        if ($model->images) {           
+                $images = explode('|',$model->images);
+                foreach ($images as $image){
+                    $delete = public_path($image);
+                    if(file_exists($delete)){
+                        unlink($delete);
+                    } 
+                }              
+        }
+    }
 }

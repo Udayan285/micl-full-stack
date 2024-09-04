@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Backend\Business;
 
-use App\Http\Controllers\Controller;
-use App\Http\Helpers\BusinessMediaUploadTrait;
 use App\Models\Bitumenplant;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Helpers\MediaDeleteTrait;
+use App\Http\Helpers\BusinessMediaUploadTrait;
 
 class BitumenPlantController extends Controller
 {
-    use BusinessMediaUploadTrait;
+    use BusinessMediaUploadTrait,MediaDeleteTrait;
    
     function storeBitumen(Request $request)
     {
@@ -45,5 +46,23 @@ class BitumenPlantController extends Controller
     {
         $bitumenAll = Bitumenplant::all();
         return view('backend.business.bitumen.previewBitumen', compact('bitumenAll'));
+    }
+
+    function removeBitumen($id)
+    {
+        $bitumen = Bitumenplant::find($id);
+        $this->businessMediaDelete($bitumen);
+        $bitumen->delete();
+        return redirect()->back()->with('status', "Bitument Plant Deleted Successfully.");
+    }
+
+    function activeBitumen($id)
+    {
+        $bitumen = Bitumenplant::findOrFail($id);
+        // Deactivate other bitumen
+        Bitumenplant::where('id', '!=', $id)->update(['status' => 0]);
+        // Activate the current bitumen
+        $bitumen->update(['status' => 1]);
+        return redirect()->back()->with('status', 'Status updated successfully.');
     }
 }
