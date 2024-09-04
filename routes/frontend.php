@@ -194,8 +194,8 @@ route::prefix("/dashboard")->name('dashboard.')->controller(BitumenPlantControll
     //Bitumen page all routes here..(#udayan285#)
     route::post('/bitumen-plant/store','storeBitumen')->name('storeBitumen');
     route::get('/bitumen-plant/preview','previewBitumen')->name('previewBitumen');
-    // route::get('/bitumen-plant/edit/{id}','editBitumen')->name('storageEdit');
-    // route::put('/bitumen-plant/update/{id}','updateBitumen')->name('storageUpdate');
+    route::get('/bitumen-plant/edit/{id}','editBitumen')->name('bitumenEdit');
+    route::put('/bitumen-plant/update/{id}','updateBitumen')->name('bitumenUpdate');
     route::put('/bitumen-plant/active/{id}','activeBitumen')->name('bitumenActive');
     route::delete('/bitumen-plant/remove/{id}','removeBitumen')->name('bitumenRemove');
 

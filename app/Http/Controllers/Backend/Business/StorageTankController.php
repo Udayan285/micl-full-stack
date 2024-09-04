@@ -122,40 +122,13 @@ class StorageTankController extends Controller
         $storage->manpower_requirement = $request->manpower_requirement;
         $storage->opportunity = $request->opportunity;
         $storage->bonded_facility = $request->bonded_facility;
-    
-        // Step 1: Retrieve existing images and split them into an array
-        if ($storage->images) {
-            $existingImages = explode('|', $storage->images);
-
-            // Step 2: Delete each existing image file
-            foreach ($existingImages as $image) {
-                $imagePath = public_path($image); // Construct the full path to the image
-                if (file_exists($imagePath)) {
-                    unlink($imagePath); // Delete the image file
-                }
-            }
-        }
-
-        // Step 3: Upload and save the new images
-        $imageUrls = [];
-        if ($request->hasFile('images')) {
-                foreach($request->file('images') as $key => $image) {
-                    $imageName = $key.'-'.time().'.'.$image->getClientOriginalExtension();
-                    $upload_path = 'business-activities/';
-                    $image_url = $upload_path.$imageName;
-                    $image->move(public_path($upload_path), $imageName);
-
-                    $imageUrls[] = $image_url;
-                }
-        }
-
-        // Step 4: Update the database with the new images
-        $storage->images = implode('|', $imageUrls);
-
+        //Delete previous images first
+        $this->businessMediaDelete($storage);
+        //New images upload again
+        $allImages = $this->uploadImages($request,'business-activities/');
+        $storage->images = $allImages;
         $storage->save();
 
-        
-    
         return redirect()->route('dashboard.preview')
             ->with('status', "Information updated successfully.");
     }

@@ -61,7 +61,7 @@
 
               <td>
                 
-                <form action="{{ route('dashboard.storageEdit',$data->id) }}" method="GET">
+                <form action="{{ route('dashboard.bitumenEdit',$data->id) }}" method="GET">
                   @csrf
                   <button type="submit" class="btn btn-sm mb-1 btn-primary">Edit</button>
                 </form>

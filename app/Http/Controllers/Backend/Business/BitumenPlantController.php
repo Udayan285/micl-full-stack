@@ -14,7 +14,6 @@ class BitumenPlantController extends Controller
    
     function storeBitumen(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             "storage_tank" => 'required',
             "service_tank" => 'required',
@@ -64,5 +63,39 @@ class BitumenPlantController extends Controller
         // Activate the current bitumen
         $bitumen->update(['status' => 1]);
         return redirect()->back()->with('status', 'Status updated successfully.');
+    }
+
+    function editBitumen($id){
+        $bitumenEdit = Bitumenplant::where('id',$id)->first();
+        return view('backend.business.bitumen.editBitumen',compact('bitumenEdit'));
+    }
+
+    function updateBitumen(Request $request,$id){
+        $request->validate([
+            "storage_tank" => 'required',
+            "service_tank" => 'required',
+            "product_turnover" => 'required',
+            "prime_raw_material" => 'required',
+            "product" => 'required',
+            "present_status" => 'required',
+            "images.*" => 'required|mimes:jpg,jpeg,png,webp',
+        ]);
+
+        $bitumen = Bitumenplant::findOrFail($id);
+        $bitumen->storage_tank = $request->storage_tank;
+        $bitumen->service_tank = $request->service_tank;
+        $bitumen->product_turnover = $request->product_turnover;
+        $bitumen->prime_raw_material = $request->prime_raw_material;
+        $bitumen->product = $request->product;
+        $bitumen->present_status = $request->present_status;    
+    
+        //Previous images deleted first for new images store.
+        $this->businessMediaDelete($bitumen);
+        //Store new images
+        $allImages = $this->uploadImages($request,'business-activities/');
+        $bitumen->images = $allImages;
+        $bitumen->save();
+        return redirect()->route('dashboard.previewBitumen')
+            ->with('status', "Information updated successfully.");
     }
 }
