@@ -11,6 +11,8 @@ use App\Models\Homeabout;
 use Illuminate\Http\Request;
 use App\Models\Homecorporate;
 use App\Http\Controllers\Controller;
+use App\Models\Bitumenplant;
+use App\Models\Physicalrefinery;
 use App\Models\Storagetank;
 
 class FrontendController extends Controller
@@ -49,13 +51,15 @@ class FrontendController extends Controller
     }
 
     function vitumenPlant(){
+        $bitumen = Bitumenplant::where('status',1)->get();
         $footer = Footer::where('status',1)->get();
-        return view('MICL-clone.bitumin-plant',compact('footer'));
+        return view('MICL-clone.bitumin-plant',compact('footer','bitumen'));
     }
 
     function physicalRefinery(){
+        $physical = Physicalrefinery::where('status',1)->get();
         $footer = Footer::where('status',1)->get();
-        return view('MICL-clone.physical-unit',compact('footer'));
+        return view('MICL-clone.physical-unit',compact('footer','physical'));
     }
 
     function dryFractionation(){

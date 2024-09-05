@@ -85,7 +85,7 @@ class BackendController extends Controller
     }
 
     function showPhysical(){
-       return view('backend.business.physical'); 
+       return view('backend.business.physical.physical'); 
     }
 
     function showSuperOil(){

@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\Business\BitumenPlantController;
+use App\Http\Controllers\Backend\Business\PhysicalRefineryController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\ManagerController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -198,5 +199,17 @@ route::prefix("/dashboard")->name('dashboard.')->controller(BitumenPlantControll
     route::put('/bitumen-plant/update/{id}','updateBitumen')->name('bitumenUpdate');
     route::put('/bitumen-plant/active/{id}','activeBitumen')->name('bitumenActive');
     route::delete('/bitumen-plant/remove/{id}','removeBitumen')->name('bitumenRemove');
+
+});
+
+//physical refinery unit related all route here..
+route::prefix("/dashboard")->name('dashboard.')->controller(PhysicalRefineryController::class)->group(function(){
+    //physical refinery unit page all routes here..(#udayan285#)
+    route::post('/physical-refienry/store','storePhysical')->name('storePhysical');
+    route::get('/physical-refienry/preview','previewPhysical')->name('previewPhysical');
+    route::get('/physical-refienry/edit/{id}','editPhysical')->name('editPhysical');
+    route::put('/physical-refienry/update/{id}','updatePhysical')->name('updatePhysical');
+    route::put('/physical-refienry/active/{id}','activePhysical')->name('activePhysical');
+    route::delete('/physical-refienry/remove/{id}','removePhysical')->name('removePhysical');
 
 });

@@ -10,6 +10,7 @@
 
       <!-- innovation_gallery -->
       <div class="innovation_gallery d-flex gap-4 container">
+        @foreach ($bitumen as $data)
         <!-- Innovation start -->
         <div class="py-5 col-lg-4 innovation">
           <div class="row">
@@ -17,24 +18,24 @@
               <div class="row">
                 <ul class="list-group">
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Service (Delivery) Tank capacity :</span>
-                    17,201.714 M.Ton
+                    <span>Storage Tank capacity (Heated) :</span>
+                    {{ $data->storage_tank }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
                     <span>Service (Delivery) Tank capacity :</span>
-                    700 M.Ton
+                    {{ $data->service_tank }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Product Turnover (Yearly) :</span>1,35,000 M.Tons
+                    <span>Product Turnover (Yearly) :</span>{{ $data->product_turnover }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Prime Raw Material :</span>Bitumen
+                    <span>Prime Raw Material :</span>{{ $data->prime_raw_material }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Product :</span> DADA Brand Bitumen (In Bulk & in drum)
+                    <span>Product :</span>{{ $data->product }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Present Status :</span>  In Operation
+                    <span>Present Status :</span>{{ $data->present_status }}
                   </li>
                 </ul>
               </div>
@@ -47,24 +48,23 @@
         <div class="py-2 col-lg-7">
           <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
             <div class="row g-5 align-items-center image_gallery">
+              @php
+                $images = explode('|',$data->images);
+              @endphp
+              @foreach ($images as $image)
               <div class="image col-lg-6">
                 <img
                   class="col-lg-4"
-                  src="{{ asset('frontend//img/MEB/bitumin storages/Bitumen tank.jpg') }}"
+                  src="{{ asset($image) }}"
                   alt=""
                 />
               </div>
-              <div class="image col-lg-6">
-                <img
-                  class="col-lg-4"
-                  src="{{ asset('frontend//img/MEB/bitumin storages/Bitumen Storage.jpg') }}"
-                  alt=""
-                />
-              </div>
+              @endforeach
             </div>
           </div>
         </div>
         <!-- Gallery End -->
+        @endforeach
       </div>
 @endsection
 

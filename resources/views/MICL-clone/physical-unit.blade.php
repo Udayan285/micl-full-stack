@@ -12,6 +12,7 @@
 
       <!-- innovation_gallery -->
       <div class="innovation_gallery d-flex gap-4 container">
+        @foreach ($physical as $data)
         <!-- Innovation start -->
         <div class="py-5 col-lg-4 innovation">
           <div class="row">
@@ -20,35 +21,35 @@
                 <ul class="list-group">
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
                     <span>Year of Establishment :</span>
-                    2005
+                    {{ $data->year_establishment }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
                     <span>Plant Manufacturer :</span>
-                    Lipico (Singapore)’ PTE
+                    {{ $data->plant_manufacturer }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Country of Origin :</span>Malaysia, Japan, USA & EU
+                    <span>Country of Origin :</span>{{ $data->country_origin }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Prime Raw Material :</span>CP Olein
+                    <span>Prime Raw Material :</span>{{ $data->prime_raw_material }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Product :</span> RPO (Refined Palm Oil)
+                    <span>Product :</span>{{ $data->product }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Pack Size :</span>  PET Bottle & Bulk
+                    <span>Pack Size :</span>{{ $data->pack_size }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Existing Capacity :</span>  1,98,000 M.T/ Year
+                    <span>Existing Capacity :</span>{{ $data->existing_capacity }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Utility Requirement :</span>  Gas, Electricity & Water.
+                    <span>Utility Requirement :</span>{{ $data->utility_requirement }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Manpower Requirement :</span>  30 Nos.
+                    <span>Manpower Requirement :</span>{{ $data->manpower_requirement }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Present Status :</span>  In Operation
+                    <span>Present Status :</span>{{ $data->present_status }}
                   </li>
                 </ul>
               </div>
@@ -61,41 +62,24 @@
         <div class="py-2 col-lg-7">
           <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
             <div class="row g-5 align-items-center image_gallery">
+              @php
+                $images = explode('|',$data->images);
+              @endphp
+              @foreach ($images as $image)
               <div class="image col-lg-6">
                 <img
                   class="col-lg-4"
-                  src="{{ asset('frontend/img/MEB/physical-unit/phy1.jpg') }}"
+                  src="{{ asset($image) }}"
                   alt=""
                 />
-              </div>
-              <div class="image col-lg-6">
-                <img
-                  class="col-lg-4"
-                  src="{{ asset('frontend/img/MEB/physical-unit/phy2.jpg') }}"
-                  alt=""
-                />
-              </div>
-            
-              <div class="image col-lg-6">
-                <img
-                  class="col-lg-4"
-                  src="{{ asset('frontend/img/MEB/physical-unit/phy4.jpg') }}"
-                  alt=""
-                />
-              </div>
-              <div class="image col-lg-6">
-                <img
-                  class="col-lg-4"
-                  src="{{ asset('frontend/img/MEB/physical-unit/phy5.jpg') }}"
-                  alt=""
-                />
-              </div>
-             
-              
+              </div> 
+              @endforeach
+
             </div>
           </div>
         </div>
         <!-- Gallery End -->
+        @endforeach
       </div>
 @endsection
    
