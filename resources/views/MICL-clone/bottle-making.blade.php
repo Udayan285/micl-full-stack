@@ -10,6 +10,7 @@
 
       <!-- innovation_gallery -->
       <div class="innovation_gallery d-flex gap-4 container">
+        @foreach ($bottle as $data)
         <!-- Innovation start -->
         <div class="py-5 col-lg-4 innovation">
           <div class="row">
@@ -17,34 +18,34 @@
               <div class="row">
                 <ul class="list-group">
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Year of Establishment :</span> 2005
+                    <span>Year of Establishment :</span>{{ $data->year_establishment }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Plant Manufacturer :</span> HMW & MG
+                    <span>Plant Manufacturer :</span>{{ $data->plant_manufacturer }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Country of Origin :</span> China, USA & Germany
+                    <span>Country of Origin :</span>{{ $data->country_origin }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Injection Machine :</span> 16 Nos
+                    <span>Injection Machine :</span>{{ $data->injection_machine }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Blowing Machine :</span> 12 Nos
+                    <span>Blowing Machine :</span>{{ $data->blowing_machine }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Existing Capacity :</span> 5 Crore Pcs/ Year
+                    <span>Existing Capacity :</span>{{ $data->existing_capacity }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Prime Raw Material :</span> Pet Resin, HDPE, LDPE
+                    <span>Prime Raw Material :</span>{{ $data->prime_raw_material }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Product :</span> Different Size Bottle
+                    <span>Product :</span>{{ $data->product }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Utility Requirement :</span> Gas, Electricity & Water.
+                    <span>Utility Requirement :</span>{{ $data->utility_requirement }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Manpower Requirement :</span> 80 Nos
+                    <span>Manpower Requirement :</span>{{ $data->manpower_requirement }}
                   </li>
                 </ul>
               </div>
@@ -57,28 +58,19 @@
         <div class="py-2 col-lg-7">
           <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
             <div class="row g-5 align-items-center image_gallery">
+              @php
+                $images = explode('|', $data->images);
+              @endphp
+              @foreach($images as $image)
               <div class="image col-lg-6">
-                <img src="{{ asset('frontend/img/MEB/Bottle making/Bottle Making 1.jpg') }}" alt="" />
+                <img src="{{ asset($image) }}" alt="bottle-making-image" />
               </div>
-              <div class="image col-lg-6">
-                <img src="{{ asset('frontend/img/MEB/Bottle making/Bottle Making...jpg') }}" alt="" />
-              </div>
-              <div class="image col-lg-6">
-                <img src="{{ asset('frontend/img/MEB/Bottle making/Bottle Making.jpg') }}" alt="" />
-              </div>
-              <div class="image col-lg-6">
-                <img src="{{ asset('frontend/img/MEB/Bottle making/Bottle Making2.jpg') }}" alt="" />
-              </div>
-              <div class="image col-lg-6">
-                <img
-                  src="{{ asset('frontend/img/MEB/Bottle making/pet-bottle-blowing-line.jpg') }}"
-                  alt=""
-                />
-              </div>
+              @endforeach
             </div>
           </div>
         </div>
         <!-- Gallery End -->
+        @endforeach
       </div>
 
 @endsection

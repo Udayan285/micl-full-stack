@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\Business\BitumenPlantController;
+use App\Http\Controllers\Backend\Business\BottleMakingController;
 use App\Http\Controllers\Backend\Business\PhysicalRefineryController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\ManagerController;
@@ -211,5 +212,17 @@ route::prefix("/dashboard")->name('dashboard.')->controller(PhysicalRefineryCont
     route::put('/physical-refienry/update/{id}','updatePhysical')->name('updatePhysical');
     route::put('/physical-refienry/active/{id}','activePhysical')->name('activePhysical');
     route::delete('/physical-refienry/remove/{id}','removePhysical')->name('removePhysical');
+
+});
+
+//bottle making related all route here..
+route::prefix("/dashboard")->name('dashboard.')->controller(BottleMakingController::class)->group(function(){
+    //bottle making page all routes here..(#udayan285#)
+    route::post('/bottle-making/store','storeBottle')->name('storeBottle');
+    route::get('/bottle-making/preview','previewBottle')->name('previewBottle');
+    route::get('/bottle-making/edit/{id}','editBottle')->name('editBottle');
+    route::put('/bottle-making/update/{id}','updateBottle')->name('updateBottle');
+    route::put('/bottle-making/active/{id}','activeBottle')->name('activeBottle');
+    route::delete('/bottle-making/remove/{id}','removeBottle')->name('removeBottle');
 
 });

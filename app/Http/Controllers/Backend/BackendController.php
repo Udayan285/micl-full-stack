@@ -97,7 +97,7 @@ class BackendController extends Controller
     }
 
     function showBottleMaking(){
-        return view('backend.business.bottleMaking');
+        return view('backend.business.bottle.bottleMaking');
     }
 
 
