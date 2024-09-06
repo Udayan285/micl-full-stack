@@ -93,7 +93,7 @@ class BackendController extends Controller
     }
 
     function showEdibleOil(){
-        return view('backend.business.edibleOil');
+        return view('backend.business.edible.edibleOil');
     }
 
     function showBottleMaking(){

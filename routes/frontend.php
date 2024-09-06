@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\BackendController;
 use App\Http\Controllers\Backend\Business\BitumenPlantController;
 use App\Http\Controllers\Backend\Business\BottleMakingController;
+use App\Http\Controllers\Backend\Business\EdibleOilController;
 use App\Http\Controllers\Backend\Business\PhysicalRefineryController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\ManagerController;
@@ -224,5 +225,17 @@ route::prefix("/dashboard")->name('dashboard.')->controller(BottleMakingControll
     route::put('/bottle-making/update/{id}','updateBottle')->name('updateBottle');
     route::put('/bottle-making/active/{id}','activeBottle')->name('activeBottle');
     route::delete('/bottle-making/remove/{id}','removeBottle')->name('removeBottle');
+
+});
+
+//edible oil related all route here..
+route::prefix("/dashboard")->name('dashboard.')->controller(EdibleOilController::class)->group(function(){
+    //edible oil all routes here..(#udayan285#)
+    route::post('/edible-oil/store','storeEdible')->name('storeEdible');
+    route::get('/edible-oil/preview','previewEdible')->name('previewEdible');
+    route::get('/edible-oil/edit/{id}','editEdible')->name('editEdible');
+    route::put('/edible-oil/update/{id}','updateEdible')->name('updateEdible');
+    route::put('/edible-oil/active/{id}','activeEdible')->name('activeEdible');
+    route::delete('/edible-oil/remove/{id}','removeEdible')->name('removeEdible');
 
 });

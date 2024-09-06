@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Edibleoil extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 }
