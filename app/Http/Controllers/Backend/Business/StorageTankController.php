@@ -15,22 +15,7 @@ class StorageTankController extends Controller
     function storeStorageTank(Request $request)
     {
 
-        $request->validate([
-            "year_establishment" => 'required',
-            "storage_capacity" => 'required',
-            "product_turnover" => 'required',
-            "inward_facility" => 'required',
-            "jetty_facility" => 'required',
-            "pipeline_facility" => 'required',
-            "delivery_facility" => 'required',
-            "outward_delivey" => 'required',
-            "weight_scale" => 'required',
-            "utility_requirement" => 'required',
-            "manpower_requirement" => 'required',
-            "opportunity" => 'required',
-            "bonded_facility" => 'required',
-            "images.*" => 'required|mimes:jpg,jpeg,png,webp'
-        ]);
+        $this->validations($request);
     
         $storage = new Storagetank();
         
@@ -49,7 +34,7 @@ class StorageTankController extends Controller
         $storage->bonded_facility = $request->bonded_facility;
     
         // Images management
-        $imagesAll=$this->uploadImages($request,'business-activities/');
+        $imagesAll=$this->uploadImages($request,'business-activities/storage-tank/');
         $storage->images = $imagesAll;
         $storage->save();
     
@@ -90,22 +75,7 @@ class StorageTankController extends Controller
 
     function updateStorage(Request $request,$id){
         
-        $request->validate([
-            "year_establishment" => 'required',
-            "storage_capacity" => 'required',
-            "product_turnover" => 'required',
-            "inward_facility" => 'required',
-            "jetty_facility" => 'required',
-            "pipeline_facility" => 'required',
-            "delivery_facility" => 'required',
-            "outward_delivey" => 'required',
-            "weight_scale" => 'required',
-            "utility_requirement" => 'required',
-            "manpower_requirement" => 'required',
-            "opportunity" => 'required',
-            "bonded_facility" => 'required',
-            "images.*" => 'required|mimes:jpg,jpeg,png,webp'
-        ]);
+        $this->validations($request);
 
         $storage = StorageTank::findOrFail($id);
 
@@ -125,12 +95,32 @@ class StorageTankController extends Controller
         //Delete previous images first
         $this->businessMediaDelete($storage);
         //New images upload again
-        $allImages = $this->uploadImages($request,'business-activities/');
+        $allImages = $this->uploadImages($request,'business-activities/storage-tank/');
         $storage->images = $allImages;
         $storage->save();
 
         return redirect()->route('dashboard.preview')
             ->with('status', "Information updated successfully.");
+    }
+
+    function validations($request)
+    {
+        $request->validate([
+            "year_establishment" => 'required',
+            "storage_capacity" => 'required',
+            "product_turnover" => 'required',
+            "inward_facility" => 'required',
+            "jetty_facility" => 'required',
+            "pipeline_facility" => 'required',
+            "delivery_facility" => 'required',
+            "outward_delivey" => 'required',
+            "weight_scale" => 'required',
+            "utility_requirement" => 'required',
+            "manpower_requirement" => 'required',
+            "opportunity" => 'required',
+            "bonded_facility" => 'required',
+            "images.*" => 'required|mimes:jpg,jpeg,png,webp'
+        ]);
     }
 
 }

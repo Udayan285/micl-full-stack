@@ -16,7 +16,7 @@ class EdibleOilController extends Controller
     {
         $this->storeOrupdate($request);
         
-        $images = $this->uploadImages($request,"business-activities/");
+        $images = $this->uploadImages($request,"business-activities/edible-oil/");
         
         Edibleoil::create([
             "year_establishment" => $request->year_establishment,
@@ -67,7 +67,7 @@ class EdibleOilController extends Controller
         $edible = Edibleoil::findOrfail($id);
 
         $this->businessMediaDelete($edible);
-        $images = $this->uploadImages($request,"business-activities/");
+        $images = $this->uploadImages($request,"business-activities/edible-oil/");
 
         $edible->update([
             "year_establishment" => $request->year_establishment,

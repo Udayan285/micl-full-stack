@@ -14,15 +14,7 @@ class BitumenPlantController extends Controller
    
     function storeBitumen(Request $request)
     {
-        $request->validate([
-            "storage_tank" => 'required',
-            "service_tank" => 'required',
-            "product_turnover" => 'required',
-            "prime_raw_material" => 'required',
-            "product" => 'required',
-            "present_status" => 'required',
-            "images.*" => 'required|mimes:jpg,jpeg,png,webp',
-        ]);
+        $this->storeOrUpdate($request);
     
         $bitumen = new Bitumenplant();
         $bitumen->storage_tank = $request->storage_tank;
@@ -33,7 +25,7 @@ class BitumenPlantController extends Controller
         $bitumen->present_status = $request->present_status;    
     
         // Images management
-        $imagesAll=$this->uploadImages($request,'business-activities/');
+        $imagesAll=$this->uploadImages($request,'business-activities/bitumen-plant/');
         // dd($imagesAll);
         $bitumen->images = $imagesAll;
         $bitumen->save();
@@ -71,15 +63,7 @@ class BitumenPlantController extends Controller
     }
 
     function updateBitumen(Request $request,$id){
-        $request->validate([
-            "storage_tank" => 'required',
-            "service_tank" => 'required',
-            "product_turnover" => 'required',
-            "prime_raw_material" => 'required',
-            "product" => 'required',
-            "present_status" => 'required',
-            "images.*" => 'required|mimes:jpg,jpeg,png,webp',
-        ]);
+        $this->storeOrUpdate($request);
 
         $bitumen = Bitumenplant::findOrFail($id);
         $bitumen->storage_tank = $request->storage_tank;
@@ -92,10 +76,23 @@ class BitumenPlantController extends Controller
         //Previous images deleted first for new images store.
         $this->businessMediaDelete($bitumen);
         //Store new images
-        $allImages = $this->uploadImages($request,'business-activities/');
+        $allImages = $this->uploadImages($request,'business-activities/bitumen-plant/');
         $bitumen->images = $allImages;
         $bitumen->save();
         return redirect()->route('dashboard.previewBitumen')
             ->with('status', "Information updated successfully.");
+    }
+
+    function storeOrUpdate($request)
+    {
+        $request->validate([
+            "storage_tank" => 'required',
+            "service_tank" => 'required',
+            "product_turnover" => 'required',
+            "prime_raw_material" => 'required',
+            "product" => 'required',
+            "present_status" => 'required',
+            "images.*" => 'required|mimes:jpg,jpeg,png,webp',
+        ]);
     }
 }

@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\ManagerController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Backend\CorporateVisionController;
 use App\Http\Controllers\Backend\Business\StorageTankController;
+use App\Http\Controllers\Backend\Business\SuperOilController;
 
 //Frontend view page show related all routes written Start here...
 route::prefix("/")->name("micl.")->controller(FrontendController::class)->group(function(){
@@ -237,5 +238,17 @@ route::prefix("/dashboard")->name('dashboard.')->controller(EdibleOilController:
     route::put('/edible-oil/update/{id}','updateEdible')->name('updateEdible');
     route::put('/edible-oil/active/{id}','activeEdible')->name('activeEdible');
     route::delete('/edible-oil/remove/{id}','removeEdible')->name('removeEdible');
+
+});
+
+//super oil related all route here..
+route::prefix("/dashboard")->name('dashboard.')->controller(SuperOilController::class)->group(function(){
+    //super oil all routes here..(#udayan285#)
+    route::post('/super-oil/store','storeSuper')->name('storeSuper');
+    route::get('/super-oil/preview','previewSuper')->name('previewSuper');
+    route::get('/super-oil/edit/{id}','editSuper')->name('editSuper');
+    route::put('/super-oil/update/{id}','updateSuper')->name('updateSuper');
+    route::put('/super-oil/active/{id}','activeSuper')->name('activeSuper');
+    route::delete('/super-oil/remove/{id}','removeSuper')->name('removeSuper');
 
 });

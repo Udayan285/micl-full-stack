@@ -14,21 +14,9 @@ class PhysicalRefineryController extends Controller
 
     function storePhysical(Request $request)
     {
-        $request->validate([
-            "year_establishment" => "required",
-            "plant_manufacturer" => "required",
-            "country_origin" => "required",
-            "prime_raw_material" => "required",
-            "product" => "required",
-            "pack_size" => "required",
-            "existing_capacity" => "required",
-            "utility_requirement" => "required",
-            "manpower_requirement" => "required",
-            "present_status" => "required",
-            "images.*" =>'required|mimes:jpg,jpeg,png,webp',
-        ]);
 
-        $images = $this->uploadImages($request,'business-activities/');
+        $this->validations($request);
+        $images = $this->uploadImages($request,'business-activities/physical-refinery/');
 
         Physicalrefinery::create([
             'year_establishment' => $request->year_establishment,
@@ -79,24 +67,12 @@ class PhysicalRefineryController extends Controller
 
     function updatePhysical(Request $request,$id)
     {
-        $request->validate([
-            "year_establishment" => "required",
-            "plant_manufacturer" => "required",
-            "country_origin" => "required",
-            "prime_raw_material" => "required",
-            "product" => "required",
-            "pack_size" => "required",
-            "existing_capacity" => "required",
-            "utility_requirement" => "required",
-            "manpower_requirement" => "required",
-            "present_status" => "required",
-            "images.*" =>'required|mimes:jpg,jpeg,png,webp',
-        ]);
+        $this->validations($request);
 
         $physical = Physicalrefinery::find($id);
 
         $this->businessMediaDelete($physical);
-        $images = $this->uploadImages($request,'business-activities/');
+        $images = $this->uploadImages($request,'business-activities/physical-refinery/');
         
         $physical->update([
             "year_establishment" => $request->year_establishment,
@@ -115,5 +91,22 @@ class PhysicalRefineryController extends Controller
         return redirect()->route('dashboard.previewPhysical')
             ->with('status', "Information updated successfully.");
         
+    }
+
+    function validations($request)
+    {
+        $request->validate([
+            "year_establishment" => "required",
+            "plant_manufacturer" => "required",
+            "country_origin" => "required",
+            "prime_raw_material" => "required",
+            "product" => "required",
+            "pack_size" => "required",
+            "existing_capacity" => "required",
+            "utility_requirement" => "required",
+            "manpower_requirement" => "required",
+            "present_status" => "required",
+            "images.*" =>'required|mimes:jpg,jpeg,png,webp',
+        ]);
     }
 }

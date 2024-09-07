@@ -16,6 +16,7 @@ use App\Models\Bottlemaking;
 use App\Models\Edibleoil;
 use App\Models\Physicalrefinery;
 use App\Models\Storagetank;
+use App\Models\Superoil;
 
 class FrontendController extends Controller
 {
@@ -65,8 +66,9 @@ class FrontendController extends Controller
     }
 
     function dryFractionation(){
+        $superOil = Superoil::where('status',1)->get();
         $footer = Footer::where('status',1)->get();
-        return view('MICL-clone.dry-friction',compact('footer'));
+        return view('MICL-clone.dry-friction',compact('footer','superOil'));
     }
 
     function edibleOil(){

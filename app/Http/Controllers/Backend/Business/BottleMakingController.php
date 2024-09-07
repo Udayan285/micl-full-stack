@@ -16,7 +16,7 @@ class BottleMakingController extends Controller
     {
         $this->validationStoreUpdate($request);
 
-        $images = $this->uploadImages($request,'business-activities/');
+        $images = $this->uploadImages($request,'business-activities/bottle-making/');
         
         Bottlemaking::create([
             "year_establishment" => $request->year_establishment,
@@ -67,7 +67,7 @@ class BottleMakingController extends Controller
         $this->validationStoreUpdate($request);
         $bottle = Bottlemaking::findOrfail($id);
         $this->businessMediaDelete($bottle);
-        $images = $this->uploadImages($request,"business-activities/");
+        $images = $this->uploadImages($request,"business-activities/bottle-making/");
         $bottle->update([
             "year_establishment" => $request->year_establishment,
             "plant_manufacturer" => $request->plant_manufacturer,

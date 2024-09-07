@@ -89,7 +89,7 @@ class BackendController extends Controller
     }
 
     function showSuperOil(){
-        return view('backend.business.superOil');
+        return view('backend.business.super-oil.superOil');
     }
 
     function showEdibleOil(){
