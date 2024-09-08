@@ -15,14 +15,9 @@ class CorporateVisionController extends Controller
         function corporateStore(Request $request)
         {
             $this->validations($request);
-    
             $corporate = new CorporateVision();
-    
             $corporate->title = $request->corporate_title;
             $corporate->description = $request->corporate_description;
-    
-    
-            
             //Checking old slug exists or not
             $oldSlug = CorporateVision::where('slug','LIKE','%'.str($request->corporate_title)->slug().'%')->count();
             if($oldSlug > 0){
@@ -34,7 +29,6 @@ class CorporateVisionController extends Controller
                 $corporate->slug = $slug;
             }
 
-    
             //image upload related task written here...
             $imgName = time().'.'.$request->corporate_image->extension();
             $request->corporate_image->move(public_path('corporates'), $imgName);
@@ -63,9 +57,7 @@ class CorporateVisionController extends Controller
         }
     
         function updateCorpo(Request $request, $slug)
-        {
-           
-    
+        { 
                $this->validations($request);
         
                 $corpoUpdate = CorporateVision::where('slug',$slug)->first();

@@ -3,20 +3,22 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Area;
+use App\Models\About;
 use App\Models\Banner;
 use App\Models\Footer;
 use App\Models\Contact;
 use App\Models\Manager;
+use App\Models\Superoil;
+use App\Models\Edibleoil;
 use App\Models\Homeabout;
-use Illuminate\Http\Request;
-use App\Models\Homecorporate;
-use App\Http\Controllers\Controller;
+use App\Models\Storagetank;
 use App\Models\Bitumenplant;
 use App\Models\Bottlemaking;
-use App\Models\Edibleoil;
+use Illuminate\Http\Request;
+use App\Models\Homecorporate;
 use App\Models\Physicalrefinery;
-use App\Models\Storagetank;
-use App\Models\Superoil;
+use App\Http\Controllers\Controller;
+use App\Models\CorporateVision;
 
 class FrontendController extends Controller
 {
@@ -39,16 +41,18 @@ class FrontendController extends Controller
 
     function aboutUs()
     {
+        $about = About::where('status',1)->get();
         $footer = Footer::where('status',1)->get();
         $bannersData = Banner::where('status',1)->get();
-        return view('MICL-clone.about',compact('bannersData','footer'));
+        return view('MICL-clone.about',compact('bannersData','footer','about'));
     }
 
     function corporateVision()
     {
+        $corporate = CorporateVision::where('status',1)->get();
         $footer = Footer::where('status',1)->get();
         $bannersData = Banner::where('status',1)->get();
-        return view('MICL-clone.corporate',compact('bannersData','footer'));
+        return view('MICL-clone.corporate',compact('bannersData','footer','corporate'));
     }
 
     function storageTank()

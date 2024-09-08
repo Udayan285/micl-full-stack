@@ -2,40 +2,34 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use App\Models\Footer;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Helpers\MediaDeleteTrait;
 
 class FooterController extends Controller
 {
-    //Footer controller funcationallity added here
+    use MediaDeleteTrait;
+    //coded by here #udayan285..
     public function storeFooter(Request $request)
     {
-
         $this->validations($request);
-
         Footer::create($request->all());
-
         return redirect()->back()->with('status', 'Get in touch information added successfully.');
     }
 
     function removeFooter($id)
     {
-        $footer = Footer::where('id',$id)->first();
+        $footer = Footer::findOrfail($id);
         $footer->delete();
         return redirect()->back()->with('status', 'Get in touch information removed successfully.');
     }
     
     function activeFooter($id)
     { 
-        //Udayan285
-       
+
         $footer = Footer::findOrFail($id);
-    
-        // Deactivate other footer
         Footer::where('id', '!=', $id)->update(['status' => 0]);
-    
-        // Activate the current footer
         $footer->update(['status' => 1]);
 
         return redirect()->back()->with('status', 'Status updated successfully.');
@@ -49,7 +43,7 @@ class FooterController extends Controller
         return view('backend.footer.editFooter',compact('footer'));
     }
 
-    function updateFooter(Request $request , $id)
+    function updateFooter(Request $request,$id)
     {
         
         $this->validations($request);

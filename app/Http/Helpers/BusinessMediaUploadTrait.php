@@ -22,8 +22,7 @@ trait BusinessMediaUploadTrait
     }
 
     function generalMediaUpload($request,$folder)
-    {
-        
+    {       
         $imgName = time().'.'.$request->image->extension();
         $upload_path = $folder;
         $image_url = $upload_path.$imgName;

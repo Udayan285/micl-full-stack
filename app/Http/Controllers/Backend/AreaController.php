@@ -13,18 +13,10 @@ class AreaController extends Controller
         //Area page all function here..(#udayan285#)
         function storeArea(Request $request)
         {
-                
             $this->validations($request);
-    
             $area = new Area();
-    
             $area->title = $request->area_title;
             $area->description = $request->area_description;
-    
-
-            //$slug = $this->slugGenerator($request,About::class);
-            //$about->slug = $slug;
-
             $oldSlug = Area::where('slug','LIKE','%'.str($request->area_title)->slug().'%')->count();
             if($oldSlug > 0){
                 $oldSlug +=1;
@@ -34,15 +26,11 @@ class AreaController extends Controller
                 $slug = str($request->area_title)->slug();
                 $area->slug = $slug;
             }
-    
             //image upload related task written here...
             $imgName = time().'.'.$request->area_image->extension();
             $request->area_image->move(public_path('area'), $imgName);
             $area->image_url = $imgName;
-    
-    
             $area->save();
-    
             return redirect()->back()->with('status','Area information added successfully.');
         }
     
