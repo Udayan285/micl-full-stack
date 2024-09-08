@@ -6,7 +6,7 @@
         <div class="row g-4">
               {{-- Success message show here via alert --}}
               @if (session('status'))
-              <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <div class="alert alert-success alert-dismissible fade show" id="status-alert" role="alert">
                     <i class="fa fa-exclamation-circle me-2"></i>{{ session('status') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
@@ -35,26 +35,20 @@
                             
                         </div>
 
-                        {{-- //try to add ckeditior here --}}
-                        {{-- <div class="form-floating">
-                            <textarea class="form-control" id="editor" name="ckeditor_details" placeholder="Leave a description here" style="height: 150px;" >
-                            
-                            </textarea>
-                        </div> --}}
-                        {{-- //try to add ckeditior here --}}
-
-
                         @error('corporate_description')
                              <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
 
                         <label for="exampleInputDescription" class="form-label mt-2">Corporate Page Corporate Images</label>
                         <div class="mb-3">     
-                            <input type="file" name="corporate_image" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">  
+                            <input type="file" name="corporate_image" class="form-control" id="imageFile" aria-describedby="emailHelp">  
                         </div>
                         @error('corporate_image')
                              <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+                        <div class="mb-3">
+                            <img id="corporateImage"  src="" style="height: 100px; width:100px;" alt="corporate image">
+                        </div>
                         
                         <button type="submit" class="btn btn-primary">Add Now</button>
                     </form>
@@ -123,18 +117,32 @@
     </div>       
 </div>
 
-{{-- try to add custom js for ckeditor --}}
-{{-- @push('ckeditorMainCorporate')
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
+@push('imgviewmaincorporate')
 <script>
-    ClassicEditor
-    .create( document.querySelector( '#editor' ) )
-    .catch( error => {
-        console.error( error );
-    } );
+    let uploadImg = document.querySelector('#imageFile')
+    let display = document.querySelector('#corporateImage')
+    
+    function imgPreviewer(event){
+        let url = URL.createObjectURL(event.target.files[0])
+        display.src = url
+    }
+    uploadImg.addEventListener('change',imgPreviewer);
+
+    // Set timeout to hide the alert after 3 seconds
+        setTimeout(function()
+    {
+            var alert = document.getElementById('status-alert');
+            if (alert) {
+                // Bootstrap fade-out
+                alert.classList.remove('show');
+                alert.classList.add('fade');
+            }
+    }, 3000);
 </script>
-@endpush --}}
+@endpush
+
+
+
 
 
 

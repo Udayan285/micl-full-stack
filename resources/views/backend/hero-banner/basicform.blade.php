@@ -12,7 +12,7 @@
 
                         {{-- Success message show here via alert --}}
                         @if (session('status'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <div class="alert alert-success alert-dismissible fade show" role="alert" id="status-alert">
                               <i class="fa fa-exclamation-circle me-2"></i>{{ session('status') }}
                               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
@@ -38,11 +38,14 @@
 
                         <label for="exampleInputDescription" class="form-label mt-2">Banner Images</label>
                         <div class="mb-3">     
-                            <input type="file" name="banner_image" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">  
+                            <input type="file" name="banner_image" class="form-control" id="imageFile" aria-describedby="emailHelp">  
                         </div>
                         @error('banner_image')
                              <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+                        <div class="mb-3">
+                            <img id="heroImage"  src="" style="height: 100px; width:100px;" alt="corporate image">
+                        </div>
                         
                         <button type="submit" class="btn btn-primary">Add Now</button>
                     </form>
@@ -103,6 +106,31 @@
         </div>
     </div>       
 </div>
+
+@push('imgviewmaincorporate')
+<script>
+    let uploadImg = document.querySelector('#imageFile')
+    let display = document.querySelector('#heroImage')
+    
+    function imgPreviewer(event){
+        let url = URL.createObjectURL(event.target.files[0])
+        display.src = url
+    }
+    uploadImg.addEventListener('change',imgPreviewer);
+
+
+    // Set timeout to hide the alert after 3 seconds
+    setTimeout(function()
+    {
+            var alert = document.getElementById('status-alert');
+            if (alert) {
+                // Bootstrap fade-out
+                alert.classList.remove('show');
+                alert.classList.add('fade');
+            }
+    }, 3000);
+</script>
+@endpush
 @endsection
 
 

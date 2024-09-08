@@ -2,13 +2,13 @@
 
 @section('backendLayoutsPart')
 
-        <!-- Content Start -->
-        <div class="content">
+<!-- Content Start -->
+<div class="content">
             <!-- Sales Chart Start -->
             <div class="container-fluid pt-4 px-4">
                 {{-- Success message show here via alert --}}
                 @if (session('status'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <div class="alert alert-success alert-dismissible fade show" role="alert" id="status-alert">
                 <i class="fa fa-exclamation-circle me-2"></i>{{ session('status') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                  </div>
@@ -31,7 +31,18 @@
                 </div>
             </div>
             <!-- Sales Chart End -->
-        </div>
-        <!-- Content End -->
-    
+</div>
+<!-- Content End -->
+<script>
+    // Set timeout to hide the alert after 3 seconds
+    setTimeout(function()
+    {
+            var alert = document.getElementById('status-alert');
+            if (alert) {
+                // Bootstrap fade-out
+                alert.classList.remove('show');
+                alert.classList.add('fade');
+            }
+    }, 3000);    
+</script>    
 @endsection
