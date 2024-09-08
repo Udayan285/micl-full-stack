@@ -59,7 +59,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
                     <a href="{{ route('micl.home') }}" class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a>
-                    <a href="{{ route('micl.md') }}" class="nav-item nav-link {{ request()->is('md-profile') ? 'active' : '' }}">MD Profile</a>
+                    <a href="{{ route('micl.manager') }}" class="nav-item nav-link {{ request()->is('manager-profile') ? 'active' : '' }}">MD Profile</a>
                     <a href="{{ route('micl.aboutUs') }}" class="nav-item nav-link {{ request()->is('about-us-front') ? 'active' : '' }}">About Us</a>
                     <a href="{{ route('micl.corporate') }}" class="nav-item nav-link {{ request()->is('corporate-vision') ? 'active' : '' }}">Corporate Vision</a>
                     

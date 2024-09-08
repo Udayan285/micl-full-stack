@@ -10,14 +10,11 @@ use Illuminate\Http\Request;
 class AreaController extends Controller
 {
     use MediaDeleteTrait;
-        //Main about us page all function here..(#udayan285#)
-        function storeArea(Request $request){
+        //Area page all function here..(#udayan285#)
+        function storeArea(Request $request)
+        {
                 
-            $request->validate([
-                "area_title" => "required",
-                "area_description" => "required",
-                "area_image" => "required|mimes:png,jpg,jpeg,svg"
-            ]);
+            $this->validations($request);
     
             $area = new Area();
     
@@ -49,7 +46,8 @@ class AreaController extends Controller
             return redirect()->back()->with('status','Area information added successfully.');
         }
     
-        function removeArea($slug){
+        function removeArea($slug)
+        {
             $area = Area::where('slug',$slug)->first();
             //remove from public folder
             $this->deleteMedia($area,'area/');
@@ -57,19 +55,15 @@ class AreaController extends Controller
             return redirect()->back()->with('status',"Selected area info. deleted successfully.");
         }
     
-        function editArea($slug){
+        function editArea($slug)
+        {
             $areaEdit = Area::where('slug',$slug)->first();
             return view('backend.area.editArea',compact('areaEdit'));
         }
     
-        function updateArea(Request $request, $slug){
-    
-                $request->validate([
-                    "area_title" => "required",
-                    "area_description" => "required",
-                    "area_image" => "required|mimes:png,jpg,jpeg,svg"
-                ]);
-        
+        function updateArea(Request $request, $slug)
+        {
+                $this->validations($request);
                 $areaUpdate = Area::where('slug',$slug)->first();
                 $areaUpdate->title = $request->area_title;
                 $areaUpdate->description = $request->area_description;
@@ -98,7 +92,8 @@ class AreaController extends Controller
                 ->with('status',"Area information updated successfully.");
         }
     
-        function activeArea($slug){
+        function activeArea($slug)
+        {
             $singleArea = Area::where('slug',$slug)->first();
             
             
@@ -125,6 +120,15 @@ class AreaController extends Controller
            
             $singleArea->save();
             return redirect()->back()->with('status',"Status updated successfully.");
+        }
+
+        function  validations($request)
+        {
+            $request->validate([
+                "area_title" => "required",
+                "area_description" => "required",
+                "area_image" => "required|mimes:png,jpg,jpeg,svg"
+            ]);
         }
 
 

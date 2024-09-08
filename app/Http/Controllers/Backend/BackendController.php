@@ -19,7 +19,6 @@ use App\Http\Helpers\MediaDeleteTrait;
 
 class BackendController extends Controller
 {
-   // use SlugBuilder;
    use MediaDeleteTrait;
 
    //show all menu time page here starts
@@ -107,13 +106,10 @@ class BackendController extends Controller
 
     
     //Hero Banner detail store/update/delete here..
-    function heroStore(Request $request){
+    function heroStore(Request $request)
+    {
 
-        $request->validate([
-            "banner_title" => "required",
-            "banner_description" => "required",
-            "banner_image" => "required|mimes:png,jpg,jpeg,svg"
-        ]);
+        $this->validations($request);
 
         $banner = new Banner();
         $banner->title = $request->banner_title;
@@ -146,7 +142,8 @@ class BackendController extends Controller
     }
 
     //Remove Banner
-    function removeHero(string $slug){
+    function removeHero(string $slug)
+    {
         $banner = Banner::where('slug',$slug)->first();
         //remove from public folder
         $this->deleteMedia($banner,'images/');
@@ -155,18 +152,16 @@ class BackendController extends Controller
     }
 
     //Edit banner
-    function editHero(string $slug){
+    function editHero(string $slug)
+    {
         $bannerEdit = Banner::where('slug',$slug)->first();
         return view('backend.hero-banner.editForm',compact('bannerEdit'));
     }
 
-    function updateHero(Request $request, $slug){
-        $request->validate([
-            "banner_title" => "required",
-            "banner_description" => "required",
-            "banner_image" => "required|mimes:png,jpg,jpeg,svg"
-        ]);
-
+    function updateHero(Request $request, $slug)
+    {
+        
+        $this->validations($request);
         $bannerUpdate = Banner::where('slug',$slug)->first();
         $bannerUpdate->title = $request->banner_title;
         $bannerUpdate->description = $request->banner_description;
@@ -201,7 +196,8 @@ class BackendController extends Controller
 
     }
 
-    function activeHero($slug){
+    function activeHero($slug)
+    {
         $banner = Banner::where('slug',$slug)->first();
 
         if($banner->status == 0 ){
@@ -213,14 +209,20 @@ class BackendController extends Controller
         return redirect()->back()->with('status',"Status updated successfully.");
     }
 
+    function validations($request)
+    {
+        $request->validate([
+            "banner_title" => "required",
+            "banner_description" => "required",
+            "banner_image" => "required|mimes:png,jpg,jpeg,svg"
+        ]);
+    }
+
 
     //Home Corporate detail store/update/delete here..
-    function homeCorporateStore(Request $request){
-        $request->validate([
-            "home_corporate_title" => "required",
-            "home_corporate_description" => "required",
-            "home_corporate_image" => "required|mimes:png,jpg,jpeg,svg"
-        ]);
+    function homeCorporateStore(Request $request)
+    {
+        $this->validationCorpo($request);
 
         $homecorporate = new Homecorporate();
 
@@ -253,7 +255,8 @@ class BackendController extends Controller
         return redirect()->back()->with('status','Home page corporate information added successfully.');
     }
 
-    function removeHomeCorpo($slug){
+    function removeHomeCorpo($slug)
+    {
         $homecorpo = Homecorporate::where('slug',$slug)->first();
         
         //remove from public folder
@@ -263,18 +266,16 @@ class BackendController extends Controller
         return redirect()->back()->with('status',"Selected homepage corporate info. deleted successfully.");
     }
 
-    function editHomeCorpo($slug){
+    function editHomeCorpo($slug)
+    {
         $homeCorpoEdit = Homecorporate::where('slug',$slug)->first();
         return view('backend.corporate.corporateEdit',compact('homeCorpoEdit'));
     }
 
-    function updateHomeCorpo(Request $request, $slug){
+    function updateHomeCorpo(Request $request, $slug)
+    {
 
-            $request->validate([
-                "home_corporate_title" => "required",
-                "home_corporate_description" => "required",
-                "home_corporate_image" => "required|mimes:png,jpg,jpeg,svg"
-            ]);
+           $this->validationCorpo($request);
     
             $homeCorpoUpdate = Homecorporate::where('slug',$slug)->first();
             $homeCorpoUpdate->title = $request->home_corporate_title;
@@ -307,7 +308,8 @@ class BackendController extends Controller
             ->with('status',"Home corporate information updated successfully.");
     }
 
-    function activeHomeCorpo($slug){
+    function activeHomeCorpo($slug)
+    {
         $singleHomeCorporate = Homecorporate::where('slug',$slug)->first();
         
         
@@ -322,5 +324,14 @@ class BackendController extends Controller
        
         $singleHomeCorporate->save();
         return redirect()->back()->with('status',"Status updated successfully.");
+    }
+
+    function validationCorpo($request)
+    {
+        $request->validate([
+            "home_corporate_title" => "required",
+            "home_corporate_description" => "required",
+            "home_corporate_image" => "required|mimes:png,jpg,jpeg,svg"
+        ]);
     }
 }

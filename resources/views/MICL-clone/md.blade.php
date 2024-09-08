@@ -14,7 +14,7 @@
               <div class="text-center w-100 p-5">
                 <img
                   class="img-fluid bg-light p-3"
-                  src="{{asset('md/'.$md->image_url)}}"
+                  src="{{asset($md->image_url)}}"
                   alt=""
                   style="width: 100%"
                 />

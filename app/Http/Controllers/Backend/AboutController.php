@@ -17,22 +17,11 @@ class AboutController extends Controller
             //Home Page About detail store/update/delete here..(#udayan285#)
             function storeHomeAbout(Request $request){
                 
-                $request->validate([
-                    "home_about_title" => "required",
-                    "home_about_description" => "required",
-                    "home_about_image" => "required|mimes:png,jpg,jpeg,svg"
-                ]);
-        
+                $this->validations($request);
                 $homeabout = new Homeabout();
         
                 $homeabout->title = $request->home_about_title;
                 $homeabout->description = $request->home_about_description;
-        
-
-               // $slug = $this->slugGenerator($request,$title,Homeabout::class);
-                //$homeabout->slug = $slug;
-
-                    //Checking old slug exists or not
 
                 $oldSlug = Homeabout::where('slug','LIKE','%'.str($request->home_about_title)->slug().'%')->count();
                 if($oldSlug > 0){
@@ -71,15 +60,11 @@ class AboutController extends Controller
                 return view('backend.about.editHomeAbout',compact('homeAboutEdit'));
             }
         
-            function updateHomeAbout(Request $request, $slug){
-                // dd($request->all());
+            function updateHomeAbout(Request $request, $slug)
+            {
         
-                    $request->validate([
-                        "home_about_title" => "required",
-                        "home_about_description" => "required",
-                        "home_about_image" => "required|mimes:png,jpg,jpeg,svg"
-                    ]);
-            
+                    
+                    $this->validations($request);
                     $homeAboutUpdate = Homeabout::where('slug',$slug)->first();
                     $homeAboutUpdate->title = $request->home_about_title;
                     $homeAboutUpdate->description = $request->home_about_description;
@@ -126,16 +111,21 @@ class AboutController extends Controller
                 return redirect()->back()->with('status',"Status updated successfully.");
             }
 
+            function validations($request)
+            {
+                $request->validate([
+                    "home_about_title" => "required",
+                    "home_about_description" => "required",
+                    "home_about_image" => "required|mimes:png,jpg,jpeg,svg"
+                ]);
+            }
+
           
           
             //Main about us page all function here..(#udayan285#)
             function storeAbout(Request $request){
                 
-                $request->validate([
-                    "about_title" => "required",
-                    "about_description" => "required",
-                    "about_image" => "required|mimes:png,jpg,jpeg,svg"
-                ]);
+                $this->validationsAbout($request);
         
                 $about = new About();
         
@@ -180,14 +170,8 @@ class AboutController extends Controller
             }
         
             function updateAbout(Request $request, $slug){
-                // dd($request->all());
-        
-                    $request->validate([
-                        "about_title" => "required",
-                        "about_description" => "required",
-                        "about_image" => "required|mimes:png,jpg,jpeg,svg"
-                    ]);
             
+                    $this->validationsAbout($request);
                     $aboutUpdate = About::where('slug',$slug)->first();
                     $aboutUpdate->title = $request->about_title;
                     $aboutUpdate->description = $request->about_description;
@@ -233,5 +217,14 @@ class AboutController extends Controller
                
                 $singleAbout->save();
                 return redirect()->back()->with('status',"Status updated successfully.");
+            }
+
+            function validationsAbout($request)
+            {
+                $request->validate([
+                    "about_title" => "required",
+                    "about_description" => "required",
+                    "about_image" => "required|mimes:png,jpg,jpeg,svg"
+                ]);
             }
 }

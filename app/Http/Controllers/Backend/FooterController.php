@@ -9,26 +9,25 @@ use Illuminate\Http\Request;
 class FooterController extends Controller
 {
     //Footer controller funcationallity added here
-    public function storeFooter(Request $request){
+    public function storeFooter(Request $request)
+    {
 
-        $request->validate([
-            'corporate_office' => 'required',
-            'sales_office' => 'required', 
-            'factory' => 'required',
-        ]);
+        $this->validations($request);
 
         Footer::create($request->all());
 
         return redirect()->back()->with('status', 'Get in touch information added successfully.');
     }
 
-    function removeFooter($id){
+    function removeFooter($id)
+    {
         $footer = Footer::where('id',$id)->first();
         $footer->delete();
         return redirect()->back()->with('status', 'Get in touch information removed successfully.');
     }
     
-    function activeFooter($id){ 
+    function activeFooter($id)
+    { 
         //Udayan285
        
         $footer = Footer::findOrFail($id);
@@ -44,22 +43,29 @@ class FooterController extends Controller
 
     }
 
-    function editFooter($id){
+    function editFooter($id)
+    {
         $footer = Footer::where('id',$id)->first();
         return view('backend.footer.editFooter',compact('footer'));
     }
 
-    function updateFooter(Request $request , $id){
-        $request->validate([
-            'corporate_office' => 'required',
-            'sales_office' => 'required', 
-            'factory' => 'required',
-        ]);
-
+    function updateFooter(Request $request , $id)
+    {
+        
+        $this->validations($request);
         $footer = Footer::findOrFail($id);
         $footer->update($request->all());
     
         return redirect()->route('dashboard.footer')
             ->with('status', "Get in touch information updated successfully.");
+    }
+
+    function validations($request)
+    {
+        $request->validate([
+            'corporate_office' => 'required',
+            'sales_office' => 'required', 
+            'factory' => 'required',
+        ]);
     }
 }

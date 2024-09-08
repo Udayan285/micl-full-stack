@@ -11,13 +11,10 @@ use App\Models\CorporateVision;
 class CorporateVisionController extends Controller
 {
     use MediaDeleteTrait;
-        //Corporate detail store/update/delete here..
-        function corporateStore(Request $request){
-            $request->validate([
-                "corporate_title" => "required",
-                "corporate_description" => "required",
-                "corporate_image" => "required|mimes:png,jpg,jpeg,svg"
-            ]);
+        //Coded by udayan285#..
+        function corporateStore(Request $request)
+        {
+            $this->validations($request);
     
             $corporate = new CorporateVision();
     
@@ -49,7 +46,8 @@ class CorporateVisionController extends Controller
             return redirect()->back()->with('status','Corporate information added successfully.');
         }
     
-        function removeCorpo($slug){
+        function removeCorpo($slug)
+        {
             $corporate = CorporateVision::where('slug',$slug)->first();
             //remove from public folder
             $this->deleteMedia($corporate,'corporates/');
@@ -58,19 +56,17 @@ class CorporateVisionController extends Controller
             return redirect()->back()->with('status',"Selected corporate info. deleted successfully.");
         }
     
-        function editCorpo($slug){
+        function editCorpo($slug)
+        {
             $CorpoEdit = CorporateVision::where('slug',$slug)->first();
             return view('backend.corporate.editMainCorporate',compact('CorpoEdit'));
         }
     
-        function updateCorpo(Request $request, $slug){
-            // dd($request->all());
+        function updateCorpo(Request $request, $slug)
+        {
+           
     
-                $request->validate([
-                    "corporate_title" => "required",
-                    "corporate_description" => "required",
-                    "corporate_image" => "required|mimes:png,jpg,jpeg,svg"
-                ]);
+               $this->validations($request);
         
                 $corpoUpdate = CorporateVision::where('slug',$slug)->first();
                 $corpoUpdate->title = $request->corporate_title;
@@ -103,7 +99,8 @@ class CorporateVisionController extends Controller
                 ->with('status',"Corporate information updated successfully.");
         }
     
-        function activeCorpo($slug){
+        function activeCorpo($slug)
+        {
             $singleCorporate = CorporateVision::where('slug',$slug)->first();
             
             
@@ -118,5 +115,14 @@ class CorporateVisionController extends Controller
            
             $singleCorporate->save();
             return redirect()->back()->with('status',"Status updated successfully.");
+        }
+
+        function validations($request)
+        {
+            $request->validate([
+                "corporate_title" => "required",
+                "corporate_description" => "required",
+                "corporate_image" => "required|mimes:png,jpg,jpeg,svg"
+            ]);
         }
 }

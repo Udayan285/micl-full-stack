@@ -22,7 +22,7 @@ use App\Http\Controllers\Backend\Business\SuperOilController;
 //Frontend view page show related all routes written Start here...
 route::prefix("/")->name("micl.")->controller(FrontendController::class)->group(function(){
     Route::get('', 'homePage')->name('home');
-    Route::get('md-profile','mdProfile')->name('md');
+    Route::get('manager-profile','mdProfile')->name('manager');
     Route::get('about-us-front','aboutUs')->name('aboutUs');
     Route::get('corporate-vision','corporateVision')->name('corporate');
     Route::get('storage-tank-terminal','storageTank')->name('storageTank');

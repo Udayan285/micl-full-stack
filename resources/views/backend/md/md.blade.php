@@ -79,7 +79,7 @@
                                 <td>{{ $md->name }}</td>                            
                                 <td>{!! $md->description !!}</td>                       
                                 <td>
-                                    <img src="{{ asset('md/'.$md->image_url) }}" alt="Manager Image" style="height: 80px;width:90px;">
+                                    <img src="{{ asset($md->image_url) }}" alt="Manager Image" style="height: 80px;width:90px;">
                                 </td>
                                 <td>
                                    

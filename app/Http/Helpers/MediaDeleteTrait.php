@@ -12,6 +12,18 @@ trait MediaDeleteTrait
         }
     }
 
+    //Update delete method
+    function updateDeleteMedia($model)
+    {
+        if ($model->image_url) {  
+                $image = $model->image_url;         
+                $delete = public_path($image);
+                if(file_exists($delete)){
+                    unlink($delete);
+                } 
+            }              
+    }
+
     function businessMediaDelete($model)
     {
         if ($model->images) {           
