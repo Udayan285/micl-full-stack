@@ -8,16 +8,17 @@ use App\Http\Controllers\Backend\AreaController;
 use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\FooterController;
 use App\Http\Controllers\Backend\BackendController;
-use App\Http\Controllers\Backend\Business\BitumenPlantController;
-use App\Http\Controllers\Backend\Business\BottleMakingController;
-use App\Http\Controllers\Backend\Business\EdibleOilController;
-use App\Http\Controllers\Backend\Business\PhysicalRefineryController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\ManagerController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Backend\UserManagementController;
 use App\Http\Controllers\Backend\CorporateVisionController;
-use App\Http\Controllers\Backend\Business\StorageTankController;
 use App\Http\Controllers\Backend\Business\SuperOilController;
+use App\Http\Controllers\Backend\Business\EdibleOilController;
+use App\Http\Controllers\Backend\Business\StorageTankController;
+use App\Http\Controllers\Backend\Business\BitumenPlantController;
+use App\Http\Controllers\Backend\Business\BottleMakingController;
+use App\Http\Controllers\Backend\Business\PhysicalRefineryController;
 
 //Frontend view page show related all routes written Start here...
 route::prefix("/")->name("micl.")->controller(FrontendController::class)->group(function(){
@@ -251,4 +252,12 @@ route::prefix("/dashboard")->name('dashboard.')->controller(SuperOilController::
     route::put('/super-oil/active/{id}','activeSuper')->name('activeSuper');
     route::delete('/super-oil/remove/{id}','removeSuper')->name('removeSuper');
 
+});
+
+//User Management Controller route here..
+route::prefix("/dashboard")->name('dashboard.')->controller(UserManagementController::class)->group(function(){
+    //user management controller here..(#udayan285#)
+    route::get('/user-management','getUserManagement')->name('getUserManagement');
+    route::get('/user-profile','getUserProfile')->name('getUserProfile');
+    route::get('/edit-user-profile/{id}','editUserProfile')->name('editUserProfile');
 });

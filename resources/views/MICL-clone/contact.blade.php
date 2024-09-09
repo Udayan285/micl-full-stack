@@ -13,7 +13,7 @@
             <h1 class="mb-3">Get In Touch</h1>
           </div>
           
-          @foreach ($contact as $data)
+          @forelse($contact as $data)
           <div class="row g-4 mb-5">
             <div
               class="col-md-6 col-lg-4 text-center wow fadeInUp"
@@ -52,10 +52,47 @@
               <h6>{!! $data->contact_phone !!}</h6>
             </div>
           </div>
-          @endforeach
-        
-
-
+          @empty
+          <div class="row g-4 mb-5">
+            <div
+              class="col-md-6 col-lg-4 text-center wow fadeInUp"
+              data-wow-delay="0.1s"
+            >
+              <div
+                class="rounded-circle d-inline-flex align-items-center justify-content-center mb-4 primaryBg"
+                style="width: 75px; height: 75px"
+              >
+                <i class="fa fa-map-marker-alt fa-2x text-primary"></i>
+              </div>
+              <h6 class="locat-content">Habib’s, (Level-4), 1574/A, East Nasirabad, Bayezid Bostami Road, Opposite side of Nasirabad Housing Society (Road No-03), Panchlaish, Chattogram - 4000, Bangladesh.</h6>
+            </div>
+            <div
+              class="col-md-6 col-lg-4 text-center wow fadeInUp"
+              data-wow-delay="0.3s"
+            >
+              <div
+                class="primaryBg rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                style="width: 75px; height: 75px"
+              >
+                <i class="fa fa-envelope-open fa-2x text-primary"></i>
+              </div>
+              <h6>info@miclbd.com</h6>
+            </div>
+            <div
+              class="col-md-6 col-lg-4 text-center wow fadeInUp"
+              data-wow-delay="0.5s"
+            >
+              <div
+                class="primaryBg rounded-circle d-inline-flex align-items-center justify-content-center mb-4"
+                style="width: 75px; height: 75px"
+              >
+                <i class="fa fa-phone-alt fa-2x text-primary"></i>
+              </div>
+              <h6>Phone : 02-41356228</h6>
+              <h6>Phone : 02-41356229</h6>
+            </div>
+          </div>
+          @endforelse
           <div class="primaryBg rounded">
             <div class="row g-0">
               <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">

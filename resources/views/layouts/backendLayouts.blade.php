@@ -52,12 +52,18 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
+                        <a href="{{ route('dashboard.getUserProfile') }}">
                         <img class="rounded-circle" src="{{ asset('backend/img/udayan.png') }}" alt="" style="width: 40px; height: 40px;">
+                        </a>
+                        
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                       
                     </div>
                     <div class="ms-3">
+                        <a href="{{ route('dashboard.getUserProfile') }}">
                         <h6 class="mb-0">{{ auth()->user() ? auth()->user()->first_name : "Udayan Singh" }}</h6>
                         <span>Admin</span>
+                        </a>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
@@ -101,10 +107,9 @@
                     <a href="{{ route('dashboard.contactPage') }}" class="nav-item nav-link {{ request()->is('dashboard/contact-page') ? 'active' : '' }}"><i class="fas fa-address-book"></i>Contact Us</a>
                     <a href="{{ route('dashboard.mdPage') }}" class="nav-item nav-link {{ request()->is('dashboard/md-profile') ? 'active' : '' }}"><i class="fas fa-user"></i>Manager</a>
                     <a href="{{ route('dashboard.footer') }}" class="nav-item nav-link {{ request()->is('dashboard/footer') ? 'active' : '' }}"><i class="fas fa-hourglass-end"></i>Footer</a>
+                    <a href="{{ route('dashboard.getUserManagement') }}" class="nav-item nav-link {{ request()->is('dashboard/user-management') ? 'active' : '' }}"><i class="fas fa-users"></i>Role</a>
                     <a href="{{ route("auth.logout") }}" class="nav-item nav-link "><i class="fas fa-sign-out-alt"></i>Logout</a>
 
-                    
-                   
                 </div>
             </nav>
         </div>
