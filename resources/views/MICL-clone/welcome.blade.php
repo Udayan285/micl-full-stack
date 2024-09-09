@@ -32,7 +32,7 @@
                             @isset($homeCorporate)
                                 <img class="img-fluid w-75 bg-light p-3" src="{{ asset('homecorporate/'.$homeCorporate->image_url) }}" alt="Home Page Corporate Image">
                             @else
-                                <img class="img-fluid w-75 bg-light p-3" src="{{ asset('homecorporate/1721539433.jpg') }}" alt="Corporate Image">
+                                <img class="img-fluid w-75 bg-light p-3" src="{{ asset('frontend/img/MEB/bitumin storages/Bitumen Storage.jpg') }}" alt="Corporate Image">
                             @endisset
                             </div>
                          
@@ -54,7 +54,7 @@
                             @isset($homeAbout)
                             <img class="position-absolute w-100 h-100 rounded" alt="home-about-image" src="{{ $homeAbout ? asset('about-us/'.$homeAbout->image_url) : '' }}" alt="Homepage about image" style="object-fit: cover;">
                             @else
-                            <img class="position-absolute w-100 h-100 rounded" alt="home-about-image" src="{{ asset('about-us/1723729487.jpg') }}" alt="Homepage about image" style="object-fit: cover;">
+                            <img class="position-absolute w-100 h-100 rounded" alt="home-about-image" src="{{ asset('frontend/img/MEB/Tank Terminal & Bitumen Plant/New folder/Bitumen Drum Plant.png') }}" alt="Homepage about image" style="object-fit: cover;">
                             @endisset
                                
                             </div>

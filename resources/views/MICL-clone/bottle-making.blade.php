@@ -10,7 +10,7 @@
 
       <!-- innovation_gallery -->
       <div class="innovation_gallery d-flex gap-4 container">
-        @foreach ($bottle as $data)
+        @forelse ($bottle as $data)
         <!-- Innovation start -->
         <div class="py-5 col-lg-4 innovation">
           <div class="row">
@@ -70,7 +70,13 @@
           </div>
         </div>
         <!-- Gallery End -->
-        @endforeach
+        @empty
+        <div class="col-lg-12">
+          <div class="alert alert-warning" role="alert">
+            Nothing to preview
+          </div>
+        </div>
+        @endforelse
       </div>
 
 @endsection

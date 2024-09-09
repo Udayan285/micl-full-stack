@@ -10,7 +10,7 @@
   </div>
    {{-- Success message show here via alert --}}
    @if (session('status'))
-   <div class="alert alert-success alert-dismissible fade show" role="alert">
+   <div class="alert alert-success alert-dismissible fade show" id="status-alert" role="alert">
          <i class="fa fa-exclamation-circle me-2"></i>{{ session('status') }}
          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
    </div>
@@ -89,7 +89,18 @@
  
 </div>
 
-
+<script>
+  // Set timeout to hide the alert after 3 seconds
+  setTimeout(function()
+    {
+            var alert = document.getElementById('status-alert');
+            if (alert) {
+                // Bootstrap fade-out
+                alert.classList.remove('show');
+                alert.classList.add('fade');
+            }
+    }, 3000);
+</script>
 
 
 @endsection
