@@ -47,7 +47,7 @@
                         @enderror
                         
                         <div class="mb-3">
-                            <img id="aboutImage"  src="" style="height: 100px; width:100px;" alt="About Image">
+                            <img id="aboutImage"  src="{{ $aboutEdit ? asset('about-us/'.$aboutEdit->image_url) : '' }}" style="height: 100px; width:100px;" alt="About Image">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Update Now</button>

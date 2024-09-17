@@ -24,13 +24,11 @@
         <thead>
             <tr>
             <th scope="col">#</th>
-            <th scope="col">Year of Establishment</th>
             <th scope="col">Plant Manufacturer</th>
             <th scope="col">Country of Origin</th>
             <th scope="col">Prime Raw Material</th>
             <th scope="col">Product</th>
             <th scope="col">Pack Size</th>
-            <th scope="col">Existing Capacity</th>
             <th scope="col">Utility Requirement</th>
             <th scope="col">Manpower Requirement</th>
             <th scope="col">Present Status</th>
@@ -44,13 +42,11 @@
             @foreach($physicalAll as $key=> $data)
             <tr>
               <th scope="row">{{ ++$key }}</th>
-              <td>{{ $data->year_establishment }}</td>
               <td>{{ $data->plant_manufacturer }}</td>
               <td>{{ $data->country_origin }}</td>
               <td>{{ $data->prime_raw_material }}</td>
               <td>{{ $data->product }}</td>
               <td>{{ $data->pack_size }}</td>
-              <td>{{ $data->existing_capacity }}</td>
               <td>{{ $data->utility_requirement }}</td>
               <td>{{ $data->manpower_requirement }}</td>
               <td>{{ $data->present_status }}</td>

@@ -10,7 +10,7 @@
 
           <!-- innovation_gallery -->
       <div class="innovation_gallery d-flex gap-4 container">
-        @foreach ($edible as $data)
+        @forelse ($edible as $data)
         <!-- Innovation start -->
         <div class="py-5 col-lg-4 innovation">
           <div class="row">
@@ -18,16 +18,13 @@
               <div class="row">
                 <ul class="list-group">
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Year of Establishment :</span>{{ $data->year_establishment }}
-                  </li>
-                  <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
                     <span>Plant Manufacturer :</span>{{ $data->plant_manufacturer }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
                     <span>Country of Origin :</span>{{ $data->country_origin }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Existing Capacity (2 Shifts) :</span>{{ $data->existing_capacity }}
+                    <span>Prime Raw Material :</span>{{ $data->prime_raw_material }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
                     <span>Product :</span>{{ $data->product }}
@@ -61,6 +58,13 @@
           </div>
         </div>
         <!-- Gallery End -->
-        @endforeach
+        @empty
+        <div class="col-lg-12">
+          <div class="alert alert-warning" role="alert">
+            Nothing to preview
+          </div>
+        </div>
+
+        @endforelse
       </div>
 @endsection

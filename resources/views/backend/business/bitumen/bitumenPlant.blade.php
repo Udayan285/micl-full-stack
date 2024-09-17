@@ -17,29 +17,6 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif 
-    @error('storage_tank')
-    <div class="alert alert-danger">{{ $message }}</div>
-    @enderror 
-    <li>
-        <label for="textArea">Storage Tank Capacity (Heated)</label>
-        <textarea id="textArea" name="storage_tank" rows="4" cols="50"></textarea>
-     </li>
-
-    @error('service_tank')
-    <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <li>
-      <label for="textArea">Service (Delivery) Tank capacity</label>
-      <textarea id="textArea" name="service_tank" rows="4" cols="50"></textarea>
-    </li>
-
-    @error('product_turnover')
-    <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    <li>
-      <label for="textArea">Product Turnover (Yearly)</label>
-      <textarea id="textArea" name="product_turnover" rows="4" cols="50"></textarea>
-    </li>
     
     @error('prime_raw_material')
     <div class="alert alert-danger">{{ $message }}</div>

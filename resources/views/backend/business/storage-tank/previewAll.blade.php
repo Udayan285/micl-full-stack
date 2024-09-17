@@ -22,9 +22,6 @@
         <thead>
             <tr>
             <th scope="col">#</th>
-            <th scope="col">Year of Establishment</th>
-            <th scope="col">Storage Capacity (Existing)</th>
-            <th scope="col">Product Turnover</th>
             <th scope="col">Inward Facility</th>
             <th scope="col">Jetty Facility for discharge</th>
             <th scope="col">Pipeline Facility</th>
@@ -45,9 +42,6 @@
             @foreach($storagetanks as $key=> $data)
             <tr>
               <th scope="row">{{ ++$key }}</th>
-              <td>{{ $data->year_establishment }}</td>
-              <td>{{ $data->storage_capacity }}</td>
-              <td>{{ $data->product_turnover }}</td>
               <td>{{ $data->inward_facility }}</td>
               <td>{{ $data->jetty_facility }}</td>
               <td>{{ $data->pipeline_facility }}</td>

@@ -13,13 +13,11 @@ return new class extends Migration
     {
         Schema::create('physicalrefineries', function (Blueprint $table) {
             $table->id();
-            $table->longText('year_establishment');
             $table->longText('plant_manufacturer');
             $table->longText('country_origin');
             $table->longText('prime_raw_material');
             $table->longText('product');
             $table->longText('pack_size');
-            $table->longText('existing_capacity');
             $table->longText('utility_requirement');
             $table->longText('manpower_requirement');
             $table->longText('present_status');

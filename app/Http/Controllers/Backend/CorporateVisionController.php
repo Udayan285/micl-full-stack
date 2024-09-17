@@ -14,8 +14,8 @@ class CorporateVisionController extends Controller
         //Coded by udayan285#..
         function corporateStore(Request $request)
         {
-            $this->validations($request);
             $corporate = new CorporateVision();
+            $this->validations($request,$corporate);
             $corporate->title = $request->corporate_title;
             $corporate->description = $request->corporate_description;
             //Checking old slug exists or not
@@ -58,13 +58,11 @@ class CorporateVisionController extends Controller
     
         function updateCorpo(Request $request, $slug)
         { 
-               $this->validations($request);
-        
                 $corpoUpdate = CorporateVision::where('slug',$slug)->first();
+                $this->validations($request,$corpoUpdate);
                 $corpoUpdate->title = $request->corporate_title;
                 $corpoUpdate->description = $request->corporate_description;
                 
-                //corporate slug updated
                 //Checking old slug exists or not
                  $oldSlug = CorporateVision::where('slug','LIKE','%'.str($request->corporate_title)->slug().'%')->count();
                  if($oldSlug > 0){
@@ -76,16 +74,21 @@ class CorporateVisionController extends Controller
                      $corpoUpdate->slug = $slug;
                  }
         
-                //remove from public folder
-                $this->deleteMedia($corpoUpdate,'corporates/');
+                if($request->hasFile('corporate_image')){
                 
+                $this->deleteMedia($corpoUpdate,'corporates/');
                 $imageName = time().'.'.$request->corporate_image->extension();
                 $request->corporate_image->move(public_path('corporates'), $imageName);
                 $corpoUpdate->image_url = $imageName;
+
+                }
+
+                if(!$request->hasFile('corporate_image') && $corpoUpdate->image_url){
+                    $corpoUpdate->image_url = $corpoUpdate->image_url;
+                }
+
                 $corpoUpdate->save();
                 
-        
-                //$allCorporates = CorporateVision::all();
         
                 return redirect()->route('dashboard.mainCorporate')
                 ->with('status',"Corporate information updated successfully.");
@@ -109,12 +112,12 @@ class CorporateVisionController extends Controller
             return redirect()->back()->with('status',"Status updated successfully.");
         }
 
-        function validations($request)
+        function validations($request,$model)
         {
             $request->validate([
                 "corporate_title" => "required",
                 "corporate_description" => "required",
-                "corporate_image" => "required|mimes:png,jpg,jpeg,svg"
+                "corporate_image" => $model->image_url ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
             ]);
         }
 }

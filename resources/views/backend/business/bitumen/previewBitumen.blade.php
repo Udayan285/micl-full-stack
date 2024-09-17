@@ -24,9 +24,6 @@
         <thead>
             <tr>
             <th scope="col">#</th>
-            <th scope="col">Storage Tank Capacity (Heated)</th>
-            <th scope="col">Service (Delivery) Tank capacity</th>
-            <th scope="col">Product Turnover (Yearly)</th>
             <th scope="col">Prime Raw Material</th>
             <th scope="col">Product</th>
             <th scope="col">Present Status</th>
@@ -40,9 +37,6 @@
             @foreach($bitumenAll as $key=> $data)
             <tr>
               <th scope="row">{{ ++$key }}</th>
-              <td>{{ $data->storage_tank }}</td>
-              <td>{{ $data->service_tank }}</td>
-              <td>{{ $data->product_turnover }}</td>
               <td>{{ $data->prime_raw_material }}</td>
               <td>{{ $data->product }}</td>
               <td>{{ $data->present_status }}</td>

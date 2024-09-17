@@ -13,12 +13,8 @@ return new class extends Migration
     {
         Schema::create('bottlemakings', function (Blueprint $table) {
             $table->id();
-            $table->longText('year_establishment');
             $table->longText('plant_manufacturer');
             $table->longText('country_origin');
-            $table->longText('injection_machine');
-            $table->longText('blowing_machine');
-            $table->longText('existing_capacity');
             $table->longText('prime_raw_material');
             $table->longText('product');
             $table->longText('utility_requirement');

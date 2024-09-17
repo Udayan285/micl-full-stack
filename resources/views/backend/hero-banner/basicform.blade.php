@@ -44,7 +44,7 @@
                              <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                         <div class="mb-3">
-                            <img id="heroImage"  src="" style="height: 100px; width:100px;" alt="corporate image">
+                            <img id="heroImage"  src="" style="height: 100px; width:100px;" alt="banner image">
                         </div>
                         
                         <button type="submit" class="btn btn-primary">Add Now</button>

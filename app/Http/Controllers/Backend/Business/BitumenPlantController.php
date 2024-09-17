@@ -14,12 +14,8 @@ class BitumenPlantController extends Controller
    
     function storeBitumen(Request $request)
     {
-        $this->storeOrUpdate($request);
-    
         $bitumen = new Bitumenplant();
-        $bitumen->storage_tank = $request->storage_tank;
-        $bitumen->service_tank = $request->service_tank;
-        $bitumen->product_turnover = $request->product_turnover;
+        $this->storeOrUpdate($request,$bitumen);
         $bitumen->prime_raw_material = $request->prime_raw_material;
         $bitumen->product = $request->product;
         $bitumen->present_status = $request->present_status;    
@@ -63,36 +59,35 @@ class BitumenPlantController extends Controller
     }
 
     function updateBitumen(Request $request,$id){
-        $this->storeOrUpdate($request);
-
         $bitumen = Bitumenplant::findOrFail($id);
-        $bitumen->storage_tank = $request->storage_tank;
-        $bitumen->service_tank = $request->service_tank;
-        $bitumen->product_turnover = $request->product_turnover;
+        $this->storeOrUpdate($request,$bitumen);
         $bitumen->prime_raw_material = $request->prime_raw_material;
         $bitumen->product = $request->product;
         $bitumen->present_status = $request->present_status;    
     
-        //Previous images deleted first for new images store.
+        if($request->hasFile('images'))
+        {
         $this->businessMediaDelete($bitumen);
-        //Store new images
         $allImages = $this->uploadImages($request,'business-activities/bitumen-plant/');
         $bitumen->images = $allImages;
+        }
+
+        if(!$request->hasFile('images') && $bitumen->images){
+            $bitumen->images = $bitumen->images;
+        }
+        
         $bitumen->save();
         return redirect()->route('dashboard.previewBitumen')
             ->with('status', "Information updated successfully.");
     }
 
-    function storeOrUpdate($request)
+    function storeOrUpdate($request,$model)
     {
         $request->validate([
-            "storage_tank" => 'required',
-            "service_tank" => 'required',
-            "product_turnover" => 'required',
             "prime_raw_material" => 'required',
             "product" => 'required',
             "present_status" => 'required',
-            "images.*" => 'required|mimes:jpg,jpeg,png,webp',
+            "images.*" => $model->images ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
         ]);
     }
 }

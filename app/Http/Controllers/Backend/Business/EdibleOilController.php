@@ -14,15 +14,15 @@ class EdibleOilController extends Controller
     //coded by udayan285#
     function storeEdible(Request $request)
     {
-        $this->storeOrupdate($request);
+        $edible = new Edibleoil();
+        $this->storeOrupdate($request,$edible);
         
         $images = $this->uploadImages($request,"business-activities/edible-oil/");
         
-        Edibleoil::create([
-            "year_establishment" => $request->year_establishment,
+        $edible::create([
             "plant_manufacturer" => $request->plant_manufacturer,
             "country_origin" => $request->country_origin,
-            "existing_capacity" => $request->existing_capacity,
+            "prime_raw_material" => $request->prime_raw_material,
             "product" => $request->product,
             "utility_requirement" => $request->utility_requirement,
             "manpower_requirement" => $request->manpower_requirement,
@@ -63,17 +63,23 @@ class EdibleOilController extends Controller
 
     function  updateEdible(Request $request,$id)
     {
-        $this->storeOrupdate($request);
         $edible = Edibleoil::findOrfail($id);
+        $this->storeOrupdate($request,$edible);
 
+        if($request->hasFile('images'))
+        {
         $this->businessMediaDelete($edible);
         $images = $this->uploadImages($request,"business-activities/edible-oil/");
-
+        }
+        if(!$request->hasFile('images') && $edible->images)
+        {
+            $images = $edible->images;
+        }
+        
         $edible->update([
-            "year_establishment" => $request->year_establishment,
             "plant_manufacturer" => $request->plant_manufacturer,
             "country_origin" => $request->country_origin,
-            "existing_capacity" => $request->existing_capacity,
+            "prime_raw_material" => $request->prime_raw_material,
             "product" => $request->product,
             "utility_requirement" => $request->utility_requirement,
             "manpower_requirement" => $request->manpower_requirement,
@@ -82,16 +88,15 @@ class EdibleOilController extends Controller
         return redirect()->route('dashboard.previewEdible')->with(['status' => 'Edible Oil Updated Successfully']);
     }
 
-    function storeOrupdate($request){
+    function storeOrupdate($request,$model){
         $request->validate([
-            "year_establishment" => "required",
             "plant_manufacturer" => "required",
             "country_origin" => "required",
-            "existing_capacity" => "required",
+            "prime_raw_material" => "required",
             "product" => "required",
             "utility_requirement" => "required",
             "manpower_requirement" => "required",
-            "images.*" => "required|mimes:png,jpg,jpeg,webp"
+            "images.*" => $model->images ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
         ]);
     }
 }

@@ -18,13 +18,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif 
-    @error('year_establishment')
-    <div class="alert alert-danger">{{ $message }}</div>
-    @enderror  
-    <li>
-        <label for="textArea">Year of Establishment</label>
-        <textarea id="textArea" name="year_establishment" rows="4" cols="50">{{ $edibleEdit ? $edibleEdit->year_establishment : '' }}</textarea>
-     </li>
+
     @error('plant_manufacturer')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror 
@@ -39,12 +33,12 @@
       <label for="textArea">Country of Origin</label>
       <textarea id="textArea" name="country_origin" rows="4" cols="50">{{ $edibleEdit ? $edibleEdit->country_origin : '' }}</textarea>
     </li>
-    @error('existing_capacity')
+    @error('prime_raw_material')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror 
     <li>
-        <label for="textArea">Existing Capacity (2 Shifts)</label>
-        <textarea id="textArea" name="existing_capacity" rows="4" cols="50">{{ $edibleEdit ? $edibleEdit->existing_capacity : '' }}</textarea>
+        <label for="textArea">Prime Raw Material</label>
+        <textarea id="textArea" name="prime_raw_material" rows="4" cols="50">{{ $edibleEdit ? $edibleEdit->prime_raw_material : '' }}</textarea>
     </li>
 
     @error('product')

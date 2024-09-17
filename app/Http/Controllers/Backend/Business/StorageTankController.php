@@ -15,13 +15,10 @@ class StorageTankController extends Controller
     function storeStorageTank(Request $request)
     {
 
-        $this->validations($request);
-    
         $storage = new Storagetank();
+        $this->validations($request,$storage);
+    
         
-        $storage->year_establishment = $request->year_establishment;
-        $storage->storage_capacity = $request->storage_capacity;
-        $storage->product_turnover = $request->product_turnover;
         $storage->inward_facility = $request->inward_facility;
         $storage->jetty_facility = $request->jetty_facility;
         $storage->pipeline_facility = $request->pipeline_facility;
@@ -75,13 +72,10 @@ class StorageTankController extends Controller
 
     function updateStorage(Request $request,$id){
         
-        $this->validations($request);
-
         $storage = StorageTank::findOrFail($id);
+        $this->validations($request,$storage);
 
-        $storage->year_establishment = $request->year_establishment;
-        $storage->storage_capacity = $request->storage_capacity;
-        $storage->product_turnover = $request->product_turnover;
+
         $storage->inward_facility = $request->inward_facility;
         $storage->jetty_facility = $request->jetty_facility;
         $storage->pipeline_facility = $request->pipeline_facility;
@@ -92,23 +86,28 @@ class StorageTankController extends Controller
         $storage->manpower_requirement = $request->manpower_requirement;
         $storage->opportunity = $request->opportunity;
         $storage->bonded_facility = $request->bonded_facility;
+
+        if($request->hasFile('images')){
         //Delete previous images first
         $this->businessMediaDelete($storage);
         //New images upload again
         $allImages = $this->uploadImages($request,'business-activities/storage-tank/');
         $storage->images = $allImages;
+        }
+
+        if(!$request->hasFile('images') && $storage->images){
+            $storage->images = $storage->images;
+        }
+
         $storage->save();
 
         return redirect()->route('dashboard.preview')
             ->with('status', "Information updated successfully.");
     }
 
-    function validations($request)
+    function validations($request,$model)
     {
         $request->validate([
-            "year_establishment" => 'required',
-            "storage_capacity" => 'required',
-            "product_turnover" => 'required',
             "inward_facility" => 'required',
             "jetty_facility" => 'required',
             "pipeline_facility" => 'required',
@@ -119,7 +118,7 @@ class StorageTankController extends Controller
             "manpower_requirement" => 'required',
             "opportunity" => 'required',
             "bonded_facility" => 'required',
-            "images.*" => 'required|mimes:jpg,jpeg,png,webp'
+            "images.*" => $model->images ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
         ]);
     }
 

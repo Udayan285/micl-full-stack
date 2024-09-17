@@ -24,6 +24,18 @@ trait MediaDeleteTrait
             }              
     }
 
+   
+    function generalMediaDelete($model)
+    {
+        if ($model->image) {  
+                $image = $model->image;         
+                $delete = public_path($image);
+                if(file_exists($delete)){
+                    unlink($delete);
+                } 
+            }              
+    }
+
     function businessMediaDelete($model)
     {
         if ($model->images) {           

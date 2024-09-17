@@ -19,29 +19,6 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       @endif
-      @error('year_establishment')
-      <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
-      <li>
-        <label for="textArea">Year of Establishment</label>
-        <textarea name="year_establishment" id="textArea" rows="4" cols="50"></textarea>
-     </li>
-
-     @error('storage_capacity')
-      <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
-     <li>
-      <label for="textArea">Storage Capacity (Existing)</label>
-      <textarea name="storage_capacity" id="textArea" rows="4" cols="50"></textarea>
-     </li>
-
-     @error('product_turnover')
-      <div class="alert alert-danger">{{ $message }}</div>
-      @enderror
-    <li>
-      <label for="textArea">Product Turnover</label>
-      <textarea name="product_turnover" id="textArea" rows="4" cols="50"></textarea>
-    </li>
     
     @error('inward_facility')
       <div class="alert alert-danger">{{ $message }}</div>

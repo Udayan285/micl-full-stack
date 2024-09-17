@@ -46,7 +46,7 @@
                         @enderror
                         
                         <div class="mb-3">
-                            <img id="manager_image_main"  src="{{ $mdEdit ? asset('md/'.$mdEdit->image_url) : '' }}" style="height: 100px; width:100px;" alt="MD Image">
+                            <img id="manager_image_main"  src="{{ asset('md-profile/'.$mdEdit->image_url) }}" style="height: 100px; width:100px;" alt="MD Image">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Update Profile</button>

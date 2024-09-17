@@ -18,13 +18,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
-    @error('year_establishment')
-    <div class="alert alert-danger">{{ $message }}</div>
-    @enderror  
-    <li>
-        <label for="textArea">Year of Establishment</label>
-        <textarea id="textArea" name="year_establishment" rows="4" cols="50">{{ $super ? $super->year_establishment : '' }}</textarea>
-     </li>
+
     @error('plant_manufacturer')
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror 
@@ -54,13 +48,6 @@
       <textarea id="textArea" name="product" rows="4" cols="50">{{ $super ? $super->product : '' }}</textarea>
     </li>
 
-    @error('existing_capacity')
-    <div class="alert alert-danger">{{ $message }}</div>
-    @enderror 
-    <li>
-        <label for="textArea">Existing Capacity</label>
-        <textarea id="textArea" name="existing_capacity" rows="4" cols="50">{{ $super ? $super->existing_capacity : '' }}</textarea>
-    </li>
 
     @error('utility_requirement')
     <div class="alert alert-danger">{{ $message }}</div>
@@ -83,80 +70,81 @@
  {{-- images attchment --}}
  @error('images.*')
  <div class="alert alert-danger">{{ $message }}</div>
-@enderror
-<li>
- <label for="images">Select Multiple Images</label>
- <input name="images[]" multiple id="ImageFile" type="file"></input>
-</li>
+  @enderror
+  <li>
+  <label for="images">Select Multiple Images</label>
+  <input name="images[]" multiple id="ImageFile" type="file"></input>
+  </li>
 
-{{-- images show here via ajax --}}
-<li>
- <label for="">All Images</label>
- <div>
+  {{-- images show here via ajax --}}
+  <li>
+  <label for="">All Images</label>
+  <div>
+      <div class="row">
+          @if($super && $super->images)
+              @php
+                  $images = explode('|', $super->images); // Split string into an array using the pipe as a delimiter
+              @endphp
+              @foreach($images as $image)
+                  <div class="col-md-4 Imageview" style="margin-bottom: 10px;">
+                      <img src="{{ asset($image) }}" style="height:100px;width:100px;" alt="Image" class="img-fluid">
+                  </div>
+              @endforeach
+          @endif
+      </div>
     <div class="row">
-        @if($super && $super->images)
-            @php
-                $images = explode('|', $super->images); // Split string into an array using the pipe as a delimiter
-            @endphp
-            @foreach($images as $image)
-                <div class="col-md-4 Imageview" style="margin-bottom: 10px;">
-                    <img src="{{ asset($image) }}" style="height:100px;width:100px;" alt="Image" class="img-fluid">
-                </div>
-            @endforeach
-        @endif
+      <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+      <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+      <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+      <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+      <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+      <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+      <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+      <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
+      <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
     </div>
-   <div class="row">
-     <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-     <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-     <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-     <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-     <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-     <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-     <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-     <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-     <div class="col-md-4 Imageview" style="margin-bottom: 10px;"></div>
-   </div>
- </div>
-</li>
+  </div>
+  </li>
 
- <li>
-   <button id="submit" type="submit">Update Now</button>
- </li>
-</ul>
-</form>
+  <li>
+    <button id="submit" type="submit">Update Now</button>
+  </li>
+  </ul>
+  </form>
 </div>
 
-{{-- Custom javascript here for media upload --}}
+
+  {{-- Custom javascript here for media upload --}}
 @push('homeAboutImage')
 <script>
-let uploadImg = document.querySelector('#ImageFile');
-let imageViews = document.querySelectorAll('.Imageview');
+  let uploadImg = document.querySelector('#ImageFile');
+  let imageViews = document.querySelectorAll('.Imageview');
 
-function imgPreviewer(event) {
-   let files = event.target.files;
+  function imgPreviewer(event) {
+    let files = event.target.files;
 
-   // Clear previous previews
-   imageViews.forEach(view => view.innerHTML = '');
+    // Clear previous previews
+    imageViews.forEach(view => view.innerHTML = '');
 
-   // Loop through each selected file
-   for (let i = 0; i < files.length; i++) {
-       let url = URL.createObjectURL(files[i]);
-       let imgElement = document.createElement('img');
-       imgElement.src = url;
-       imgElement.style.height = '100px';
-       imgElement.style.width = '100px';
-       imgElement.style.marginBottom = '10px';
-       
-       // Append the image to the corresponding .Imageview container
-       if (imageViews[i]) {
-           imageViews[i].appendChild(imgElement);
-       } else {
-           // If more images are selected than available containers, you can add more dynamically or handle accordingly
-           console.log("More images selected than available containers.");
-       }
-   }
-}
-uploadImg.addEventListener('change', imgPreviewer);
+    // Loop through each selected file
+    for (let i = 0; i < files.length; i++) {
+        let url = URL.createObjectURL(files[i]);
+        let imgElement = document.createElement('img');
+        imgElement.src = url;
+        imgElement.style.height = '100px';
+        imgElement.style.width = '100px';
+        imgElement.style.marginBottom = '10px';
+        
+        // Append the image to the corresponding .Imageview container
+        if (imageViews[i]) {
+            imageViews[i].appendChild(imgElement);
+        } else {
+            // If more images are selected than available containers, you can add more dynamically or handle accordingly
+            console.log("More images selected than available containers.");
+        }
+    }
+  }
+  uploadImg.addEventListener('change', imgPreviewer);
 </script>
 @endpush
 

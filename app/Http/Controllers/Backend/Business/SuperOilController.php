@@ -14,16 +14,15 @@ class SuperOilController extends Controller
     //Coded by Udayan285#
     function storeSuper(Request $request)
     {
-        $this->storeOrUpdate($request);
+        $superOil = new Superoil();
+        $this->storeOrUpdate($request,$superOil);
         $images = $this->uploadImages($request,"business-activities/super-oil/");
 
-        Superoil::create([
-            "year_establishment" => $request->year_establishment,
+        $superOil::create([
             "plant_manufacturer" => $request->plant_manufacturer,
             "country_origin" => $request->country_origin,
             "prime_raw_material" => $request->prime_raw_material,
             "product" => $request->product,
-            "existing_capacity" => $request->existing_capacity,
             "utility_requirement" => $request->utility_requirement,
             "manpower_requirement" => $request->manpower_requirement,
             "images" => $images
@@ -63,16 +62,22 @@ class SuperOilController extends Controller
     function updateSuper(Request $request, $id)
     {
         $super = Superoil::findOrfail($id);
-        $this->storeOrUpdate($request);
+        $this->storeOrUpdate($request,$super);
+
+        if($request->hasFile('images')){
         $this->businessMediaDelete($super);
         $images = $this->uploadImages($request,"business-activities/super-oil/");
+        }
+
+        if(!$request->hasFile('images') && $super->images){
+            $images = $super->images;
+        }
+        
         $super->update([
-            "year_establishment" => $request->year_establishment,
             "plant_manufacturer" => $request->plant_manufacturer,
             "country_origin" => $request->country_origin,
             "prime_raw_material" => $request->prime_raw_material,
             "product" => $request->product,
-            "existing_capacity" => $request->existing_capacity,
             "utility_requirement" => $request->utility_requirement,
             "manpower_requirement" => $request->manpower_requirement,
             "images" => $images
@@ -81,18 +86,16 @@ class SuperOilController extends Controller
 
     }
 
-    function storeOrUpdate($request)
+    function storeOrUpdate($request,$model)
     {
         $request->validate([
-            "year_establishment" => "required",
             "plant_manufacturer" => "required",
             "country_origin" => "required",
             "prime_raw_material" => "required",
             "product" => "required",
-            "existing_capacity" => "required",
             "utility_requirement" => "required",
             "manpower_requirement" => "required",
-            "images.*" => "required|mimes:jpg,jpeg,png,webp"
+            "images.*" => $model->images ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
         ]);
     }
 }

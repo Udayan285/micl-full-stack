@@ -11,22 +11,13 @@
 
       <!-- innovation_gallery -->
       <div class="innovation_gallery d-flex gap-4 container col-lg-12">
-        @foreach ($storages as $key=>$data)
+        @forelse($storages as $key=>$data)
         <!-- Innovation start -->
         <div class="py-5 col-lg-4 innovation">
           <div class="row">
             <div class="col-lg-12 col-sm-12">
               <div class="row">
                 <ul class="list-group">
-                  <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Year of Establishment :</span>{{ $data->year_establishment }}
-                  </li>
-                  <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Storage Capacity (Existing) :</span>{{ $data->storage_capacity }}
-                  </li>
-                  <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Product Turnover :</span>{{ $data->product_turnover }}
-                  </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
                     <span>Inward Facility :</span>{{ $data->inward_facility  }}
                   </li>
@@ -84,7 +75,14 @@
           </div>
         </div>
         <!-- Gallery End -->
-        @endforeach
+        @empty
+        <div class="col-lg-12">
+          <div class="alert alert-warning" role="alert">
+            Nothing to preview
+          </div>
+        </div>
+
+        @endforelse
       </div>
 @endsection
 

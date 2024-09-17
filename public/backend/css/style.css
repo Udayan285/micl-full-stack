@@ -8,6 +8,7 @@
   color: #17202A;
 } */
 
+
 #title{
   text-align: center;
   font-family: 'Open Sans', sans-serif;
@@ -208,6 +209,12 @@ select{
     min-height: 100vh;
     background: #FFFFFF;
     transition: 0.5s;
+}
+
+
+/* Align footer text */
+.align-left-item{
+    text-align: left !important;
 }
 
 @media (min-width: 992px) {

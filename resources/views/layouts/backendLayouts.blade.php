@@ -53,7 +53,7 @@
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
                         <a href="{{ route('dashboard.getUserProfile') }}">
-                        <img class="rounded-circle" src="{{ asset('backend/img/udayan.png') }}" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle" src="{{ asset(auth()->user()->image_url) }}" alt="" style="width: 40px; height: 40px;">
                         </a>
                         
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
@@ -61,12 +61,23 @@
                     </div>
                     <div class="ms-3">
                         <a href="{{ route('dashboard.getUserProfile') }}">
-                        <h6 class="mb-0">{{ auth()->user() ? auth()->user()->first_name : "Udayan Singh" }}</h6>
+                        <h6 class="mb-0">{{ str(auth()->user()->first_name)->headline() }}</h6>
+                        @role(['admin', 'moderator'])
                         <span>Admin</span>
+                        @endrole
+                        @if(!Auth::user()->hasAnyRole(['admin', 'moderator']))
+                        <span>User</span>
+                        @endif
                         </a>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
+                    {{-- Role test here --}}
+                    @if(!Auth::user()->hasAnyRole(['admin', 'moderator']))
+                    <a href="{{ route('dashboard.all') }}" class="nav-item nav-link {{ request()->is('dashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    @endif
+
+                    @role('admin|moderator')
                     <a href="{{ route('dashboard.all') }}" class="nav-item nav-link {{ request()->is('dashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="{{ route('dashboard.heroBanner') }}" class="nav-item nav-link {{ request()->is('dashboard/hero-banner') ? 'active' : '' }}"><i class="fas fa-home"></i>Hero Banner</a>
                    
@@ -102,6 +113,9 @@
                             <a href="{{ route('dashboard.bottleMaking') }}" class="dropdown-item {{ request()->is('dashboard/bottle-making','dashboard/bottle-making/preview') ? 'active' : '' }}">Bottle making</a>                           
                         </div>
                     </div>
+                    
+                    {{-- Role test here --}}
+
 
                     <a href="{{ route('dashboard.area') }}" class="nav-item nav-link {{ request()->is('dashboard/area') ? 'active' : '' }}"><i class="fas fa-street-view"></i>Area</a>
                     <a href="{{ route('dashboard.contactPage') }}" class="nav-item nav-link {{ request()->is('dashboard/contact-page') ? 'active' : '' }}"><i class="fas fa-address-book"></i>Contact Us</a>
@@ -109,7 +123,11 @@
                     <a href="{{ route('dashboard.footer') }}" class="nav-item nav-link {{ request()->is('dashboard/footer') ? 'active' : '' }}"><i class="fas fa-hourglass-end"></i>Footer</a>
                     <a href="{{ route('dashboard.getUserManagement') }}" class="nav-item nav-link {{ request()->is('dashboard/user-management') ? 'active' : '' }}"><i class="fas fa-users"></i>Role</a>
                     <a href="{{ route("auth.logout") }}" class="nav-item nav-link "><i class="fas fa-sign-out-alt"></i>Logout</a>
-
+                    @endrole
+                    
+                    @if(!Auth::user()->hasAnyRole(['admin', 'moderator']))
+                    <a href="{{ route("auth.logout") }}" class="nav-item nav-link "><i class="fas fa-sign-out-alt"></i>Logout</a>
+                    @endif
                 </div>
             </nav>
         </div>

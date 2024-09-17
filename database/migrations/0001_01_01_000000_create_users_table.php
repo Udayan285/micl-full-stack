@@ -16,8 +16,9 @@ return new class extends Migration
             $table->string('slug');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('image_url')->nullable();
             $table->string('email')->unique();
+            $table->string('contact')->nullable();
+            $table->string('image_url')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

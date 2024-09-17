@@ -16,9 +16,9 @@ class ManagerController extends Controller
     function storeMD(Request $request)
     {
 
-        $this->validations($request);
-        $image = $this->generalMediaUpload($request,"md-profile/");
         $manager = new Manager();
+        $this->validations($request,$manager);
+        $image = $this->generalMediaUpload($request,"md-profile/");
         $manager->name = $request->name;
         $manager->description = $request->description;
         $manager->image_url = $image;
@@ -43,13 +43,23 @@ class ManagerController extends Controller
     function updateMD(Request $request, $id) 
     {
         
-        $this->validations($request);
         $mdUpdate = Manager::findOrfail($id);
-        $this->updateDeleteMedia($mdUpdate);
-        $image = $this->generalMediaUpload($request,"md-profile/");
+        $this->validations($request,$mdUpdate);
         $mdUpdate->name = $request->name;
         $mdUpdate->description = $request->description;
+
+        if($request->hasFile('image'))
+        {
+        $this->updateDeleteMedia($mdUpdate);
+        $image = $this->generalMediaUpload($request,"md-profile/");
         $mdUpdate->image_url = $image;
+        }
+
+        if(!$request->hasFile('image') && $mdUpdate->image_url)
+        {
+            $mdUpdate->image_url = $mdUpdate->image_url;
+        }
+
         $mdUpdate->save();
     
         return redirect()->route('dashboard.mdPage')
@@ -64,12 +74,12 @@ class ManagerController extends Controller
         return redirect()->back()->with('status', 'Status updated successfully.');
     }
 
-    function validations($request)
+    function validations($request,$model)
     {
         $request->validate([
             'name' => 'required',
             'description' => 'required', 
-            'image' => 'required|mimes:png,jpg,jpeg',
+            "image" => $model->image_url ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
         ]); 
     }
 }

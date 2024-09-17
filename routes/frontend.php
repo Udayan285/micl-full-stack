@@ -259,5 +259,6 @@ route::prefix("/dashboard")->name('dashboard.')->controller(UserManagementContro
     //user management controller here..(#udayan285#)
     route::get('/user-management','getUserManagement')->name('getUserManagement');
     route::get('/user-profile','getUserProfile')->name('getUserProfile');
-    route::get('/edit-user-profile/{id}','editUserProfile')->name('editUserProfile');
+    route::put('/update-user-profile/{id}','updateUserProfile')->name('updateUserProfile');
+    route::put('/update-user-password/{id}','UpdatePassword')->name('UpdatePassword');
 });

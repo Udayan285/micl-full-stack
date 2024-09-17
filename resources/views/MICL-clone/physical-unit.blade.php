@@ -12,17 +12,13 @@
 
       <!-- innovation_gallery -->
       <div class="innovation_gallery d-flex gap-4 container">
-        @foreach ($physical as $data)
+        @forelse($physical as $data)
         <!-- Innovation start -->
         <div class="py-5 col-lg-4 innovation">
           <div class="row">
             <div class="col-lg-12 col-sm-12">
               <div class="row">
                 <ul class="list-group">
-                  <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Year of Establishment :</span>
-                    {{ $data->year_establishment }}
-                  </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
                     <span>Plant Manufacturer :</span>
                     {{ $data->plant_manufacturer }}
@@ -38,9 +34,6 @@
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
                     <span>Pack Size :</span>{{ $data->pack_size }}
-                  </li>
-                  <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Existing Capacity :</span>{{ $data->existing_capacity }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
                     <span>Utility Requirement :</span>{{ $data->utility_requirement }}
@@ -79,7 +72,14 @@
           </div>
         </div>
         <!-- Gallery End -->
-        @endforeach
+        @empty
+        <div class="col-lg-12">
+          <div class="alert alert-warning" role="alert">
+            Nothing to preview
+          </div>
+        </div>
+
+        @endforelse
       </div>
 @endsection
    

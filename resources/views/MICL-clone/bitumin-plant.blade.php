@@ -18,17 +18,6 @@
               <div class="row">
                 <ul class="list-group">
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Storage Tank capacity (Heated) :</span>
-                    {{ $data->storage_tank }}
-                  </li>
-                  <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Service (Delivery) Tank capacity :</span>
-                    {{ $data->service_tank }}
-                  </li>
-                  <li class="list-group-item px-3 border-0 rounded-3 mb-2">
-                    <span>Product Turnover (Yearly) :</span>{{ $data->product_turnover }}
-                  </li>
-                  <li class="list-group-item px-3 border-0 rounded-3 mb-2">
                     <span>Prime Raw Material :</span>{{ $data->prime_raw_material }}
                   </li>
                   <li class="list-group-item px-3 border-0 rounded-3 mb-2">

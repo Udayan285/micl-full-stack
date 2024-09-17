@@ -17,23 +17,12 @@
             <div class="col-lg-12 col-sm-12">
               <div class="row">
                 <ul class="list-group">
-                  <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Year of Establishment :</span>{{ $data->year_establishment }}
-                  </li>
+               
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
                     <span>Plant Manufacturer :</span>{{ $data->plant_manufacturer }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
                     <span>Country of Origin :</span>{{ $data->country_origin }}
-                  </li>
-                  <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Injection Machine :</span>{{ $data->injection_machine }}
-                  </li>
-                  <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Blowing Machine :</span>{{ $data->blowing_machine }}
-                  </li>
-                  <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
-                    <span>Existing Capacity :</span>{{ $data->existing_capacity }}
                   </li>
                   <li class="list-group-item  px-3 border-0 rounded-3 mb-2">
                     <span>Prime Raw Material :</span>{{ $data->prime_raw_material }}

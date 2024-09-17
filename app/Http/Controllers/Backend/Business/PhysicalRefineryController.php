@@ -11,25 +11,24 @@ use Illuminate\Http\Request;
 class PhysicalRefineryController extends Controller
 {
     use BusinessMediaUploadTrait,MediaDeleteTrait;
-
+    //coded by udayan285#
     function storePhysical(Request $request)
     {
-
-        $this->validations($request);
+        $physical = new Physicalrefinery;
+        
+        $this->validations($request,$physical);
         $images = $this->uploadImages($request,'business-activities/physical-refinery/');
 
-        Physicalrefinery::create([
-            'year_establishment' => $request->year_establishment,
+        $physical::create([
             'plant_manufacturer' => $request->plant_manufacturer,
             'country_origin' => $request->country_origin,
             'prime_raw_material' => $request->prime_raw_material,
             'product' => $request->product,
             'pack_size' => $request->pack_size,
-            'existing_capacity' => $request->existing_capacity,
             'utility_requirement' => $request->utility_requirement,
             'manpower_requirement' => $request->manpower_requirement,
             'present_status' => $request->present_status,
-            'images' => $images// Save the images paths
+            'images' => $images,
         ]);
         return redirect()->back()->with('status', "Physical Refinery Unit Submitted Successfully.");
 
@@ -67,21 +66,25 @@ class PhysicalRefineryController extends Controller
 
     function updatePhysical(Request $request,$id)
     {
-        $this->validations($request);
-
+        
         $physical = Physicalrefinery::find($id);
+        $this->validations($request, $physical);
 
+        if($request->hasFile('images')){
         $this->businessMediaDelete($physical);
         $images = $this->uploadImages($request,'business-activities/physical-refinery/');
+        }
+        if(!$request->hasFile('images') && $physical->images)
+        {
+            $images = $physical->images;
+        }
         
         $physical->update([
-            "year_establishment" => $request->year_establishment,
             "plant_manufacturer" => $request->plant_manufacturer,
             "country_origin" => $request->country_origin,
             "prime_raw_material" => $request->prime_raw_material,
             "product" => $request->product,
             "pack_size" => $request->pack_size,
-            "existing_capacity" => $request->existing_capacity,
             "utility_requirement" => $request->utility_requirement,
             "manpower_requirement" => $request->manpower_requirement,
             "present_status" => $request->present_status,
@@ -93,20 +96,18 @@ class PhysicalRefineryController extends Controller
         
     }
 
-    function validations($request)
+    function validations($request,$model)
     {
         $request->validate([
-            "year_establishment" => "required",
             "plant_manufacturer" => "required",
             "country_origin" => "required",
             "prime_raw_material" => "required",
             "product" => "required",
             "pack_size" => "required",
-            "existing_capacity" => "required",
             "utility_requirement" => "required",
             "manpower_requirement" => "required",
             "present_status" => "required",
-            "images.*" =>'required|mimes:jpg,jpeg,png,webp',
+            "images.*" => $model->images ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
         ]);
     }
 }

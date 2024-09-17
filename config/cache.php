@@ -91,6 +91,11 @@ return [
 
     ],
 
+
+    //changes
+    'default' => env('CACHE_DRIVER', 'file'),
+
+
     /*
     |--------------------------------------------------------------------------
     | Cache Key Prefix

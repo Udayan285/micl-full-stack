@@ -11,7 +11,7 @@
                     <div class="row justify-content-start">
                         <div class="col-10 col-lg-8">
                              <h1 class="display-2 text-white animated slideInDown mb-4">{{ $data->title }}</h1>
-                            <p class="fs-5 fw-medium text-white mb-4 pb-2">{{ $data->description }}</p>
+                            <h3 class="fs-5 fw-medium text-white mb-4 pb-2">{!! $data->description !!}</h3>
                             
                         </div>
                     </div>

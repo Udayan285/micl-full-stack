@@ -78,4 +78,35 @@
             </div>
         </div>
         <!-- about End -->
+
+        <!-- business activities Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        @isset($homeCorporate)
+                        <h1 class="mb-4">{{ $homeCorporate->title }}</h1>
+                        <p>{!! $homeCorporate->description !!}</p>
+                        @else
+                            <h1 class="mb-4">Business activities</h1>
+                            <p>The company is engaged in Tank Terminal Services for Storage & Delivery of Bulk Petroleum Bitumen, HFO, Edible Oil items and manufacturing units of Edible Oil.
+                            </p>
+                        @endisset
+                    </div>
+                    <div class="col-lg-6 about-img wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                            @isset($homeCorporate)
+                                <img class="img-fluid w-75 bg-light p-3" src="{{ asset('homecorporate/'.$homeCorporate->image_url) }}" alt="Home Page Corporate Image">
+                            @else
+                                <img class="img-fluid w-75 bg-light p-3" src="{{ asset('frontend/img/MEB/bitumin storages/Bitumen Storage.jpg') }}" alt="Corporate Image">
+                            @endisset
+                            </div>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- business activites End -->
 @endsection

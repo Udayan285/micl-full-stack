@@ -98,24 +98,17 @@ class BackendController extends Controller
     function showBottleMaking(){
         return view('backend.business.bottle.bottleMaking');
     }
-
-
     //ends here all menu items page show..
-
-
 
     
     //Hero Banner detail store/update/delete here..
     function heroStore(Request $request)
     {
 
-        $this->validations($request);
-
         $banner = new Banner();
+        $this->validations($request,$banner);
         $banner->title = $request->banner_title;
         $banner->description = $request->banner_description;
-
-
         
         //Checking old slug exists or not
         $oldSlug = Banner::where('slug','LIKE','%'.str($request->banner_title)->slug().'%')->count();
@@ -127,8 +120,6 @@ class BackendController extends Controller
             $slug = str($request->banner_title)->slug();
             $banner->slug = $slug;
         }
-        //$slug = $this->slugGenerator($request,Banner::class);
-        //$banner->slug = $slug;
 
         //image upload related task written here...
         $imgName = time().'.'.$request->banner_image->extension();
@@ -161,12 +152,11 @@ class BackendController extends Controller
     function updateHero(Request $request, $slug)
     {
         
-        $this->validations($request);
         $bannerUpdate = Banner::where('slug',$slug)->first();
+        $this->validations($request,$bannerUpdate);
         $bannerUpdate->title = $request->banner_title;
         $bannerUpdate->description = $request->banner_description;
         
-        //banner slug updated
         //Checking old slug exists or not
          $oldSlug = Banner::where('slug','LIKE','%'.str($request->banner_title)->slug().'%')->count();
          if($oldSlug > 0){
@@ -179,15 +169,18 @@ class BackendController extends Controller
          }
 
 
-       //remove from public folder
-       $this->deleteMedia($bannerUpdate,'images/');
-        
+        if($request->hasFile('banner_image')){
+        $this->deleteMedia($bannerUpdate,'images/');
         $imageName = time().'.'.$request->banner_image->extension();
         $request->banner_image->move(public_path('images'), $imageName);
         $bannerUpdate->image_url = $imageName;
-        $bannerUpdate->save();
-        
+        }
 
+        if(!$request->hasFile('banner_image') && $bannerUpdate->image_url){
+            $bannerUpdate->image_url = $bannerUpdate->image_url;
+        }
+
+        $bannerUpdate->save();       
         $banners = Banner::all();
 
         return redirect()->route('dashboard.heroBanner',compact('banners'))
@@ -209,12 +202,12 @@ class BackendController extends Controller
         return redirect()->back()->with('status',"Status updated successfully.");
     }
 
-    function validations($request)
+    function validations($request,$model)
     {
         $request->validate([
             "banner_title" => "required",
             "banner_description" => "required",
-            "banner_image" => "required|mimes:png,jpg,jpeg,svg"
+            "banner_image" => $model->image_url ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
         ]);
     }
 
@@ -222,9 +215,10 @@ class BackendController extends Controller
     //Home Corporate detail store/update/delete here..
     function homeCorporateStore(Request $request)
     {
-        $this->validationCorpo($request);
-
+        
         $homecorporate = new Homecorporate();
+
+        $this->validationCorpo($request,$homecorporate);
 
         $homecorporate->title = $request->home_corporate_title;
         $homecorporate->description = $request->home_corporate_description;
@@ -275,13 +269,11 @@ class BackendController extends Controller
     function updateHomeCorpo(Request $request, $slug)
     {
 
-           $this->validationCorpo($request);
-    
             $homeCorpoUpdate = Homecorporate::where('slug',$slug)->first();
+            $this->validationCorpo($request,$homeCorpoUpdate);
             $homeCorpoUpdate->title = $request->home_corporate_title;
             $homeCorpoUpdate->description = $request->home_corporate_description;
             
-            //banner slug updated
             //Checking old slug exists or not
              $oldSlug = Homecorporate::where('slug','LIKE','%'.str($request->home_corporate_title)->slug().'%')->count();
              if($oldSlug > 0){
@@ -293,12 +285,20 @@ class BackendController extends Controller
                  $homeCorpoUpdate->slug = $slug;
              }
     
+            if ($request->hasFile('home_corporate_image')) {
             //remove from public folder
             $this->deleteMedia($homeCorpoUpdate,'homecorporate/');
             
             $imageName = time().'.'.$request->home_corporate_image->extension();
             $request->home_corporate_image->move(public_path('homecorporate'), $imageName);
             $homeCorpoUpdate->image_url = $imageName;
+            }
+
+            if (!$request->hasFile('home_corporate_image') && $homeCorpoUpdate->image_url) {
+                // No new image, old image is retained
+            $homeCorpoUpdate->image_url = $homeCorpoUpdate->image_url;
+            }
+
             $homeCorpoUpdate->save();
             
     
@@ -326,12 +326,12 @@ class BackendController extends Controller
         return redirect()->back()->with('status',"Status updated successfully.");
     }
 
-    function validationCorpo($request)
+    function validationCorpo($request,$model)
     {
         $request->validate([
             "home_corporate_title" => "required",
             "home_corporate_description" => "required",
-            "home_corporate_image" => "required|mimes:png,jpg,jpeg,svg"
+            "home_corporate_image" => $model->image_url ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
         ]);
     }
 }

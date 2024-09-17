@@ -14,17 +14,13 @@ class BottleMakingController extends Controller
     //Coded by #udayan285
     function storeBottle(Request $request)
     {
-        $this->validationStoreUpdate($request);
-
+        $bottle = new Bottlemaking();
+        $this->validationStoreUpdate($request,$bottle);
         $images = $this->uploadImages($request,'business-activities/bottle-making/');
         
-        Bottlemaking::create([
-            "year_establishment" => $request->year_establishment,
+        $bottle::create([
             "plant_manufacturer" => $request->plant_manufacturer,
             "country_origin" => $request->country_origin,
-            "injection_machine" => $request->injection_machine,
-            "blowing_machine" => $request->blowing_machine,
-            "existing_capacity" => $request->existing_capacity,
             "prime_raw_material" => $request->prime_raw_material,
             "product" => $request->product,
             "utility_requirement" => $request->utility_requirement,
@@ -64,42 +60,42 @@ class BottleMakingController extends Controller
 
     function updateBottle(Request $request, $id)
     {
-        $this->validationStoreUpdate($request);
         $bottle = Bottlemaking::findOrfail($id);
+        $this->validationStoreUpdate($request,$bottle);
+
+        if($request->hasFile('images'))
+        {
         $this->businessMediaDelete($bottle);
         $images = $this->uploadImages($request,"business-activities/bottle-making/");
+        }
+
+        if(!$request->hasFile('images') && $bottle->images){
+            $images = $bottle->images;
+        }
         $bottle->update([
-            "year_establishment" => $request->year_establishment,
             "plant_manufacturer" => $request->plant_manufacturer,
             "country_origin" => $request->country_origin,
-            "injection_machine" => $request->injection_machine,
-            "blowing_machine" => $request->blowing_machine,
-            "existing_capacity" => $request->existing_capacity,
             "prime_raw_material" => $request->prime_raw_material,
             "product" => $request->product,
             "utility_requirement" => $request->utility_requirement,
             "manpower_requirement" => $request->manpower_requirement,
             "images" => $images,
         ]);
-        return back()->with(['status' => 'Bottle Making Details Updated Successfully']);
-
+      
+        return redirect()->route('dashboard.previewBottle')->with(['status' => 'Bottle Making Details Updated Successfully']);
     }
 
     
-    function validationStoreUpdate($request)
+    function validationStoreUpdate($request,$model)
     {
         $request->validate([
-            "year_establishment" => "required",
             "plant_manufacturer" => "required",
             "country_origin" => "required",
-            "injection_machine" => "required",
-            "blowing_machine" => "required",
-            "existing_capacity" => "required",
             "prime_raw_material" =>"required",
             "product" => "required",
             "utility_requirement" => "required",
             "manpower_requirement" => "required",
-            "images.*" => "required|mimes:jpg,jpeg,png,webp"
+            "images.*" => $model->images ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
         ]);    
     }
 }

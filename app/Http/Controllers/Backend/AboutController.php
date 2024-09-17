@@ -17,8 +17,8 @@ class AboutController extends Controller
             //Home Page About detail store/update/delete here..(#udayan285#)
             function storeHomeAbout(Request $request){
                 
-                $this->validations($request);
                 $homeabout = new Homeabout();
+                $this->validations($request,$homeabout);
         
                 $homeabout->title = $request->home_about_title;
                 $homeabout->description = $request->home_about_description;
@@ -63,13 +63,11 @@ class AboutController extends Controller
             function updateHomeAbout(Request $request, $slug)
             {
         
-                    
-                    $this->validations($request);
                     $homeAboutUpdate = Homeabout::where('slug',$slug)->first();
+                    $this->validations($request,$homeAboutUpdate);
                     $homeAboutUpdate->title = $request->home_about_title;
                     $homeAboutUpdate->description = $request->home_about_description;
                     
-                    //home about slug updated
                     //Checking old slug exists or not
                      $oldSlug = Homeabout::where('slug','LIKE','%'.str($request->home_about_title)->slug().'%')->count();
                      if($oldSlug > 0){
@@ -81,14 +79,17 @@ class AboutController extends Controller
                          $homeAboutUpdate->slug = $slug;
                      }
             
-            
-                    //remove from public folder
+                    if($request->hasFile('home_about_image')){
                     $this->deleteMedia($homeAboutUpdate,'about-us/');
-                    
-                    
                     $imageName = time().'.'.$request->home_about_image->extension();
                     $request->home_about_image->move(public_path('about-us'), $imageName);
                     $homeAboutUpdate->image_url = $imageName;
+                    }
+
+                    if(!$request->hasFile('home_about_image') && $homeAboutUpdate->image_url){
+                        $homeAboutUpdate->image_url = $homeAboutUpdate->image_url;
+                    }
+
                     $homeAboutUpdate->save();
                     
                     return redirect()->route('dashboard.homeAbout')
@@ -111,12 +112,12 @@ class AboutController extends Controller
                 return redirect()->back()->with('status',"Status updated successfully.");
             }
 
-            function validations($request)
+            function validations($request,$model)
             {
                 $request->validate([
                     "home_about_title" => "required",
                     "home_about_description" => "required",
-                    "home_about_image" => "required|mimes:png,jpg,jpeg,svg"
+                    "home_about_image" => $model->image_url ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg"
                 ]);
             }
 
@@ -125,10 +126,8 @@ class AboutController extends Controller
             //Main about us page all function here..(#udayan285#)
             function storeAbout(Request $request){
                 
-                $this->validationsAbout($request);
-        
                 $about = new About();
-        
+                $this->validationsAbout($request,$about);
                 $about->title = $request->about_title;
                 $about->description = $request->about_description;
         
@@ -171,12 +170,11 @@ class AboutController extends Controller
         
             function updateAbout(Request $request, $slug){
             
-                    $this->validationsAbout($request);
                     $aboutUpdate = About::where('slug',$slug)->first();
+                    $this->validationsAbout($request,$aboutUpdate);
                     $aboutUpdate->title = $request->about_title;
                     $aboutUpdate->description = $request->about_description;
                     
-                    //home about slug updated
                     //Checking old slug exists or not
                      $oldSlug = About::where('slug','LIKE','%'.str($request->about_title)->slug().'%')->count();
                      if($oldSlug > 0){
@@ -189,13 +187,17 @@ class AboutController extends Controller
                      }
             
             
-                    
-                    //remove from public folder
+                    if($request->hasFile('about_image')){
                     $this->deleteMedia($aboutUpdate,'about-us/');
-                    
                     $imageName = time().'.'.$request->about_image->extension();
                     $request->about_image->move(public_path('about-us'), $imageName);
                     $aboutUpdate->image_url = $imageName;
+                    }
+
+                    if(!$request->hasFile('about_image') && $aboutUpdate->image_url){
+                        $aboutUpdate->image_url = $aboutUpdate->image_url;
+                    }
+
                     $aboutUpdate->save();
                     
                     return redirect()->route('dashboard.actualAbout')
@@ -219,12 +221,12 @@ class AboutController extends Controller
                 return redirect()->back()->with('status',"Status updated successfully.");
             }
 
-            function validationsAbout($request)
+            function validationsAbout($request,$model)
             {
                 $request->validate([
                     "about_title" => "required",
                     "about_description" => "required",
-                    "about_image" => "required|mimes:png,jpg,jpeg,svg"
+                    "about_image" => $model->image_url ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
                 ]);
             }
 }
