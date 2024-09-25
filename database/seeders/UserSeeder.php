@@ -26,10 +26,10 @@ class UserSeeder extends Seeder
         $user->assignRole('admin');
 
         $user = new User();
-        $user->first_name = "Moderator";
+        $user->first_name = "Developer";
         $user->last_name = "MICL";
-        $user->slug = "moderator";
-        $user->email = "moderator@gmail.com";
+        $user->slug = "developer";
+        $user->email = "developer@gmail.com";
         $user->password = Hash::make('123');
         $user->save();
         $user->assignRole('admin');

@@ -16,6 +16,7 @@ use App\Models\CorporateVision;
 use App\Http\Helpers\SlugBuilder;
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\MediaDeleteTrait;
+use App\Models\Activity;
 
 class BackendController extends Controller
 {
@@ -72,6 +73,12 @@ class BackendController extends Controller
     function showFooter(){
         $footers = Footer::all();
         return view('backend.footer.footer',compact('footers'));
+    }
+
+    function showActivity(){
+        $activities = Activity::all();
+        return view('backend.business-activity.activity',compact('activities'));
+        
     }
 
     // Business Activities

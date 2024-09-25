@@ -29,4 +29,13 @@ trait BusinessMediaUploadTrait
         $request->image->move(public_path($upload_path), $imgName);
         return $image_url;
     }
+
+    function activityUpload($request,$folder)
+    {
+        $imgName = time().'.'.$request->activity_image->extension();
+        $upload_path = $folder;
+        $image_url = $upload_path.$imgName;
+        $request->activity_image->move(public_path($upload_path), $imgName);
+        return $image_url;
+    }
 }

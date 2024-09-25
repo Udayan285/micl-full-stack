@@ -36,11 +36,11 @@
 <body>
     <div class="container-fluid position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        {{-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
-        </div> --}}
+        </div>
         <!-- Spinner End -->
 
 
@@ -117,11 +117,12 @@
                     {{-- Role test here --}}
 
 
+                    <a href="{{ route('dashboard.activity') }}" class="nav-item nav-link {{ request()->is('dashboard/activity') ? 'active' : '' }}"><i class="fas fa-solid fa-thumbtack"></i>Activity</a>
                     <a href="{{ route('dashboard.area') }}" class="nav-item nav-link {{ request()->is('dashboard/area') ? 'active' : '' }}"><i class="fas fa-street-view"></i>Area</a>
                     <a href="{{ route('dashboard.contactPage') }}" class="nav-item nav-link {{ request()->is('dashboard/contact-page') ? 'active' : '' }}"><i class="fas fa-address-book"></i>Contact Us</a>
                     <a href="{{ route('dashboard.mdPage') }}" class="nav-item nav-link {{ request()->is('dashboard/md-profile') ? 'active' : '' }}"><i class="fas fa-user"></i>Manager</a>
                     <a href="{{ route('dashboard.footer') }}" class="nav-item nav-link {{ request()->is('dashboard/footer') ? 'active' : '' }}"><i class="fas fa-hourglass-end"></i>Footer</a>
-                    <a href="{{ route('dashboard.getUserManagement') }}" class="nav-item nav-link {{ request()->is('dashboard/user-management') ? 'active' : '' }}"><i class="fas fa-users"></i>Role</a>
+                    <a href="{{ route('dashboard.getUserManagement') }}" class="nav-item nav-link {{ request()->is('dashboard/user-management') ? 'active' : '' }}"><i class="fas fa-users"></i>All-Users</a>
                     <a href="{{ route("auth.logout") }}" class="nav-item nav-link "><i class="fas fa-sign-out-alt"></i>Logout</a>
                     @endrole
                     

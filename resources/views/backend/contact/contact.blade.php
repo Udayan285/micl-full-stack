@@ -56,6 +56,7 @@
 
 
             {{--  contact section show table starts --}}
+            @forelse ($contacts as $key=>$contact)
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Contact Page Information...</h6>
@@ -71,7 +72,7 @@
                         </thead>
                         <tbody>
 
-                            @foreach ($contacts as $key=>$contact)
+                            {{-- @foreach ($contacts as $key=>$contact) --}}
                                 
                                            
                             <tr>
@@ -102,13 +103,17 @@
                                 </td>
                                
                             </tr>  
-                            @endforeach 
+                            {{-- @endforeach  --}}
 
                                                                          
                         </tbody>
                     </table>
                 </div>
             </div>
+            @empty
+            <div>
+                <div class="alert alert-warning text-center">No contacts found</div>
+            @endforelse
             {{--contact section show table ends--}}
 
         

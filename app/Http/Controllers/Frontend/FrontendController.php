@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Models\Homecorporate;
 use App\Models\Physicalrefinery;
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use App\Models\CorporateVision;
 
 class FrontendController extends Controller
@@ -29,7 +30,8 @@ class FrontendController extends Controller
         $bannersData = Banner::where('status',1)->get();
         $homeCorporate = Homecorporate::where('status',1)->first();
         $homeAbout = Homeabout::where('status',1)->first();
-        return view('MICL-clone.welcome',compact('bannersData','homeCorporate','homeAbout','footer'));
+        $homeActivity = Activity::where('status',1)->first();
+        return view('MICL-clone.welcome',compact('bannersData','homeCorporate','homeAbout','footer','homeActivity'));
     }
 
     function mdProfile()

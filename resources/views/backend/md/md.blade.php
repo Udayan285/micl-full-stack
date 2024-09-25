@@ -140,6 +140,7 @@
                 alert.classList.remove('show');
                 alert.classList.add('fade');
             }
+
     }, 3000);
 </script>
 @endpush

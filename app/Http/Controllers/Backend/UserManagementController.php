@@ -19,6 +19,16 @@ class UserManagementController extends Controller
         return view('backend.user-management.userManagement',compact('users'));
     }
 
+    function removeUser($slug)
+    {
+        $user = User::where('slug',$slug)->first();
+        $this->updateDeleteMedia($user);
+        $user->delete();
+        return redirect()->route('dashboard.getUserManagement')->with('success','User has been deleted successfully');
+    }
+
+
+    //single profile
     function getUserProfile()
     {
         return view("backend.user-management.userProfile");

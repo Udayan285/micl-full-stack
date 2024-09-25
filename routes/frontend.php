@@ -19,6 +19,7 @@ use App\Http\Controllers\Backend\Business\StorageTankController;
 use App\Http\Controllers\Backend\Business\BitumenPlantController;
 use App\Http\Controllers\Backend\Business\BottleMakingController;
 use App\Http\Controllers\Backend\Business\PhysicalRefineryController;
+use App\Http\Controllers\Backend\BusinessActivitiesController;
 
 //Frontend view page show related all routes written Start here...
 route::prefix("/")->name("micl.")->controller(FrontendController::class)->group(function(){
@@ -70,6 +71,7 @@ route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->c
     route::get('/contact-page','showContact')->name('contactPage');
     route::get('/md-profile','showMD')->name('mdPage');
     route::get('/footer','showFooter')->name('footer');
+    route::get('/activity','showActivity')->name('activity');
     
     // business activities related blade route
     route::get('/storage-tank-terminal-and-delivery-support-services','showStorageTank')->name('storageTank');
@@ -99,7 +101,7 @@ route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->c
 
 
 //Corporate Vision page route here..
-route::prefix("/dashboard")->name('dashboard.')->controller(CorporateVisionController::class)->group(function(){
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(CorporateVisionController::class)->group(function(){
     route::post('/corporate/store','corporateStore')->name('corpoStore');
     route::get('/corporate/edit/{slug}','editCorpo')->name('corpoEdit');
     route::put('/corporate/update/{slug}','updateCorpo')->name('corpoUpdate');
@@ -108,7 +110,7 @@ route::prefix("/dashboard")->name('dashboard.')->controller(CorporateVisionContr
 });
 
 //about-us all route here..
-route::prefix("/dashboard")->name('dashboard.')->controller(AboutController::class)->group(function(){
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(AboutController::class)->group(function(){
    
     //Home Page all about us related routes here..(#udayan285#)
     route::post('/home-about-us/store','storeHomeAbout')->name('homeAboutStore');
@@ -128,7 +130,7 @@ route::prefix("/dashboard")->name('dashboard.')->controller(AboutController::cla
 });
 
 //Area Page related all route here..
-route::prefix("/dashboard")->name('dashboard.')->controller(AreaController::class)->group(function(){
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(AreaController::class)->group(function(){
    
     //Area page all routes here..(#udayan285#)
     route::post('/area-page/store','storeArea')->name('areaStore');
@@ -140,7 +142,7 @@ route::prefix("/dashboard")->name('dashboard.')->controller(AreaController::clas
 });
 
 //Contact Page related all route here..
-route::prefix("/dashboard")->name('dashboard.')->controller(ContactController::class)->group(function(){
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(ContactController::class)->group(function(){
    
     //Contact page all routes here..(#udayan285#)
     route::post('/contact/store','storeContact')->name('contactStore');
@@ -158,7 +160,7 @@ route::post('/send-email',[EmailController::class,'sendEmail'])->name('sendEmail
 
 
 //Managing Director page related all route here..
-route::prefix("/dashboard")->name('dashboard.')->controller(ManagerController::class)->group(function(){
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(ManagerController::class)->group(function(){
    
     //MD page all routes here..(#udayan285#)
     route::post('/md-profile/store','storeMD')->name('mdStore');
@@ -170,7 +172,7 @@ route::prefix("/dashboard")->name('dashboard.')->controller(ManagerController::c
 });
 
 //Footer page related all route here..
-route::prefix("/dashboard")->name('dashboard.')->controller(FooterController::class)->group(function(){
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(FooterController::class)->group(function(){
    
     //Footer page all routes here..(#udayan285#)
     route::post('/footer/store','storeFooter')->name('footerStore');
@@ -182,7 +184,7 @@ route::prefix("/dashboard")->name('dashboard.')->controller(FooterController::cl
 });
 
 //storage tank related all route here..
-route::prefix("/dashboard")->name('dashboard.')->controller(StorageTankController::class)->group(function(){
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(StorageTankController::class)->group(function(){
    
     //Footer page all routes here..(#udayan285#)
     route::post('/storage-tank/store','storeStorageTank')->name('storageTankStore');
@@ -195,7 +197,7 @@ route::prefix("/dashboard")->name('dashboard.')->controller(StorageTankControlle
 });
 
 //bitumen plant related all route here..
-route::prefix("/dashboard")->name('dashboard.')->controller(BitumenPlantController::class)->group(function(){
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(BitumenPlantController::class)->group(function(){
     //Bitumen page all routes here..(#udayan285#)
     route::post('/bitumen-plant/store','storeBitumen')->name('storeBitumen');
     route::get('/bitumen-plant/preview','previewBitumen')->name('previewBitumen');
@@ -207,7 +209,7 @@ route::prefix("/dashboard")->name('dashboard.')->controller(BitumenPlantControll
 });
 
 //physical refinery unit related all route here..
-route::prefix("/dashboard")->name('dashboard.')->controller(PhysicalRefineryController::class)->group(function(){
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(PhysicalRefineryController::class)->group(function(){
     //physical refinery unit page all routes here..(#udayan285#)
     route::post('/physical-refienry/store','storePhysical')->name('storePhysical');
     route::get('/physical-refienry/preview','previewPhysical')->name('previewPhysical');
@@ -219,7 +221,7 @@ route::prefix("/dashboard")->name('dashboard.')->controller(PhysicalRefineryCont
 });
 
 //bottle making related all route here..
-route::prefix("/dashboard")->name('dashboard.')->controller(BottleMakingController::class)->group(function(){
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(BottleMakingController::class)->group(function(){
     //bottle making page all routes here..(#udayan285#)
     route::post('/bottle-making/store','storeBottle')->name('storeBottle');
     route::get('/bottle-making/preview','previewBottle')->name('previewBottle');
@@ -231,7 +233,7 @@ route::prefix("/dashboard")->name('dashboard.')->controller(BottleMakingControll
 });
 
 //edible oil related all route here..
-route::prefix("/dashboard")->name('dashboard.')->controller(EdibleOilController::class)->group(function(){
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(EdibleOilController::class)->group(function(){
     //edible oil all routes here..(#udayan285#)
     route::post('/edible-oil/store','storeEdible')->name('storeEdible');
     route::get('/edible-oil/preview','previewEdible')->name('previewEdible');
@@ -243,7 +245,7 @@ route::prefix("/dashboard")->name('dashboard.')->controller(EdibleOilController:
 });
 
 //super oil related all route here..
-route::prefix("/dashboard")->name('dashboard.')->controller(SuperOilController::class)->group(function(){
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(SuperOilController::class)->group(function(){
     //super oil all routes here..(#udayan285#)
     route::post('/super-oil/store','storeSuper')->name('storeSuper');
     route::get('/super-oil/preview','previewSuper')->name('previewSuper');
@@ -255,10 +257,25 @@ route::prefix("/dashboard")->name('dashboard.')->controller(SuperOilController::
 });
 
 //User Management Controller route here..
-route::prefix("/dashboard")->name('dashboard.')->controller(UserManagementController::class)->group(function(){
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(UserManagementController::class)->group(function(){
     //user management controller here..(#udayan285#)
     route::get('/user-management','getUserManagement')->name('getUserManagement');
+    route::delete('/user-remove/{slug}','removeUser')->name('removeUser');
+
+    //user-profile
     route::get('/user-profile','getUserProfile')->name('getUserProfile');
     route::put('/update-user-profile/{id}','updateUserProfile')->name('updateUserProfile');
     route::put('/update-user-password/{id}','UpdatePassword')->name('UpdatePassword');
+});
+
+//Business activities Page related all route here..
+route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->controller(BusinessActivitiesController::class)->group(function(){
+   
+    //Business activities page all routes here..(#udayan285#)
+    route::post('/business-activity/store','storeBusinessActivity')->name('activityStore');
+    route::get('/business-activity/edit/{slug}','editBusinessActivity')->name('activityEdit');
+    route::put('/business-activity/update/{slug}','updateBusinessActivity')->name('activityUpdate');
+    route::put('/business-activity/active/{slug}','activeBusinessActivity')->name('activityActive');
+    route::delete('/business-activity/remove/{slug}','removeBusinessActivity')->name('activityRemove');
+
 });

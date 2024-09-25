@@ -14,15 +14,15 @@
             
              <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Banner related all information...</h6>
+                    <h6 class="mb-4">Users related all information...</h6>
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">S.No</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Role</th>
                                 <th scope="col">Images</th>
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,24 +31,16 @@
                                 <th scope="row">{{ ++$key }}</th>
                                 <td>{{ $user->first_name." ".$user->last_name }}</td>
                                 <td>{{ $user->email }}</td>
-
-                                <td>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                                        <label class="form-check-label" for="flexSwitchCheckChecked">Admin</label>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                                        <label class="form-check-label" for="flexSwitchCheckChecked">Moderator</label>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                                        <label class="form-check-label" for="flexSwitchCheckChecked">User</label>
-                                    </div>
-                                </td>
                                 
                                 <td>
-                                    <img src="" alt="" style="height: 80px;width:90px;">
+                                    <img src="{{ asset($user->image_url) }}" alt="user-image" style="height: 80px;width:90px;">
+                                </td>
+                                <td>
+                                    <form action="{{ route('dashboard.removeUser',$user->slug) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</button>
+                                    </form>
                                 </td>
                             </tr> 
                             @endforeach            
