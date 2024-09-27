@@ -22,7 +22,6 @@ class BitumenPlantController extends Controller
     
         // Images management
         $imagesAll=$this->uploadImages($request,'business-activities/bitumen-plant/');
-        // dd($imagesAll);
         $bitumen->images = $imagesAll;
         $bitumen->save();
     

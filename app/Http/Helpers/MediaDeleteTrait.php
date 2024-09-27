@@ -48,4 +48,18 @@ trait MediaDeleteTrait
                 }              
         }
     }
+
+    //This delete media trais for Main About us page,Main Corporate page, Area page
+    function MediaDelete($model)
+    {
+        if ($model->image_url) {           
+                $images = explode('|',$model->image_url);
+                foreach ($images as $image){
+                    $delete = public_path($image);
+                    if(file_exists($delete)){
+                        unlink($delete);
+                    } 
+                }              
+        }
+    }
 }

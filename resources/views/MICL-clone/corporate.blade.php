@@ -15,13 +15,11 @@
                     @forelse ($corporate as $data)
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                         <h1 class="mb-4 about-us-headline">{{ $data->title }}</h1>
-                        <ul>
-                            <li>
+                       
                                 <p>
                                     {!! $data->description !!}
                                 </p>
-                            </li>
-                        </ul>
+                      
                        
                     </div>
                     <div class="col-lg-6 about-img wow fadeInUp" data-wow-delay="0.5s">

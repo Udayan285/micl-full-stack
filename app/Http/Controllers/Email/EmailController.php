@@ -14,11 +14,11 @@ class EmailController extends Controller
         $request->validate([
           'name' => 'required|max:20|min:5',
           'email' => 'required|email',
-          'subject' => 'required|min:5|max:20',
-          'message' => 'required|min:10|max:255',
+          'subject' => 'required|min:5|max:30',
+          'message' => 'required|max:255',
         ]);
   
-        $adminMail = "odoynnath@gmail.com";
+        $adminMail = "info@miclbd.com";
   
         $response = Mail::to($adminMail)->send(new mebemail($request->all()));
       

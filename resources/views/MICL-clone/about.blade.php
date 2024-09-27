@@ -15,20 +15,24 @@
                     @forelse ($about as $data)
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                         <h1 class="mb-4 about-us-headline">{{ $data->title }}</h1>
-                        <ul>
-                            <li>
+                        
                                 <p>
                                     {!! $data->description !!}
                                 </p>
-                            </li>        
-                        </ul>
+                       
                        
 
                     </div>
                     <div class="col-lg-6 about-img wow fadeInUp" data-wow-delay="0.5s">
                         <div class="row">
-                            <div class="col-12 text-center">
-                                <img class="img-fluid w-75  bg-light p-3" src="{{ asset('about-us/'.$data->image_url) }}" alt="About Image">
+                            <div class="col-12 text-center mt-2">
+                                @php
+                                $images = explode('|', $data->image_url);
+                                @endphp
+                                {{-- forloop for images --}}
+                                @foreach($images as $image)
+                                <img class="img-fluid w-75  bg-light p-3 mt-3" src="{{ asset($image) }}" alt="About Image">
+                                @endforeach 
                             </div>
                             
                         </div>

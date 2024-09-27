@@ -7,12 +7,13 @@ use App\Models\About;
 use App\Models\Homeabout;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Helpers\SlugBuilder;
 use App\Http\Helpers\MediaDeleteTrait;
+use App\Http\Controllers\Helpers\SlugBuilder;
+use App\Http\Helpers\BusinessMediaUploadTrait;
 
 class AboutController extends Controller
 {
-       use MediaDeleteTrait;   
+       use MediaDeleteTrait,BusinessMediaUploadTrait;   
     
             //Home Page About detail store/update/delete here..(#udayan285#)
             function storeHomeAbout(Request $request){
@@ -143,9 +144,8 @@ class AboutController extends Controller
                 }
         
                 //image upload related task written here...
-                $imgName = time().'.'.$request->about_image->extension();
-                $request->about_image->move(public_path('about-us'), $imgName);
-                $about->image_url = $imgName;
+                $imagesAll=$this->uploadImages($request,'about-us/');
+                $about->image_url = $imagesAll;
         
         
                 $about->save();
@@ -157,7 +157,7 @@ class AboutController extends Controller
                 $about = About::where('slug',$slug)->first();
                 
                 //remove from public folder
-                $this->deleteMedia($about,'about-us/');
+                $this->MediaDelete($about);
         
                 $about->delete();
                 return redirect()->back()->with('status',"Selected about info. deleted successfully.");
@@ -187,14 +187,15 @@ class AboutController extends Controller
                      }
             
             
-                    if($request->hasFile('about_image')){
-                    $this->deleteMedia($aboutUpdate,'about-us/');
-                    $imageName = time().'.'.$request->about_image->extension();
-                    $request->about_image->move(public_path('about-us'), $imageName);
-                    $aboutUpdate->image_url = $imageName;
+                    if($request->hasFile('images')){
+                    $this->MediaDelete($aboutUpdate);
+                    //image upload related task written here...
+                    $imagesAll=$this->uploadImages($request,'about-us/');
+                    $aboutUpdate->image_url = $imagesAll;
+
                     }
 
-                    if(!$request->hasFile('about_image') && $aboutUpdate->image_url){
+                    if(!$request->hasFile('images') && $aboutUpdate->image_url){
                         $aboutUpdate->image_url = $aboutUpdate->image_url;
                     }
 
@@ -226,7 +227,7 @@ class AboutController extends Controller
                 $request->validate([
                     "about_title" => "required",
                     "about_description" => "required",
-                    "about_image" => $model->image_url ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
+                    "images*" => $model->image_url ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
                 ]);
             }
 }
