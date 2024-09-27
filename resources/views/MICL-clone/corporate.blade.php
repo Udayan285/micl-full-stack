@@ -25,7 +25,13 @@
                     <div class="col-lg-6 about-img wow fadeInUp" data-wow-delay="0.5s">
                         <div class="row">
                             <div class="col-12 text-center">
-                                <img class="img-fluid w-75  bg-light p-3" src="{{ asset('corporates/'.$data->image_url) }}" alt="">
+                                @php
+                                $images = explode('|', $data->image_url);
+                                @endphp
+                                {{-- forloop for images --}}
+                                @foreach($images as $image)
+                                <img class="img-fluid w-75  bg-light p-3 mt-3" src="{{ asset($image) }}" alt="Corporate Image">
+                                @endforeach 
                             </div>
                             
                         </div>

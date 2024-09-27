@@ -39,13 +39,18 @@
 
                         <label for="exampleInputDescription" class="form-label mt-2">Update Corporate Images</label>
                         <div class="mb-3">     
-                            <input type="file" id="imageFile" name="corporate_image" class="form-control"  aria-describedby="emailHelp">  
+                            <input type="file" multiple id="corpoImages" name="images[]" class="form-control"  aria-describedby="emailHelp">  
                         </div>
-                        @error('corporate_image')
+                        @error('images*')
                              <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+                       
                         <div class="mb-3">
-                            <img id="corporateImage"  src="{{ asset('corporates/'.$CorpoEdit->image_url) }}" style="height: 100px; width:100px;" alt="corporate image">
+                            <div class="row">
+                                <div class="col-md-2 corpoImage" style="margin-bottom: 10px;"></div>
+                                <div class="col-md-2 corpoImage" style="margin-bottom: 10px;"></div>
+                                <div class="col-md-2 corpoImage" style="margin-bottom: 10px;"></div>
+                            </div>                          
                         </div>
                         
                         <button type="submit" class="btn btn-primary">Update Now</button>
@@ -60,14 +65,34 @@
 {{-- Custom javascript here for media upload --}}
 @push('imgviewmaincorporate')
 <script>
-    let uploadImg = document.querySelector('#imageFile')
-    let display = document.querySelector('#corporateImage')
-    
-    function imgPreviewer(event){
-        let url = URL.createObjectURL(event.target.files[0])
-        display.src = url
+    let uploadImg = document.querySelector('#corpoImages');
+    let imageViews = document.querySelectorAll('.corpoImage');
+
+    function imgPreviewer(event) {
+        let files = event.target.files;
+
+        // Clear previous previews
+        imageViews.forEach(view => view.innerHTML = '');
+
+        // Loop through each selected file
+        for (let i = 0; i < files.length; i++) {
+            let url = URL.createObjectURL(files[i]);
+            let imgElement = document.createElement('img');
+            imgElement.src = url;
+            imgElement.style.height = '100px';
+            imgElement.style.width = '100px';
+            imgElement.style.marginBottom = '10px';
+            
+            // Append the image to the corresponding .Imageview container
+            if (imageViews[i]) {
+                imageViews[i].appendChild(imgElement);
+            } else {
+                // If more images are selected than available containers, you can add more dynamically or handle accordingly
+                console.log("More images selected than available containers.");
+            }
+        }
     }
-    uploadImg.addEventListener('change',imgPreviewer);
+    uploadImg.addEventListener('change', imgPreviewer);
 </script>
 @endpush
 

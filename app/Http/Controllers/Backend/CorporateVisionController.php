@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
+use App\Models\CorporateVision;
 use App\Http\Controllers\Controller;
 use App\Http\Helpers\MediaDeleteTrait;
-use App\Models\CorporateVision;
+use App\Http\Helpers\BusinessMediaUploadTrait;
 
 
 class CorporateVisionController extends Controller
 {
-    use MediaDeleteTrait;
+    use MediaDeleteTrait,BusinessMediaUploadTrait;
         //Coded by udayan285#..
         function corporateStore(Request $request)
         {
@@ -28,12 +29,9 @@ class CorporateVisionController extends Controller
                 $slug = str($request->corporate_title)->slug();
                 $corporate->slug = $slug;
             }
-
             //image upload related task written here...
-            $imgName = time().'.'.$request->corporate_image->extension();
-            $request->corporate_image->move(public_path('corporates'), $imgName);
-            $corporate->image_url = $imgName;
-    
+            $imagesAll=$this->uploadImages($request,'corporates/');
+            $corporate->image_url = $imagesAll;
     
             $corporate->save();
     
@@ -44,7 +42,7 @@ class CorporateVisionController extends Controller
         {
             $corporate = CorporateVision::where('slug',$slug)->first();
             //remove from public folder
-            $this->deleteMedia($corporate,'corporates/');
+            $this->MediaDelete($corporate);
     
             $corporate->delete();
             return redirect()->back()->with('status',"Selected corporate info. deleted successfully.");
@@ -74,16 +72,16 @@ class CorporateVisionController extends Controller
                      $corpoUpdate->slug = $slug;
                  }
         
-                if($request->hasFile('corporate_image')){
-                
-                $this->deleteMedia($corpoUpdate,'corporates/');
-                $imageName = time().'.'.$request->corporate_image->extension();
-                $request->corporate_image->move(public_path('corporates'), $imageName);
-                $corpoUpdate->image_url = $imageName;
+        
+                if($request->hasFile('images')){
+                $this->MediaDelete($corpoUpdate);
+                //image upload related task written here...
+                $imagesAll=$this->uploadImages($request,'corporates/');
+                $corpoUpdate->image_url = $imagesAll;
 
                 }
 
-                if(!$request->hasFile('corporate_image') && $corpoUpdate->image_url){
+                if(!$request->hasFile('images') && $corpoUpdate->image_url){
                     $corpoUpdate->image_url = $corpoUpdate->image_url;
                 }
 
@@ -117,7 +115,8 @@ class CorporateVisionController extends Controller
             $request->validate([
                 "corporate_title" => "required",
                 "corporate_description" => "required",
-                "corporate_image" => $model->image_url ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
+                "images*" => $model->image_url ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
+              
             ]);
         }
 }

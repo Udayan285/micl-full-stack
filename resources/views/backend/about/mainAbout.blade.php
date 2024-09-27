@@ -49,11 +49,7 @@
                                 <div class="col-md-2 aboutImage" style="margin-bottom: 10px;"></div>
                                 <div class="col-md-2 aboutImage" style="margin-bottom: 10px;"></div>
                                 <div class="col-md-2 aboutImage" style="margin-bottom: 10px;"></div>
-                            </div>
-                            
-                            {{-- <img class="aboutImage"  src="" style="height: 100px; width:100px;" alt="">
-                            <img class="aboutImage"  src="" style="height: 100px; width:100px;" alt="">
-                            <img class="aboutImage"  src="" style="height: 100px; width:100px;" alt=""> --}}
+                            </div>                          
                         </div>
 
                         <button type="submit" class="btn btn-primary">Add Now</button>
@@ -84,7 +80,7 @@
                                 <td>{{ $about->title }}</td>
                                 <td>{!! $about->description !!}</td>
                                 <td>
-                                    {{-- <img src="{{ asset('about-us/'.$about->image_url) }}" alt="About Image" style="height: 80px;width:90px;"> --}}
+                                   
                                     @php
                                     $images = explode('|', $about->image_url);
                                     @endphp
