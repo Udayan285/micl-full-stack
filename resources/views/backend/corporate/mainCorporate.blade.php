@@ -129,7 +129,7 @@
 
 @push('imgviewmaincorporate')
 <script>
-     let uploadImg = document.querySelector('#corpoImages');
+    let uploadImg = document.querySelector('#corpoImages');
     let imageViews = document.querySelectorAll('.corpoImage');
 
     function imgPreviewer(event) {

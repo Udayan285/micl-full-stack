@@ -38,14 +38,17 @@
 
                         <label for="exampleInputDescription" class="form-label mt-2">Area - Image</label>
                         <div class="mb-3">     
-                            <input type="file" name="area_image" class="form-control" id="area_image" aria-describedby="emailHelp">  
+                            <input type="file" multiple name="images[]" class="form-control" id="area_image" aria-describedby="emailHelp">  
                         </div>
-                        @error('area_image')
+                        @error('images*')
                              <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        
                         <div class="mb-3">
-                            <img id="area_image_main"  src="" style="height: 100px; width:100px;" alt="Area Image">
+                            <div class="row">
+                                <div class="col-md-2 areaImage" style="margin-bottom: 10px;"></div>
+                                <div class="col-md-2 areaImage" style="margin-bottom: 10px;"></div>
+                                <div class="col-md-2 areaImage" style="margin-bottom: 10px;"></div>
+                            </div>                          
                         </div>
 
                         <button type="submit" class="btn btn-primary">Add Now</button>
@@ -79,7 +82,14 @@
                                 <td>{{ $area->title }}</td>
                                 <td>{!! $area->description !!}</td>
                                 <td>
-                                    <img src="{{ asset('area/'.$area->image_url) }}" alt="Area Image" style="height: 80px;width:90px;">
+                                    @php
+                                    $images = explode('|', $area->image_url);
+                                    @endphp
+                                    {{-- forloop for images --}}
+                                    @foreach($images as $image)
+                                    <img src="{{ asset($image) }}" class="mb-1" alt="Image" style="height:50px; width:50px;">
+                                    @endforeach 
+                                   
                                 </td>
                                 <td>
                                    
@@ -121,14 +131,34 @@
 {{-- Custom javascript here for media upload --}}
 @push('homeAboutImage')
 <script>
-    let uploadImg = document.querySelector('#area_image')
-    let display = document.querySelector('#area_image_main')
-    
-    function imgPreviewer(event){
-        let url = URL.createObjectURL(event.target.files[0])
-        display.src = url
+    let uploadImg = document.querySelector('#area_image');
+    let imageViews = document.querySelectorAll('.areaImage');
+
+    function imgPreviewer(event) {
+        let files = event.target.files;
+
+        // Clear previous previews
+        imageViews.forEach(view => view.innerHTML = '');
+
+        // Loop through each selected file
+        for (let i = 0; i < files.length; i++) {
+            let url = URL.createObjectURL(files[i]);
+            let imgElement = document.createElement('img');
+            imgElement.src = url;
+            imgElement.style.height = '100px';
+            imgElement.style.width = '100px';
+            imgElement.style.marginBottom = '10px';
+            
+            // Append the image to the corresponding .Imageview container
+            if (imageViews[i]) {
+                imageViews[i].appendChild(imgElement);
+            } else {
+                // If more images are selected than available containers, you can add more dynamically or handle accordingly
+                console.log("More images selected than available containers.");
+            }
+        }
     }
-    uploadImg.addEventListener('change',imgPreviewer);
+    uploadImg.addEventListener('change', imgPreviewer);
 
     // Set timeout to hide the alert after 3 seconds
     setTimeout(function()

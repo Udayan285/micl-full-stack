@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Http\Helpers\MediaDeleteTrait;
 use App\Models\Area;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Helpers\MediaDeleteTrait;
+use App\Http\Helpers\BusinessMediaUploadTrait;
 
 class AreaController extends Controller
 {
-    use MediaDeleteTrait;
+    use MediaDeleteTrait,BusinessMediaUploadTrait;
         //Area page all function here..(#udayan285#)
         function storeArea(Request $request)
         {
@@ -27,10 +28,10 @@ class AreaController extends Controller
                 $slug = str($request->area_title)->slug();
                 $area->slug = $slug;
             }
+
             //image upload related task written here...
-            $imgName = time().'.'.$request->area_image->extension();
-            $request->area_image->move(public_path('area'), $imgName);
-            $area->image_url = $imgName;
+            $imagesAll=$this->uploadImages($request,'area/');
+            $area->image_url = $imagesAll;
             $area->save();
             return redirect()->back()->with('status','Area information added successfully.');
         }
@@ -39,7 +40,7 @@ class AreaController extends Controller
         {
             $area = Area::where('slug',$slug)->first();
             //remove from public folder
-            $this->deleteMedia($area,'area/');
+            $this->MediaDelete($area);
             $area->delete();
             return redirect()->back()->with('status',"Selected area info. deleted successfully.");
         }
@@ -70,26 +71,17 @@ class AreaController extends Controller
                 $areaUpdate->slug = $slug;
             }
 
-            // Check if a new image is uploaded
-            if ($request->hasFile('area_image')) {
-                // Remove old image from public folder if exists
-                if ($areaUpdate->image_url) {
-                    $this->deleteMedia($areaUpdate, 'area/');
+            if($request->hasFile('images')){
+                $this->MediaDelete($areaUpdate);
+                //image upload related task written here...
+                $imagesAll=$this->uploadImages($request,'area/');
+                $areaUpdate->image_url = $imagesAll;
+
                 }
 
-                // Upload the new image
-                $imageName = time() . '.' . $request->area_image->extension();
-                $request->area_image->move(public_path('area'), $imageName);
-                $areaUpdate->image_url = $imageName; // Set the new image name
-            }
-
-            // If no new image, retain the old image
-            if (!$request->hasFile('area_image') && $areaUpdate->image_url) {
-                // No new image, old image is retained
-                $areaUpdate->image_url = $areaUpdate->image_url;
-            }
-
-            // Save the updated area data
+                if(!$request->hasFile('images') && $areaUpdate->image_url){
+                    $areaUpdate->image_url = $areaUpdate->image_url;
+                }
             $areaUpdate->save();
 
             return redirect()->route('dashboard.area')
@@ -132,7 +124,8 @@ class AreaController extends Controller
             $request->validate([
                 "area_title" => "required",
                 "area_description" => "required",
-                "area_image" => $model->image_url ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
+                "images*" => $model->image_url ? "nullable|mimes:png,jpg,jpeg,svg" : "required|mimes:png,jpg,jpeg,svg",
+                
             ]);
         }
 
