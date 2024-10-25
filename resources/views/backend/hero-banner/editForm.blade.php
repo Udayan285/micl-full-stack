@@ -7,7 +7,7 @@
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Update Banner Title & Description</h6>
-                    <form action="{{ route('dashboard.heroUpdate',$bannerEdit->slug) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('dashboard.heroUpdate',$bannerEdit->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         {{-- Success message show here via alert --}}

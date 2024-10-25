@@ -138,28 +138,25 @@ class BackendController extends Controller
 
         return redirect()->back()->with('status','Banner information added successfully.');
     }
-
     //Remove Banner
-    function removeHero(string $slug)
+    function removeHero($id)
     {
-        $banner = Banner::where('slug',$slug)->first();
+        $banner = Banner::where('id',$id)->first();
         //remove from public folder
         $this->deleteMedia($banner,'images/');
         $banner->delete();
         return redirect()->back()->with('status',"Selected banner deleted successfully.");
     }
-
     //Edit banner
-    function editHero(string $slug)
+    function editHero(string $id)
     {
-        $bannerEdit = Banner::where('slug',$slug)->first();
+        $bannerEdit = Banner::where('id',$id)->first();
         return view('backend.hero-banner.editForm',compact('bannerEdit'));
     }
-
-    function updateHero(Request $request, $slug)
+    function updateHero(Request $request, $id)
     {
         
-        $bannerUpdate = Banner::where('slug',$slug)->first();
+        $bannerUpdate = Banner::where('id',$id)->first();
         $this->validations($request,$bannerUpdate);
         $bannerUpdate->title = $request->banner_title;
         $bannerUpdate->description = $request->banner_description;
@@ -195,10 +192,9 @@ class BackendController extends Controller
         
 
     }
-
-    function activeHero($slug)
+    function activeHero($id)
     {
-        $banner = Banner::where('slug',$slug)->first();
+        $banner = Banner::where('id',$id)->first();
 
         if($banner->status == 0 ){
             $banner->status = 1;
@@ -208,6 +204,7 @@ class BackendController extends Controller
         $banner->save();
         return redirect()->back()->with('status',"Status updated successfully.");
     }
+    
 
     function validations($request,$model)
     {

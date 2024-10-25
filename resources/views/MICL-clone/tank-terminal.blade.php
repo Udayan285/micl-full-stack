@@ -1,7 +1,7 @@
 @extends('layouts.frontendLayouts')
 
 @section('frontendLayoutsYeild')
-      <div class="conatiner">
+      <div class="container">
         <div class="row">
           <h1 class="mb-4 text-center py-3 my-0">
             Storage Tank Terminal & Delivery Support Services

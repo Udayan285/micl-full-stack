@@ -84,10 +84,10 @@ route::middleware(ValidUser::class)->prefix("/dashboard")->name('dashboard.')->c
 
     //banner info store/update/delete
     route::post('/store','heroStore')->name('heroStore');
-    route::get('/edit/{slug}','editHero')->name('heroEdit');
-    route::put('/update/{slug}','updateHero')->name('heroUpdate');
-    route::put('/active/{slug}','activeHero')->name('heroActive');
-    route::delete('/remove/{slug}','removeHero')->name('heroRemove');
+    route::get('/edit/{id}','editHero')->name('heroEdit');
+    route::put('/update/{id}','updateHero')->name('heroUpdate');
+    route::put('/active/{id}','activeHero')->name('heroActive');
+    route::delete('/remove/{id}','removeHero')->name('heroRemove');
 
     //Home Page Corporate info store/update/delete
     route::post('/home-corporate/store','homeCorporateStore')->name('homeCorpoStore');

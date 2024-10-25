@@ -18,16 +18,24 @@ class EmailController extends Controller
           'message' => 'required|max:255',
         ]);
   
-        $adminMail = "info@miclbd.com";
+        $adminMail = "udayannath31@gmail.com";
   
-        $response = Mail::to($adminMail)->send(new mebemail($request->all()));
+        // $response = Mail::to($adminMail)->send(new mebemail($request->all()));
       
       
-        if($response){
-          return back()->with('success','Mail sent successfully');
-        }else{
-          return back()->with('fail','Mail not sent');
-        }
+        // if($response){
+        //   return back()->with('success','Mail sent successfully');
+        // }else{
+        //   return back()->with('fail','Mail not sent');
+        // }
+
+
+        try {
+          Mail::to($adminMail)->send(new mebemail($request->all()));
+          return back()->with('success', 'Mail sent successfully');
+      } catch (\Exception $e) {
+          return back()->with('fail', 'Mail not sent. Error: ' . $e->getMessage());
+      }
       
       }
 }

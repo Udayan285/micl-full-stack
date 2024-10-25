@@ -77,18 +77,18 @@
                                 </td>
                                 <td>
                                     {{-- <button class="btn btn-warning btn-sm">Active</button> --}}
-                                    <form action="{{ route('dashboard.heroActive',$banner->slug) }}" method="POST">
+                                    <form action="{{ route('dashboard.heroActive',$banner->id) }}" method="POST">
                                         @csrf
                                         @method("PUT")
                                         <button type="submit" class="btn btn-{{ $banner->status == 0 ? "warning" : "success" }} btn-sm mt-2">{{ $banner->status == 0 ? "Active" : "Deactive" }}</button>
                                     </form>
                                     
-                                    <form action="{{ route('dashboard.heroEdit',$banner->slug) }}" method="GET">
+                                    <form action="{{ route('dashboard.heroEdit',$banner->id) }}" method="GET">
                                         @csrf
                                         <button type="submit" class="btn btn-primary btn-sm mt-2">Edit</button>
                                     </form>
                                    
-                                    <form action="{{ route('dashboard.heroRemove',$banner->slug) }}" method="POST">
+                                    <form action="{{ route('dashboard.heroRemove',$banner->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm mt-2">Delete</button>
